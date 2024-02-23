@@ -1,0 +1,15 @@
+.signInput{
+    height: 37px;
+    width: 268px;
+    border: 1px solid #DBDBDB;
+    font-size: 14px;
+    padding-left: 5px;
+    border-radius: 3px;
+    background-color: #FAFAFA;
+}
+input.signInput::placeholder{
+font-size: 12px;
+}
+.linkSpan{
+    color: #00376b;
+}
