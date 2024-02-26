@@ -4,7 +4,14 @@ import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
 import "./SignUp.css";
 import { useNavigate } from "react-router";
+
 function SignUp() {
+
+  const handleChange = () => {
+    navigate("/login");
+    
+  }
+
   const navigate = useNavigate()
   return (
     <div className="flex justify-center items-center flex-col">
@@ -104,7 +111,7 @@ function SignUp() {
             </a>
           </div>
         </div>
-        <button className="bg-blue-400 text-white text-sm font-semibold rounded-md lg:w-[200px] lg:py-2 md:py-2 sm:py-2 sm:w-20 cursor-default">
+        <button onClick={handleChange} className="bg-blue-400 text-white text-sm font-semibold rounded-md lg:w-[200px] lg:py-2 md:py-2 sm:py-2 sm:w-20 cursor-default">
           Sign Up
         </button>
       </div>
@@ -112,7 +119,7 @@ function SignUp() {
             <p className="text-sm ">
               {" "}
                have an account?{" "}
-              <span className="text-sm font-medium text-blue-500 cursor-pointer" onClick={()=> navigate('/')}>
+              <span className="text-sm font-medium text-blue-500 cursor-pointer" onClick={()=> navigate('/login')}>
                 Log in
               </span>{" "}
             </p>

@@ -9,9 +9,13 @@ import UserExplore from './pages/user/UserExplore';
 import UserMessage from './pages/user/UserMessage';
 import UserPost from './pages/user/UserPost';
 import UserSaved from './pages/user/UserSaved';
+import { createContext } from 'react';
 
+export const myContext = createContext
 
 function App() {
+
+  
   return (
     <div >
 <Routes>

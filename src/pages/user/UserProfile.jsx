@@ -5,6 +5,7 @@ import { IoMdGrid } from "react-icons/io";
 import SaveIcon from '../../asset/save icon.png'
 import { FaHeart } from "react-icons/fa";
 import { Outlet, useNavigate } from 'react-router';
+import './UserProfile.css'
 function UserProfile() {
     const navigate = useNavigate()
   return (
@@ -35,17 +36,17 @@ function UserProfile() {
     </div>
     <hr className='m-6 ml-20 w-[900px] border-t border-gray-300'/>
     <div className='flex text-gray-500 gap-16 mx-[350px] '>
-       <p onClick={()=> navigate('/profile/')} className='font-medium flex text-sm'>
+       <p onClick={()=> navigate('/profile/')} className=' profileIcon font-medium flex text-sm cursor-pointer  hover:bg-gray-200 rounded-md hover:p-1'>
         <IoMdGrid className='size-5'/>
         Posts
        </p>
        
-       <p onClick={()=> navigate('/profile/saved')} className='font-medium flex text-sm'>
+       <p onClick={()=> navigate('/profile/saved')} className=' profileIcon font-medium flex text-sm cursor-pointer hover:bg-gray-200 rounded-md hover:p-1 '>
        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" viewBox="0 0 24 24" fill='#6B7280'>
     <path d="M 4 2 L 4 22 L 12 19 L 20 22 L 20 2 L 6 2 L 4 2 z"></path>
 </svg> Saved
        </p>
-       <p className='font-medium flex text-sm'>
+       <p className=' profileIcon font-medium flex text-sm  hover:bg-gray-200 rounded-md hover:p-1'>
        <FaHeart className='size-5'/>
          Likes
        </p>
