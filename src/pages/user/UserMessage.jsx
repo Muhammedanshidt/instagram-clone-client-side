@@ -2,7 +2,8 @@ import React from 'react'
 import UserProfile from '../../asset/user profile photo.jpg'
 function UserMessage() {
   return (
-    <div >
+<>
+    <div className='w-full h-screen overflow-auto'>
 
   <div className=' w-[350px] h-full'>
      <div className='ml-4'>
@@ -75,6 +76,7 @@ function UserMessage() {
   </div>
 
     </div>
+    </>
   )
 }
 

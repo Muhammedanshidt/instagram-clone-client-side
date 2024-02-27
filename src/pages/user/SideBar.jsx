@@ -106,14 +106,17 @@ const SideBar = () => {
 
         {/* Main Content */}
 
+     
+
         {/* Sidebar Icons for Small Screens */}
-        <div className="fixed bottom-0 w-full bg-gray-800 text-white sm:hidden">
-          <div className="flex justify-around p-4">
-            <span className="text-2xl">&#128196;</span>
-            <span className="text-2xl">&#128172;</span>
-            <span className="text-2xl">&#128273;</span>
-            <span className="text-2xl">&#128172;</span>
-            <span className="text-2xl">&#128196;</span>
+        <div className="fixed bottom-0 w-screen bg-white sm:hidden">
+          <div className="flex gap-10 px-4 py-2">
+            <div><GoHomeFill className="size-6  text-black " /> </div>
+             <div> <MdOutlineExplore onClick={() => navigate("/explore")} className="size-6  text-black " /> </div>
+             <div> <img src={Reel} alt="logo" /></div>
+             <div><CgAddR className="  text-black size-6 rounded-lg " /> </div>
+             <div> <RiMessengerLine  onClick={() => navigate("/inbox")} className=" text-black size-6 " /></div>
+             <div> <CgProfile  onClick={() => navigate("/profile")} className=" text-black size-6" /> </div>
           </div>
         </div>
       </div>
