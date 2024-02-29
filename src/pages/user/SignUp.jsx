@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import TitleImage from "../../asset/title.png";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
@@ -7,11 +7,25 @@ import { useNavigate } from "react-router";
 
 function SignUp() {
 
-  const handleChange = () => {
-    navigate("/login");
-    
-  }
+  const initialFormData = {
+    email:"",
+    name:"",
+    user:"",
+    password:""
+  };
 
+  const [formFillData,setFormFillData] = useState(initialFormData)
+
+  const handleChange = (event) => {
+
+    const  {name, value} = event.target;
+    setFormFillData({
+      ...formFillData,
+      [name]:value
+    });
+
+  };
+  console.log(formFillData);
   const navigate = useNavigate()
   return (
     <div className="flex justify-center items-center flex-col">
@@ -42,36 +56,44 @@ function SignUp() {
         </p>
         <div className=" flex-col ">
           <input
+            onChange={handleChange}
             className="signInput mt-2 "
             type="email"
             placeholder="Email address"
             id="email"
+            name="email"
             required
             autoFocus
           />
           <br />
           <input
+            onChange={handleChange}
             className="signInput mt-2"
             type="text"
             placeholder="Full Name"
             id="name"
+            name="name"
             required
             
           />
           <br />
           <input
+            onChange={handleChange}
             className="signInput mt-2 "
             type="text"
             placeholder="username"
             id="user"
+            name="user"
             required
           />
           <br />
           <input
+            onChange={handleChange}
             className="signInput mt-2"
             type="password"
             placeholder="Password"
             id="password"
+            name="password"
             required
           />
         </div>
@@ -111,7 +133,7 @@ function SignUp() {
             </a>
           </div>
         </div>
-        <button onClick={handleChange} className="bg-blue-400 text-white text-sm font-semibold rounded-md lg:w-[200px] lg:py-2 md:py-2 sm:py-2 sm:w-20 cursor-default">
+        <button className="bg-blue-400 text-white text-sm font-semibold rounded-md lg:w-[200px] lg:py-2 md:py-2 sm:py-2 sm:w-20 cursor-default">
           Sign Up
         </button>
       </div>

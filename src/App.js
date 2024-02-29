@@ -9,14 +9,17 @@ import UserExplore from './pages/user/UserExplore';
 import UserMessage from './pages/user/UserMessage';
 import UserPost from './pages/user/UserPost';
 import UserSaved from './pages/user/UserSaved';
-import { createContext } from 'react';
-
-export const myContext = createContext
+import UserNotification from './pages/user/UserNotification'
+import Clintcontex from './pages/userContext/ClientContext';
 
 function App() {
 
+  const  clientData = {
+
+  }
   
   return (
+    <Clintcontex.Provider value={clientData}>
     <div >
 <Routes>
   <Route path='/login' element={<Login />}/>
@@ -30,6 +33,7 @@ function App() {
          </Route>
          <Route path='/explore' element={<UserExplore/>}/>
          <Route path='/inbox' element={<UserMessage/>}/>
+         <Route path='/notification' element={<UserNotification/>}/>
 
     </Route>
 
@@ -41,6 +45,7 @@ function App() {
 {/* <SignUp/> */}
 
     </div>
+    </Clintcontex.Provider>
   );
 }
 

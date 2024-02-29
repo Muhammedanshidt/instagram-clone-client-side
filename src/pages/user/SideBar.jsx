@@ -16,6 +16,12 @@ import './SideBar.css'
 
 const SideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+  const [menuOpen,setMenuOpen] = useState(false)
+
+  const toggleMenu = () => {
+    setMenuOpen(!menuOpen)
+  }
+
   const navigate = useNavigate();
   return (
     <div>
@@ -95,7 +101,7 @@ const SideBar = () => {
               <p>Profile</p>
             </div>
           </div>
-          <div className="flex text-black h-[30px] m-8 flex gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg">
+          <div onClick={toggleMenu} className="flex  text-black h-[30px] m-8 flex gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg">
             <AiOutlineMenu className="size-6" />
             <p>More</p>
           </div>
