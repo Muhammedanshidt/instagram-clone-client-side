@@ -10,20 +10,34 @@ import UserMessage from './pages/user/UserMessage';
 import UserPost from './pages/user/UserPost';
 import UserSaved from './pages/user/UserSaved';
 import UserNotification from './pages/user/UserNotification'
+import UserOtp from './pages/user/UserOtp';
 import Clintcontex from './pages/userContext/ClientContext';
+import { useState } from 'react';
 
 function App() {
 
-  const  clientData = {
 
+  // const [formFillData,setFormFillData] = useState("")
+  const [userData,setUserData] = useState({});
+
+  
+  const  clientData = {
+   userData,
+   setUserData,
   }
   
   return (
     <Clintcontex.Provider value={clientData}>
     <div >
+
+ {/* -- ROUTES ------- */}
+
 <Routes>
   <Route path='/login' element={<Login />}/>
   <Route path="/signup" element={<SignUp />}/>
+  <Route path='/otp' element={<UserOtp/>}/>
+  {/* </Route> */}
+
   <Route path="/home" element={<Home/>}/>
   <Route path="/" element={<SideBar/>}>
 
@@ -41,8 +55,7 @@ function App() {
 
   
 </Routes>
-{/* <Login/> */}
-{/* <SignUp/> */}
+
 
     </div>
     </Clintcontex.Provider>

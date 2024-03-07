@@ -12,15 +12,15 @@ import { AiOutlineMenu } from "react-icons/ai";
 import TitleImage from "../../asset/title.png";
 import { Outlet } from "react-router";
 import { useNavigate } from "react-router";
-import './SideBar.css'
+// import "./SideBar.css";
 
 const SideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  const [menuOpen,setMenuOpen] = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const toggleMenu = () => {
-    setMenuOpen(!menuOpen)
-  }
+    setMenuOpen(!menuOpen);
+  };
 
   const navigate = useNavigate();
   return (
@@ -52,7 +52,7 @@ const SideBar = () => {
 
             <div
               onClick={() => navigate("/explore")}
-              className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg"
+              className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg "
             >
               <div>
                 <MdOutlineExplore className="size-6 " />
@@ -101,7 +101,42 @@ const SideBar = () => {
               <p>Profile</p>
             </div>
           </div>
-          <div onClick={toggleMenu} className="flex  text-black h-[30px] m-8 flex gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg">
+          <div
+            onClick={toggleMenu}
+            className="flex  text-black h-[30px] m-8 flex gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg"
+          >
+                  {menuOpen && (
+        <div
+        className=" absolute left-8 bottom-16 origin-top-left w-56 h-64 bg-slate-200 shadow-xl divide-y rounded-lg  divide-gray-100 ring-1 ring-black ring-opacity-5 focus:outline-none"
+          // className="absolute  left-0 mb-2 origin-top-left bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          // role="menu"
+          // aria-orientation="vertical"
+          // aria-labelledby="menu-button"
+          // tabIndex="-1"
+          // style={{ minWidth: '10rem' }}
+        >
+          <div className=" absolute bottom-3 py-1">
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+              tabIndex="-1"
+              id="menu-item-0"
+            >
+              Item 1
+            </a>
+            <a
+              href="#"
+              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+              role="menuitem"
+              tabIndex="-1"
+              id="menu-item-1"
+            >
+              Item 2
+            </a>
+          </div>
+        </div>
+      )}
             <AiOutlineMenu className="size-6" />
             <p>More</p>
           </div>
@@ -112,17 +147,40 @@ const SideBar = () => {
 
         {/* Main Content */}
 
-     
-
         {/* Sidebar Icons for Small Screens */}
         <div className="fixed bottom-0 w-screen bg-white sm:hidden">
           <div className="flex gap-10 px-4 py-2">
-            <div><GoHomeFill className="size-6  text-black " /> </div>
-             <div> <MdOutlineExplore onClick={() => navigate("/explore")} className="size-6  text-black " /> </div>
-             <div> <img src={Reel} alt="logo" /></div>
-             <div><CgAddR className="  text-black size-6 rounded-lg " /> </div>
-             <div> <RiMessengerLine  onClick={() => navigate("/inbox")} className=" text-black size-6 " /></div>
-             <div> <CgProfile  onClick={() => navigate("/profile")} className=" text-black size-6" /> </div>
+            <div>
+              <GoHomeFill className="size-6  text-black " />{" "}
+            </div>
+            <div>
+              {" "}
+              <MdOutlineExplore
+                onClick={() => navigate("/explore")}
+                className="size-6  text-black "
+              />{" "}
+            </div>
+            <div>
+              {" "}
+              <img src={Reel} alt="logo" />
+            </div>
+            <div>
+              <CgAddR className="  text-black size-6 rounded-lg " />{" "}
+            </div>
+            <div>
+              {" "}
+              <RiMessengerLine
+                onClick={() => navigate("/inbox")}
+                className=" text-black size-6 "
+              />
+            </div>
+            <div>
+              {" "}
+              <CgProfile
+                onClick={() => navigate("/profile")}
+                className=" text-black size-6"
+              />{" "}
+            </div>
           </div>
         </div>
       </div>

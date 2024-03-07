@@ -1,32 +1,77 @@
-import React, { useState } from "react";
+import React, { useState,useContext } from "react";
 import TitleImage from "../../asset/title.png";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
 import "./SignUp.css";
 import { useNavigate } from "react-router";
+import Clintcontex from "../userContext/ClientContext";
+import Axios from "axios"
 
 function SignUp() {
 
   const initialFormData = {
     email:"",
-    name:"",
-    user:"",
+    fullname:"",
+    username:"",
     password:""
   };
 
-  const [formFillData,setFormFillData] = useState(initialFormData)
+  const {userData,setUserData} = useContext(Clintcontex)
 
-  const handleChange = (event) => {
+  const [formFillData,setFormFillData] = useState(initialFormData)
+  const [errorMessage, setErrorMessage]= useState({})
+  
+  const routeNavigate = useNavigate()
+
+  const handleChange =  (event) => {
 
     const  {name, value} = event.target;
     setFormFillData({
       ...formFillData,
       [name]:value
-    });
-
+    })
+    ;
+    
   };
-  console.log(formFillData);
-  const navigate = useNavigate()
+
+  const saveUser = () => {
+    setUserData(formFillData);
+    if (Object.values(formFillData).some((value) => value === "")) {
+      alert("Please Fill All Fields");
+    } else {
+      routeNavigate("/otp");
+      // console.log(formFillData);
+      console.log(userData);
+    }
+  };
+
+  const sumbitForm = (event) => {
+    event.preventDefault();
+    console.log("submitted");
+    const formError = {}
+
+    if(formFillData.email === ""){
+      formError.email="Email is required.";
+    }
+    if(formFillData.fullname === ''){
+      formError.fullname='Full name is required.'
+    }
+    if(formFillData.username === "") {
+        formError.username = "user name is required"
+    }
+    if(formFillData.password === ""){
+      formError.password = "password is required"
+    }
+
+    setErrorMessage(formError);
+
+    if(Object.keys(formError.length === 0)){
+      // console.log(formFillData);
+     saveUser()
+    }else{
+         alert("fill full data")
+    }
+  }
   return (
     <div className="flex justify-center items-center flex-col">
       <div
@@ -72,7 +117,7 @@ function SignUp() {
             type="text"
             placeholder="Full Name"
             id="name"
-            name="name"
+            name="fullname"
             required
             
           />
@@ -83,7 +128,7 @@ function SignUp() {
             type="text"
             placeholder="username"
             id="user"
-            name="user"
+            name="username"
             required
           />
           <br />
@@ -133,7 +178,7 @@ function SignUp() {
             </a>
           </div>
         </div>
-        <button className="bg-blue-400 text-white text-sm font-semibold rounded-md lg:w-[200px] lg:py-2 md:py-2 sm:py-2 sm:w-20 cursor-default">
+        <button onClick={sumbitForm} className="bg-blue-400 text-white text-sm font-semibold rounded-md lg:w-[200px] lg:py-2 md:py-2 sm:py-2 sm:w-20 cursor-default">
           Sign Up
         </button>
       </div>
@@ -141,7 +186,7 @@ function SignUp() {
             <p className="text-sm ">
               {" "}
                have an account?{" "}
-              <span className="text-sm font-medium text-blue-500 cursor-pointer" onClick={()=> navigate('/login')}>
+              <span className="text-sm font-medium text-blue-500 cursor-pointer" onClick={()=> routeNavigate('/login')}>
                 Log in
               </span>{" "}
             </p>
