@@ -1,77 +1,90 @@
-import React, { useState,useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import TitleImage from "../../asset/title.png";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
 import "./SignUp.css";
 import { useNavigate } from "react-router";
 import Clintcontex from "../userContext/ClientContext";
-import Axios from "axios"
+import Axios from "axios";
 
 function SignUp() {
-
   const initialFormData = {
-    email:"",
-    fullname:"",
-    username:"",
-    password:""
+    email: "",
+    fullname: "",
+    username: "",
+    password: "",
   };
 
-  const {userData,setUserData} = useContext(Clintcontex)
+  const { userData, setUserData } = useContext(Clintcontex);
 
-  const [formFillData,setFormFillData] = useState(initialFormData)
-  const [errorMessage, setErrorMessage]= useState({})
-  
-  const routeNavigate = useNavigate()
+  const [formFillData, setFormFillData] = useState(initialFormData);
+  const [errorMessage, setErrorMessage] = useState({});
 
-  const handleChange =  (event) => {
+  const routeNavigate = useNavigate();
 
-    const  {name, value} = event.target;
+  const handleChange = (event) => {
+    const { name, value } = event.target;
     setFormFillData({
       ...formFillData,
-      [name]:value
-    })
-    ;
-    
+      [name]: value,
+    });
   };
-
-  const saveUser = () => {
-    setUserData(formFillData);
+  
+  const saveUser = async () => {
+    
     if (Object.values(formFillData).some((value) => value === "")) {
       alert("Please Fill All Fields");
-    } else {
-      routeNavigate("/otp");
-      // console.log(formFillData);
-      console.log(userData);
+      return;
+    }
+    try {
+     
+      const response = await Axios.post("http://localhost:3003/user/signup",
+        formFillData,
+        { withCredentials: true }
+      ); 
+      console.log("haimonu");
+
+      if (response.data) {
+        // console.log(formFillData);
+        setUserData(formFillData);
+        // console.log(userData);
+        routeNavigate("/otp");
+      }
+    } catch (error) {
+      alert(error);
+      // console.log(error);
     }
   };
 
   const sumbitForm = (event) => {
     event.preventDefault();
     console.log("submitted");
-    const formError = {}
+    console.log("hai");
+    const formError = {};
 
-    if(formFillData.email === ""){
-      formError.email="Email is required.";
+    if (formFillData.email === "") {
+      formError.email = "Email is required.";
     }
-    if(formFillData.fullname === ''){
-      formError.fullname='Full name is required.'
+    if (formFillData.fullname === "") {
+      formError.fullname = "Full name is required.";
     }
-    if(formFillData.username === "") {
-        formError.username = "user name is required"
+    if (formFillData.username === "") {
+      formError.username = "user name is required";
     }
-    if(formFillData.password === ""){
-      formError.password = "password is required"
+    if (formFillData.password === "") {
+      formError.password = "password is required";
     }
 
     setErrorMessage(formError);
 
-    if(Object.keys(formError.length === 0)){
-      // console.log(formFillData);
-     saveUser()
-    }else{
-         alert("fill full data")
+    if (Object.keys(formError.length === 0)) {
+       saveUser();
+
+    } else {
+      alert("fill full data");
+      // console.log(errorMessage);
     }
-  }
+  };
   return (
     <div className="flex justify-center items-center flex-col">
       <div
@@ -119,7 +132,6 @@ function SignUp() {
             id="name"
             name="fullname"
             required
-            
           />
           <br />
           <input
@@ -156,16 +168,20 @@ function SignUp() {
           </div>
           <div className="text-xs text-center mt-4">
             By signing up, you agree to our{" "}
-            <a href="https://help.instagram.com/581066165581870/?locale=en_GB"
-            target="_blank"
-            rel="noopener noreferrer">
+            <a
+              href="https://help.instagram.com/581066165581870/?locale=en_GB"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               {" "}
               <span className="linkSpan">Terms</span>
             </a>
             ,
-            <a href="https://www.facebook.com/privacy/policy"
-            target="_blank"
-            rel="noopener noreferrer">
+            <a
+              href="https://www.facebook.com/privacy/policy"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
               <span className="linkSpan">Privacy Policy</span>
             </a>{" "}
             and{" "}
@@ -178,47 +194,45 @@ function SignUp() {
             </a>
           </div>
         </div>
-        <button onClick={sumbitForm} className="bg-blue-400 text-white text-sm font-semibold rounded-md lg:w-[200px] lg:py-2 md:py-2 sm:py-2 sm:w-20 cursor-default">
+        <button
+          onClick={sumbitForm}
+          className="bg-blue-400 text-white text-sm font-semibold rounded-md lg:w-[200px] lg:py-2 md:py-2 sm:py-2 sm:w-20 cursor-default"
+        >
           Sign Up
         </button>
       </div>
       <div className="w-[350px] h-16 border border-1border-gray-300 flex justify-center items-center mt-2">
-            <p className="text-sm ">
-              {" "}
-               have an account?{" "}
-              <span className="text-sm font-medium text-blue-500 cursor-pointer" onClick={()=> routeNavigate('/login')}>
-                Log in
-              </span>{" "}
-            </p>
-          </div>
+        <p className="text-sm ">
+          {" "}
+          have an account?{" "}
+          <span
+            className="text-sm font-medium text-blue-500 cursor-pointer"
+            onClick={() => routeNavigate("/login")}
+          >
+            Log in
+          </span>{" "}
+        </p>
+      </div>
 
       <div className="w-[350px] h-18 mt-2">
-            <p className="text-center text-sm">Get the app.</p>
-            <div className="flex gap-3 flex justify-center my-6">
-              <a
-                href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=ig_mid%3DBB6917D7-37B1-435C-92DA-4A0D28DBC10A%26utm_campaign%3DloginPage%26utm_content%3Dlo%26utm_source%3Dinstagramweb%26utm_medium%3Dbadge&pli=1"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="h-[40px]"
-                  src={PlayStore}
-                  alt="playstore logo"
-                />
-              </a>
-              <a
-                href="https://apps.microsoft.com/detail/9NBLGGH5L9XT?hl=en-US&gl=US"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <img
-                  className="h-[40px]"
-                  src={Microsoft}
-                  alt="playstore logo"
-                />
-              </a>
-            </div>
-          </div>
+        <p className="text-center text-sm">Get the app.</p>
+        <div className="flex gap-3 flex justify-center my-6">
+          <a
+            href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=ig_mid%3DBB6917D7-37B1-435C-92DA-4A0D28DBC10A%26utm_campaign%3DloginPage%26utm_content%3Dlo%26utm_source%3Dinstagramweb%26utm_medium%3Dbadge&pli=1"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="h-[40px]" src={PlayStore} alt="playstore logo" />
+          </a>
+          <a
+            href="https://apps.microsoft.com/detail/9NBLGGH5L9XT?hl=en-US&gl=US"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <img className="h-[40px]" src={Microsoft} alt="playstore logo" />
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

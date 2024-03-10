@@ -5,12 +5,43 @@ import LoginImage from "../../asset/home-phones-2x.png";
 import { useNavigate } from "react-router";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
+import { useState,useContext } from "react";
+import axios from "axios";
+import Clintcontex from "../userContext/ClientContext";
+
 
 function Login() {
   const navigate = useNavigate();
 
+  // const {userData} = useContext(Clintcontex)
+  // const [username, setUsername] = useState("");
+  const [email,setEmail] = useState("")
+  const [password,setPassword]  = useState("")
   
+  // console.log(email);
+  // console.log(password);
 
+  const  handleSubmit = async (e)=>{
+    e.preventDefault();
+    
+      if(!email || !password){
+        alert('Please enter fields')
+        return;
+      }
+          const response = await axios.post("http://localhost:3003/user/login",{
+            email:email,
+            password:password
+          })
+
+          if(response.data.success === true){
+            alert(response.data.message)
+            navigate("/profile")
+          }else{
+            alert(response.data.message)
+          }
+
+  
+        }
   return (
     <>
       <div className="container">
@@ -32,18 +63,22 @@ function Login() {
               />
             </div>
             <input
-              placeholder="username or email address"
+              placeholder=" email address"
               className="inputBox mt-16"
               type="text"
+              onChange={(e) => setEmail(e.target.value)}
             />
             <br />
             <input
               placeholder="password"
               className="inputBox "
               type="password"
+              onChange={(e) => setPassword(e.target.value)}
+              
             />
             <br />
-            <button className="bg-blue-400 hover:bg-blue-600 text-white font-bold rounded lg:px-24 lg:py-1 md:px-6 md:py-3">
+            <button className="bg-blue-400 hover:bg-blue-600 text-white font-bold rounded lg:px-24 lg:py-1 md:px-6 md:py-3"
+            onClick={handleSubmit}>
               Log in
             </button>
             <p className=" mt-4 text-gray-500 lg:px-24 lg:py-1 md:px-6 md:py-3">
