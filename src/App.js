@@ -11,6 +11,7 @@ import UserPost from './pages/user/UserPost';
 import UserSaved from './pages/user/UserSaved';
 import UserNotification from './pages/user/UserNotification'
 import UserOtp from './pages/user/UserOtp';
+import CreatPost from './pages/user/CreatPost'
 import Clintcontex from './pages/userContext/ClientContext';
 import { useState } from 'react';
 
@@ -38,9 +39,11 @@ function App() {
   <Route path='/otp' element={<UserOtp/>}/>
   {/* </Route> */}
 
-  <Route path="/home" element={<Home/>}/>
+  {/* <Route path="/home" element={<Home/>}/> */}
   <Route path="/" element={<SideBar/>}>
-
+       <Route path="/home" element={<Home/>}/>
+       <Route path="/create" element={<CreatPost/>}/>
+        
          <Route path='/profile' element={<UserProfile/>}>
            <Route path='/profile/' element={<UserPost/>}/>
            <Route path='/profile/saved' element={<UserSaved/>}/>

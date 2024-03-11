@@ -12,6 +12,7 @@ import { AiOutlineMenu } from "react-icons/ai";
 import TitleImage from "../../asset/title.png";
 import { Outlet } from "react-router";
 import { useNavigate } from "react-router";
+import { IoIosImages } from "react-icons/io";
 // import "./SideBar.css";
 
 const SideBar = () => {
@@ -21,8 +22,8 @@ const SideBar = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
-
   const navigate = useNavigate();
+
   return (
     <div>
       <div className=" h-screen flex ">
@@ -84,12 +85,52 @@ const SideBar = () => {
               <p>Notifications</p>
             </div>
 
-            <div className=" focus-div flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg">
+            <div
+              className=" focus-div flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg "
+              onClick={() => document.getElementById("my_modal_3").showModal()}
+            >
               <div>
                 <CgAddR className="size-6 rounded-" />
               </div>
               <p>Creat</p>
             </div>
+
+            {/* UPLOAD IMAGE */}
+            <dialog id="my_modal_3" className="modal rounded-3xl shadow-2xl">
+              <div className="modal-box ">
+                <form method="dialog">
+                  <button className="btn btn-sm text-xl font-bold  btn-circle btn-ghost absolute right-2 top-2 p-2">
+                    ✕
+                  </button>
+                </form>
+                <div className="bg-white p-6 h-96 ">
+                  <h3 className="font-bold text-lg text-center m-5 w-64 ">
+                    Create new post
+                  </h3>
+                  <hr className=" border-black my-4" />
+                  <div className=" flex justify-center">
+                    <IoIosImages className="size-20 align-bottom mt-10" />
+                  </div>
+                  <h1 className="font-medium text-center mt-3 mb-6">
+                    Upload Photos Here
+                  </h1>
+                  <label
+                    htmlFor="fileInput"
+                    className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-md px-3 py-2 mx-20 my-6 cursor-pointer"
+                  >
+                    Select From Computer
+                  </label>
+                  <input
+                    type="file"
+                    id="fileInput"
+                    className="hidden"
+                    onChange={(e) => e.target.files}
+                    multiple
+                    accept="image/*"
+                  />
+                </div>
+              </div>
+            </dialog>
 
             <div
               onClick={() => navigate("/profile")}
@@ -105,38 +146,30 @@ const SideBar = () => {
             onClick={toggleMenu}
             className="flex  text-black h-[30px] m-8 flex gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg"
           >
-                  {menuOpen && (
-        <div
-        className=" absolute left-8 bottom-16 origin-top-left w-56 h-64 bg-slate-200 shadow-xl divide-y rounded-lg  divide-gray-100 ring-1 ring-black ring-opacity-5 focus:outline-none"
-          // className="absolute  left-0 mb-2 origin-top-left bg-slate-800 divide-y divide-gray-100 rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
-          // role="menu"
-          // aria-orientation="vertical"
-          // aria-labelledby="menu-button"
-          // tabIndex="-1"
-          // style={{ minWidth: '10rem' }}
-        >
-          <div className=" absolute bottom-3 py-1">
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              tabIndex="-1"
-              id="menu-item-0"
-            >
-              Item 1
-            </a>
-            <a
-              href="#"
-              className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-              role="menuitem"
-              tabIndex="-1"
-              id="menu-item-1"
-            >
-              Item 2
-            </a>
-          </div>
-        </div>
-      )}
+            {menuOpen && (
+              <div className=" absolute left-8 bottom-16 origin-top-left w-56 h-64 bg-slate-200 shadow-xl divide-y rounded-lg  divide-gray-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
+                <div className=" absolute bottom-3 py-1">
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="menu-item-0"
+                  >
+                    Item 1
+                  </a>
+                  <a
+                    href="#"
+                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+                    role="menuitem"
+                    tabIndex="-1"
+                    id="menu-item-1"
+                  >
+                    Item 2
+                  </a>
+                </div>
+              </div>
+            )}
             <AiOutlineMenu className="size-6" />
             <p>More</p>
           </div>

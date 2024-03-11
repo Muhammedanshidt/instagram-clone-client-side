@@ -1,5 +1,5 @@
 import React from 'react'
-import Profile from '../../asset/profile photo.jpg'
+// import Profile from '../../asset/profile photo.jpg'
 import { IoIosSettings } from "react-icons/io";
 import { IoMdGrid } from "react-icons/io";
 import SaveIcon from '../../asset/save icon.png'
@@ -8,12 +8,17 @@ import { Outlet, useNavigate } from 'react-router';
 import './UserProfile.css'
 function UserProfile() {
     const navigate = useNavigate()
+
+
+
+
+    
   return (
 
     <div className='w-full h-screen overflow-auto'>
     <div className='flex '>
         <div className='w-[350px] h-[250px]  flex justify-center items-center '>
-            <img className='rounded-full w-[150px] border border-3 border-gray-400' src={Profile}  alt="Profile Picture" />
+        <img className='rounded-full w-[150px] border border-3 border-gray-400' src={'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'}  alt="profile"/>
         </div>
         <div className=' w-[700px] h-[250px]  flex-col '>
           <div className='flex gap-6 mt-6'>
