@@ -34,7 +34,6 @@ function Login() {
           })
 
           if(response.data.success === true){
-            alert(response.data.message)
             navigate("/profile")
           }else{
             alert(response.data.message)

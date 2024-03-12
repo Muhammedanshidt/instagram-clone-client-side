@@ -6,10 +6,13 @@ import SaveIcon from '../../asset/save icon.png'
 import { FaHeart } from "react-icons/fa";
 import { Outlet, useNavigate } from 'react-router';
 import './UserProfile.css'
+
+
+
 function UserProfile() {
     const navigate = useNavigate()
 
-
+    
 
 
     

@@ -156,7 +156,7 @@ const SideBar = () => {
                     tabIndex="-1"
                     id="menu-item-0"
                   >
-                    Item 1
+                    Saved
                   </a>
                   <a
                     href="#"
