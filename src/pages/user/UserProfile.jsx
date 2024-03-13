@@ -1,5 +1,6 @@
 import React from 'react'
 // import Profile from '../../asset/profile photo.jpg'
+import Profile from "../../asset/profile-circle.svg"
 import { IoIosSettings } from "react-icons/io";
 import { IoMdGrid } from "react-icons/io";
 import SaveIcon from '../../asset/save icon.png'
@@ -21,12 +22,12 @@ function UserProfile() {
     <div className='w-full h-screen overflow-auto'>
     <div className='flex '>
         <div className='w-[350px] h-[250px]  flex justify-center items-center '>
-        <img className='rounded-full w-[150px] border border-3 border-gray-400' src={'https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'}  alt="profile"/>
+        <img className='rounded-full w-[150px] border border-3 border-gray-300' src={Profile}  alt="profile"/>
         </div>
         <div className=' w-[700px] h-[250px]  flex-col '>
           <div className='flex gap-6 mt-6'>
             <p className='text-lg font-'>anshid_t</p>
-            <button className='bg-gray-200 p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg '>Edit Profile</button>
+            <button className='bg-gray-200 p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg  ' onClick={() => navigate("/profile/edit")}>Edit Profile</button>
         <IoIosSettings className='size-7'/>
           </div>
           <div className='flex gap-8 mt-6'>

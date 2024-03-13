@@ -31,7 +31,8 @@ function Login() {
           const response = await axios.post("http://localhost:3003/user/login",{
             email:email,
             password:password
-          })
+          },{withCredentials:true})
+          
 
           if(response.data.success === true){
             navigate("/profile")
