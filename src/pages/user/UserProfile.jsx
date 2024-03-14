@@ -3,20 +3,14 @@ import React from 'react'
 import Profile from "../../asset/profile-circle.svg"
 import { IoIosSettings } from "react-icons/io";
 import { IoMdGrid } from "react-icons/io";
-import SaveIcon from '../../asset/save icon.png'
+// import SaveIcon from '../../asset/save icon.png'
 import { FaHeart } from "react-icons/fa";
 import { Outlet, useNavigate } from 'react-router';
 import './UserProfile.css'
 
-
-
 function UserProfile() {
     const navigate = useNavigate()
 
-    
-
-
-    
   return (
 
     <div className='w-full h-screen overflow-auto'>

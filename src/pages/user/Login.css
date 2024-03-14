@@ -9,7 +9,7 @@
     height: 100vh;
     background-color: rgb(255, 255, 255);
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
     align-items: center;
 }
 .loginInput{
@@ -67,6 +67,15 @@ input.inputBox::placeholder{
     display: flex;
     flex-direction: row;
 }
+
+.align-items {
+    align-items: flex-end;
+  }
+  
+.align-items {
+  align-items: flex-end;
+}
+  
 
 
 .image {
