@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useContext } from 'react'
 // import Profile from '../../asset/profile photo.jpg'
 import Profile from "../../asset/profile-circle.svg"
 import { IoIosSettings } from "react-icons/io";
@@ -7,13 +7,18 @@ import { IoMdGrid } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import { Outlet, useNavigate } from 'react-router';
 import './UserProfile.css'
+import Clintcontex from '../userContext/ClientContext';
 // import axios from 'axios';
 // import React, { useEffect, useState } from 'react';
 
 function UserProfile() {
     const navigate = useNavigate()
+const {userData} = useContext(Clintcontex)
 
-
+// if(Object.keys(userData).length ===0){
+//     window.location.reload()
+// }
+console.log(userData)
 
 
 
@@ -29,17 +34,17 @@ function UserProfile() {
         </div>
         <div className=' w-[700px] h-[250px]  flex-col '>
           <div className='flex gap-6 mt-6'>
-            <p className='text-lg font-'>anshid_t</p>
+            <p className='text-lg font-'>{userData?.username}</p>
             <button className='bg-gray-200 p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg  ' onClick={() => navigate("/profile/edit")}>Edit Profile</button>
         <IoIosSettings className='size-7'/>
           </div>
           <div className='flex gap-8 mt-6'>
-            <p> <span className='font-medium'>489</span>  posts</p>
-            <p> <span className='font-medium'>10.6M</span>  followers</p>
+            <p> <span className='font-medium'>{userData.post?.length}</span>  posts</p>
+            <p> <span className='font-medium'>{userData.following?.length}</span>  followers</p>
             <p> <span className='font-medium'>456</span>  following</p>
           </div>
           <div className="mt-5">
-            <p  className='font-medium font-mono text-lg mb-2'>MUHAMMED ANSHID</p>
+            <p  className='font-medium font-mono text-lg mb-2'>{userData?.fullname}</p>
             <p>MERN STACK Developer</p>
             <p>photography</p>
           </div>

@@ -1,5 +1,5 @@
-import './App.css'; 
-import { Route,Routes } from 'react-router';
+import './App.css';
+import { Route, Routes } from 'react-router';
 import Login from './pages/user/Login';
 import SignUp from './pages/user/SignUp';
 import SideBar from './pages/user/SideBar';
@@ -24,100 +24,89 @@ function App() {
 
 
   // const [formFillData,setFormFillData] = useState("")
-  const [userData,setUserData] = useState({});
-  // const [auth,setauth] =useState(false) ;
-  useEffect(()=>{
+  const [userData, setUserData] = useState({});
+  const [auth,setauth] =useState(false) ;
+  console.log("bfiyegb");
+  useEffect(() => {
     const fetchData = async () => {
       try {
-
         const cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
-        console.log(cookieToken)
-
-          if (!cookieToken) {
-            console.log("Token not found");
-            return;
-          }
-            const userDetails = jwtDecode(cookieToken);
-            console.log(userDetails );
-        const email = userDetails.mail
-
-    
-        const response = await axios.post('http://localhost:3003/user/access',{
-          email
-           });
-          //  setauth(true);
-        if (!response.data.successful) {
+        // console.log(cookieToken)
+        if (!cookieToken) {
+          console.log("Token not found");
+          return;
+        }
+        const userDetails = jwtDecode(cookieToken);
+        // console.log(userDetails );
+        const email = userDetails.email
+            console.log(("dbnfjerb"));
+        const backResponse = await axios.post("http://localhost:3003/user/access",
+          { email: email },
+          { withCredentials: true }
+        )
+          setauth(true);
+        if (!backResponse.data.successful) {
           return alert("no data available");
         }
-          
-        const value = response.data.Data
-
-
+        const value = backResponse.data.Data
+        console.log(value);
         if (!isEqual(userData, value)) {
           setUserData(value);
-        
-          console.log(value);
-          }
-       
-      } 
-  catch (error) {
+          
+        }
+
+      }
+      catch (error) {
         console.error('Error fetching data:', error);
-     
+
       }
     };
 
-    fetchData(); 
+    fetchData();
 
-  },[userData])
+  }, [userData])
 
   // console.log(auth);
-  
-  const  clientData = {
-   userData,
-   setUserData,
+
+  const clientData = {
+    userData,
+    setUserData,
   }
-  
+
   return (
     <>
-    {/* <Toaster/> */}
-    <Clintcontex.Provider value={clientData}>
-    <div >
+      {/* <Toaster/> */}
+      <Clintcontex.Provider value={clientData}>
+        <div >
 
- {/* -- ROUTES ------- */}
+          {/* -- ROUTES ------- */}
 
-<Routes>
-  <Route path='/login' element={<Login />}/>
-  <Route path="/signup" element={<SignUp />}/>
-  <Route path='/otp' element={<UserOtp/>}/>
-  {/* </Route> */}
+          <Routes>
+            <Route path='/login' element={<Login />} />
+            <Route path="/signup" element={<SignUp />} />
+            <Route path='/otp' element={<UserOtp />} />
+            {/* </Route> */}
 
-  {/* <Route path="/home" element={<Home/>}/> */}
-  <Route path="/" element={<SideBar/>}>
-       <Route path="/home" element={<Home/>}/>
-       <Route path="/create" element={<CreatPost/>}/>
-       <Route path='/profile/edit' element={<EditProfile/>}/>
-        
-         <Route path='/profile' element={<UserProfile/>}>
-           <Route path='/profile/' element={<UserPost/>}/>
-           <Route path='/profile/saved' element={<UserSaved/>}/>
-         </Route>
-         <Route path='/explore' element={<UserExplore/>}/>
-         <Route path='/inbox' element={<UserMessage/>}/>
-         <Route path='/notification' element={<UserNotification/>}/>
+            {/* <Route path="/home" element={<Home/>}/> */}
+            <Route path="/" element={<SideBar />}>
+              <Route path="/home" element={<Home />} />
+              <Route path="/create" element={<CreatPost />} />
+              <Route path='/profile/edit' element={<EditProfile />} />
 
-    </Route>
+              <Route path='/profile' element={<UserProfile />}>
+                <Route path='/profile/' element={<UserPost />} />
+                <Route path='/profile/saved' element={<UserSaved />} />
+              </Route>
+              <Route path='/explore' element={<UserExplore />} />
+              <Route path='/inbox' element={<UserMessage />} />
+              <Route path='/notification' element={<UserNotification />} />
 
+            </Route>
 
-
-  
-</Routes>
-
-
-    </div>
-    </Clintcontex.Provider>
+          </Routes>
+        </div>
+      </Clintcontex.Provider>
     </>
   );
 }
-
 export default App;
