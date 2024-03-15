@@ -7,9 +7,18 @@ import { IoMdGrid } from "react-icons/io";
 import { FaHeart } from "react-icons/fa";
 import { Outlet, useNavigate } from 'react-router';
 import './UserProfile.css'
+// import axios from 'axios';
+// import React, { useEffect, useState } from 'react';
 
 function UserProfile() {
     const navigate = useNavigate()
+
+
+
+
+
+
+
 
   return (
 

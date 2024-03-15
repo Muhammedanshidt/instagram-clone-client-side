@@ -14,12 +14,11 @@ import UserOtp from './pages/user/UserOtp';
 import CreatPost from './pages/user/CreatPost'
 import EditProfile from './pages/user/UserProfileEdit'
 import Clintcontex from './pages/userContext/ClientContext';
-import { useState } from 'react';
-// import { useEffect, useState} from 'react';
-// import { toast, Toaster } from "react-hot-toast";
-// import { jwtDecode } from "jwt-decode";
-// import { isEqual } from "lodash";
-// import axios from 'axios';
+import { useEffect, useState } from 'react';
+import { toast, Toaster } from "react-hot-toast";
+import { jwtDecode } from "jwt-decode";
+import { isEqual } from "lodash";
+import axios from 'axios';
 
 function App() {
 
@@ -27,57 +26,50 @@ function App() {
   // const [formFillData,setFormFillData] = useState("")
   const [userData,setUserData] = useState({});
   // const [auth,setauth] =useState(false) ;
-  
-  // useEffect(()=>{
-  //   const fetchData = async () => {
-  //     try {
-  //       const cookiesArray = document.cookie.split(';');
-  //       const cookies = cookiesArray.reduce((acc, cookie) => {
-  //         const [name, value] = cookie.trim().split('=');
-  //         acc[name] = value;
-  //         return acc;
-  //       }, {});
+  useEffect(()=>{
+    const fetchData = async () => {
+      try {
 
-      
-  //       const cookieToken = cookies.loginToken;
-      
+        const cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
 
-  //       if (!cookieToken) {
-  //         setauth(false);
-  //         console.log("hellow")
-  //         return;
-  //       }
+        console.log(cookieToken)
 
-  //       const userDetails = jwtDecode(cookieToken);
-  //       //const id = userDetails.userData.email
+          if (!cookieToken) {
+            console.log("Token not found");
+            return;
+          }
+            const userDetails = jwtDecode(cookieToken);
+            console.log(userDetails );
+        const email = userDetails.mail
 
-  //       console.log(userDetails );
-  //       const response = await axios.post('http://localhost:3003/user/access', {
-  //         email:userDetails 
-  //          });
-  //          setauth(true);
-  //       if (!response.data.successful) {
-  //         return toast.error(response.data.error,"error");
-  //       }
+    
+        const response = await axios.post('http://localhost:3003/user/access',{
+          email
+           });
+          //  setauth(true);
+        if (!response.data.successful) {
+          return alert("no data available");
+        }
           
-  //       const value = response.data.Data
+        const value = response.data.Data
 
 
-  //       if (!isEqual(userData, value)) {
-  //         setUserData(value);
+        if (!isEqual(userData, value)) {
+          setUserData(value);
         
-  //         console.log(value);
-  //         }
+          console.log(value);
+          }
        
-  //     } catch (error) {
-  //       console.error('Error fetching data:', error);
+      } 
+  catch (error) {
+        console.error('Error fetching data:', error);
      
-  //     }
-  //   };
+      }
+    };
 
-  //   fetchData(); 
+    fetchData(); 
 
-  // },[userData])
+  },[userData])
 
   // console.log(auth);
   
