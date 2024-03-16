@@ -15,7 +15,7 @@ import CreatPost from './pages/user/CreatPost'
 import EditProfile from './pages/user/UserProfileEdit'
 import Clintcontex from './pages/userContext/ClientContext';
 import { useEffect, useState } from 'react';
-import { toast, Toaster } from "react-hot-toast";
+// import { toast, Toaster } from "react-hot-toast";
 import { jwtDecode } from "jwt-decode";
 import { isEqual } from "lodash";
 import axios from 'axios';
