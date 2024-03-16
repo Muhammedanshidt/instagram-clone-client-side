@@ -28,7 +28,7 @@ function Login() {
         alert('Please enter fields')
         return;
       }
-          const response = await axios.post("http://localhost:3003/user/login",{
+          const response = await axios.post("https://instagram-clone-server-side-thqi.onrender.com/login",{
             email:email,
             password:password
           },{withCredentials:true})

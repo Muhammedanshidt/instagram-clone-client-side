@@ -22,7 +22,7 @@ function UserOtp() {
   const submitOtp = async () => {
     try {
         
-        const backendResponse = await Axios.post("http://localhost:3003/user/otp",
+        const backendResponse = await Axios.post("https://instagram-clone-server-side-thqi.onrender.com/otp",
         {userData,otp},
         { withCredentials: true }
       );

@@ -44,7 +44,7 @@ function App() {
         // console.log(userDetails );
         const email = userDetails.email
             console.log(("dbnfjerb"));
-        const backResponse = await axios.post("http://localhost:3003/user/access",
+        const backResponse = await axios.post("https://instagram-clone-server-side-thqi.onrender.com/access",
           { email: email },
           { withCredentials: true }
         )
