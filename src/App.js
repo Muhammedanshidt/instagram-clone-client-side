@@ -30,7 +30,8 @@ function App() {
   // const [formFillData,setFormFillData] = useState("")
   const [userData, setUserData] = useState({});
   const [auth,setauth] =useState(false) ;
-  console.log("bfiyegb");
+  console.log("before use effect");
+  
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -44,7 +45,7 @@ function App() {
         // console.log(userDetails );
         const email = userDetails.email
             console.log(("dbnfjerb"));
-        const backResponse = await axios.post("https://instagram-clone-server-side-thqi.onrender.com/access",
+        const backResponse = await axios.post("https://instagram-clone-server-side-thqi.onrender.com/user/access",
           { email: email },
           { withCredentials: true }
         )

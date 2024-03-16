@@ -22,9 +22,6 @@ console.log(userData)
 
 
 
-
-
-
   return (
 
     <div className='w-full h-screen overflow-auto'>
@@ -36,7 +33,37 @@ console.log(userData)
           <div className='flex gap-6 mt-6'>
             <p className='text-lg font-'>{userData?.username}</p>
             <button className='bg-gray-200 p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg  ' onClick={() => navigate("/profile/edit")}>Edit Profile</button>
-        <IoIosSettings className='size-7'/>
+        <IoIosSettings className='size-7 cursor-pointer' onClick={() => document.getElementById("my_modal_3_settings").showModal()}/>
+ 
+        <dialog id="my_modal_3_settings" className="modal rounded-3xl shadow-2xl">
+              <div className="modal-box ">
+                <form method="dialog">
+                  <button className="btn btn-sm text-xl font-bold  btn-circle btn-ghost absolute right-2 top-2 p-2">
+                    ✕
+                  </button>
+                </form>
+                <div className="bg-white p-6 h-96 ">
+                  <h3 className="font-bold text-lg text-center m-5 w-64 ">
+                    Edit Personal Deatails
+                  </h3>
+                  <hr className=" border-black my-4" />
+                 
+                  <label className="font-semibold text-lg mt-2"> Name</label>
+                  <br/>
+                    <input type='text' className='border mt-2 bg-slate-100 w-72 h-8'/>
+                  <br/>
+                  <label className='font-semibold text-lg mt-2"'>Username
+                    <br/>
+                    <input type='text' className='border mt-2 bg-slate-100 w-72 h-8'/>
+                  </label><br/>
+
+                  <button className='bg-blue-500 hover:bg-cyan-500 rounded-3xl mx-24 my-10 text-white text-lg font-semibold px-2 py-1 w-24'>Avatar</button>
+               
+                </div>
+              </div>
+            </dialog>
+
+
           </div>
           <div className='flex gap-8 mt-6'>
             <p> <span className='font-medium'>{userData.post?.length}</span>  posts</p>

@@ -38,7 +38,7 @@ function SignUp() {
     }
     try {
      
-      const response = await Axios.post("https://instagram-clone-server-side-thqi.onrender.com/signup",
+      const response = await Axios.post("https://instagram-clone-server-side-thqi.onrender.com/user/signup",
         formFillData,
         { withCredentials: true }
       ); 
