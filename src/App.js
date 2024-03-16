@@ -20,7 +20,11 @@ import { jwtDecode } from "jwt-decode";
 import { isEqual } from "lodash";
 import axios from 'axios';
 
+
+axios.defaults.baseURL  = process.env.APP_API;
 function App() {
+
+
 
 
   // const [formFillData,setFormFillData] = useState("")
