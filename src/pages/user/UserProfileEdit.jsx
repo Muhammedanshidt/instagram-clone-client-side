@@ -1,9 +1,13 @@
 import React, { useState } from 'react'
 import Profile from "../../asset/profile-circle.svg"
+import axios from 'axios';
+import { Spinner } from "@material-tailwind/react";
 
 function UserProfileEdit() {
 
   const [valueCount,setValueCount] = useState(0)
+  const [img,setImg] = useState(null)
+  const [loading, setLoading] = useState(false);
 
   const handlChange = (e) => {
     setValueCount(e.target.value.length);
@@ -12,6 +16,44 @@ function UserProfileEdit() {
       alert("100 is limit")
      }
   }
+const uploadFile = async (type) => {
+  const data = new FormData();
+  // data.append("file", type === img )
+  // data.append("upload_preaset", type === "image" )
+  data.append("file", img[0]);
+  data.append("upload_preset", "userProfileImages");
+
+  try {
+
+    // let cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+    // let resourceType = type === "image";
+    let api = process.env.CLOUDINARY_URL;
+
+    const response = await axios.post(api,data)
+    const { secure_url } = response.data;
+    console.log(secure_url);
+    return secure_url;
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+  const  handleSubmit = async (e) =>{
+    e.preventDefault();
+    try {
+      setLoading(true)
+
+      const imgUrl = await uploadFile("image")
+
+
+      console.log("submitted");
+      setLoading(false)
+    } catch (error) {
+      console.log(error)
+    }
+
+  }
+   
   return (
     <div className=' mx-36 mt-10 w-[600px] p-2'>
       <h1 className='text-xl font-bold'> Edit Profile </h1>
@@ -27,17 +69,18 @@ function UserProfileEdit() {
         <label
          htmlFor="fileInput"
          className="bg-blue-400 hover:bg-blue-600 text-white text-sm font-semibold rounded-md py-2 px-2 cursor-pointer"
-                  >
+          onClick={handleSubmit}        >
                     Change photo
                   </label>
                   <input
                     type="file"
                     id="fileInput"
                     className="hidden"
-                    onChange={(e) => e.target.files}
+                    onChange={(e) => setImg((prev) => e.target.files)}
                     multiple
                     accept="image/*"
                   />
+                
         </div>
       </div>
       <div className='my-10'>
@@ -81,6 +124,8 @@ function UserProfileEdit() {
                 </div>
               </div>
             </dialog>
+
+            {  loading && <Spinner color="blue" /> }
 
         
     </div>

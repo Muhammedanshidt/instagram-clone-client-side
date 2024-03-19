@@ -23,10 +23,6 @@ import axios from 'axios';
 
 axios.defaults.baseURL  = process.env.APP_API;
 function App() {
-
-
-
-
   // const [formFillData,setFormFillData] = useState("")
   const [userData, setUserData] = useState({});
   const [auth,setauth] =useState(false) ;
