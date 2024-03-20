@@ -37,7 +37,7 @@ function SignUp() {
       return;
     }
     try {
-      const response = await axios.post("signup", formFillData, {
+      const response = await axios.post("/signup", formFillData, {
         // withCredentials: true,
       });
       console.log("haimonu");
