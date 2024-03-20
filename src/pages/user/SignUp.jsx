@@ -5,9 +5,10 @@ import Microsoft from "../../asset/microsoft.png";
 import "./SignUp.css";
 import { useNavigate } from "react-router";
 import Clintcontex from "../userContext/ClientContext";
-import Axios from "axios";
+import axios from "axios";
 
 function SignUp() {
+ 
   const initialFormData = {
     email: "",
     fullname: "",
@@ -29,19 +30,16 @@ function SignUp() {
       [name]: value,
     });
   };
-  
+
   const saveUser = async () => {
-    
     if (Object.values(formFillData).some((value) => value === "")) {
       alert("Please Fill All Fields");
       return;
     }
     try {
-     
-      const response = await Axios.post("https://instagram-clone-server-side-thqi.onrender.com/user/signup",
-        formFillData,
-        { withCredentials: true }
-      ); 
+      const response = await axios.post("signup", formFillData, {
+        // withCredentials: true,
+      });
       console.log("haimonu");
 
       if (response.data) {
@@ -74,11 +72,11 @@ function SignUp() {
     if (formFillData.password === "") {
       formError.password = "password is required";
     }
-
     setErrorMessage(formError);
 
     if (Object.keys(formError.length === 0)) {
-       saveUser();
+      saveUser();
+    
 
     } else {
       alert("fill full data");

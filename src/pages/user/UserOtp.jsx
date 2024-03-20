@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useContext } from "react";
 import Clintcontex from "../userContext/ClientContext";
 import { useNavigate } from "react-router";
-import Axios from "axios";
+import axios from "axios";
 
 function UserOtp() {
   const [otp, setOtp] = useState("");
@@ -22,7 +22,7 @@ function UserOtp() {
   const submitOtp = async () => {
     try {
         
-        const backendResponse = await Axios.post("https://instagram-clone-server-side-thqi.onrender.com/user/otp",
+        const backendResponse = await axios.post("otp",
         {userData,otp},
         { withCredentials: true }
       );

@@ -5,43 +5,40 @@ import LoginImage from "../../asset/home-phones-2x.png";
 import { useNavigate } from "react-router";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
-import { useState,useContext } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import Clintcontex from "../userContext/ClientContext";
 // import { toast } from "react-toastify"
 
 function Login() {
   const navigate = useNavigate();
-
   // const {userData} = useContext(Clintcontex)
   // const [username, setUsername] = useState("");
-  const [email,setEmail] = useState("")
-  const [password,setPassword]  = useState("")
-  
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   // console.log(email);
   // console.log(password);
-
-  const  handleSubmit = async (e)=>{
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      alert("Please enter fields");
+      return;
+    }
+    console.log("hai");
+    const response = await axios.post("login",
+      {
+        email: email,
+        password: password,
+      },
+      // { withCredentials: true }
+    );
     
-      if(!email || !password){
-        alert('Please enter fields')
-        return;
-      }
-          const response = await axios.post("https://instagram-clone-server-side-thqi.onrender.com/user/login",{
-            email:email,
-            password:password
-          },{withCredentials:true})
-          
-
-          if(response.data.success === true){
-            navigate("/profile")
-          }else{
-            alert(response.data.message)
-          }
-
-  
-        }
+    if (response.data.success === true) {
+      navigate("/profile");
+    } else {
+      alert(response.data.message);
+    }
+  };
   return (
     <>
       <div className="container">
@@ -74,11 +71,12 @@ function Login() {
               className="inputBox "
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-              
             />
             <br />
-            <button className="bg-blue-400 hover:bg-blue-600 text-white font-bold rounded lg:px-24 lg:py-1 md:px-6 md:py-3"
-            onClick={handleSubmit}>
+            <button
+              className="bg-blue-400 hover:bg-blue-600 text-white font-bold rounded lg:px-24 lg:py-1 md:px-6 md:py-3"
+              onClick={handleSubmit}
+            >
               Log in
             </button>
             <p className=" mt-4 text-gray-500 lg:px-24 lg:py-1 md:px-6 md:py-3">
@@ -108,10 +106,9 @@ function Login() {
               </span>{" "}
             </p>
           </div>
-
           <div className="w-[350px] h-16">
             <p className="text-center text-sm">Get the app.</p>
-            <div className="flex gap-3 flex justify-center mt-6 ">
+            <div className=" flex gap-3 flex justify-center mt-6 ">
               <a
                 href="https://play.google.com/store/apps/details?id=com.instagram.android&referrer=ig_mid%3DBB6917D7-37B1-435C-92DA-4A0D28DBC10A%26utm_campaign%3DloginPage%26utm_content%3Dlo%26utm_source%3Dinstagramweb%26utm_medium%3Dbadge&pli=1"
                 target="_blank"
@@ -141,10 +138,9 @@ function Login() {
     </>
   );
 }
-
 export default Login;
 
-/// --- COMMENT AREA
+// --- COMMENT AREA
 
 // import { Button } from "@material-tailwind/react";
 // import { Carousel } from "@material-tailwind/react";

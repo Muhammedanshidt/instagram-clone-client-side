@@ -22,6 +22,8 @@ import axios from 'axios';
 
 
 axios.defaults.baseURL  = process.env.APP_API;
+
+
 function App() {
   // const [formFillData,setFormFillData] = useState("")
   const [userData, setUserData] = useState({});
@@ -41,7 +43,7 @@ function App() {
         // console.log(userDetails );
         const email = userDetails.email
             console.log(("dbnfjerb"));
-        const backResponse = await axios.post("https://instagram-clone-server-side-thqi.onrender.com/user/access",
+        const backResponse = await axios.post("access",
           { email: email },
           { withCredentials: true }
         )
@@ -53,13 +55,10 @@ function App() {
         console.log(value);
         if (!isEqual(userData, value)) {
           setUserData(value);
-          
         }
-
       }
       catch (error) {
         console.error('Error fetching data:', error);
-
       }
     };
 
