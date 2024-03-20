@@ -20,8 +20,8 @@ import { jwtDecode } from "jwt-decode";
 import { isEqual } from "lodash";
 import axios from 'axios';
 
+axios.defaults.baseURL  = "https://instagram-clone-server-side-thqi.onrender.com/user/ ";
 
-axios.defaults.baseURL  = process.env.APP_API;
 
 
 function App() {

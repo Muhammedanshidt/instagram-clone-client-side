@@ -32,10 +32,12 @@ function SignUp() {
   };
 
   const saveUser = async () => {
-    if (Object.values(formFillData).some((value) => value === "")) {
-      alert("Please Fill All Fields");
-      return;
-    }
+    console.log("save user")
+    // if (Object.values(formFillData).some((value) => value === "")) {
+    //   alert("Please Fill All Fields");
+    //   return;
+    // }
+    // axios.post("http://localhost:3003/user/signup",formFillData).then(res=>console.log(res)).catch(err=>console.log(err))
     try {
       const response = await axios.post("signup", formFillData, {
         withCredentials: true,
@@ -56,8 +58,8 @@ function SignUp() {
 
   const sumbitForm = (event) => {
     event.preventDefault();
-    console.log("submitted");
-    console.log("hai");
+    // console.log("submitted");
+    // console.log("hai");
     const formError = {};
 
     if (formFillData.email === "") {

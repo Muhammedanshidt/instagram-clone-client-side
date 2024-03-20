@@ -22,7 +22,7 @@ function UserOtp() {
   const submitOtp = async () => {
     try {
         
-        const backendResponse = await axios.post("otp",
+        const backendResponse = await axios.post("http://localhost:3003/user/otp",
         {userData,otp},
         { withCredentials: true }
       );

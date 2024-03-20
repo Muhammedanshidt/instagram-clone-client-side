@@ -25,7 +25,7 @@ function Login() {
       return;
     }
     console.log("hai");
-    const response = await axios.post("login",
+    const response = await axios.post("http://localhost:3003/user/login",
       {
         email: email,
         password: password,
