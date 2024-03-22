@@ -8,7 +8,7 @@ const {userData} = useContext(Clintcontex)
 console.log(userData);
   return ( 
     <div className="flex"> 
-<div className='bg-cyan-500'>
+<div className='bg-slate-50'>
   <div className=" p-4 mx-32" >
   <div className="bg-white border rounded-sm max-w-md">
     <div className="flex items-center px-4 py-3">

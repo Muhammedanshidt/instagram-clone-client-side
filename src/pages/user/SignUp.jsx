@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext,} from "react";
 import TitleImage from "../../asset/title.png";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
@@ -6,6 +6,7 @@ import "./SignUp.css";
 import { useNavigate } from "react-router";
 import Clintcontex from "../userContext/ClientContext";
 import axios from "axios";
+import toast from "react-hot-toast";
 
 function SignUp() {
  
@@ -17,7 +18,7 @@ function SignUp() {
   };
 
   const { userData, setUserData } = useContext(Clintcontex);
-
+      console.log(userData);
   const [formFillData, setFormFillData] = useState(initialFormData);
   const [errorMessage, setErrorMessage] = useState({});
 
@@ -39,7 +40,7 @@ function SignUp() {
     // }
     // axios.post("http://localhost:3003/user/signup",formFillData).then(res=>console.log(res)).catch(err=>console.log(err))
     try {
-      const response = await axios.post("signup", formFillData, {
+      const response = await axios.post("http://localhost:3003/user/signup", formFillData, {
         withCredentials: true,
       });
       console.log("haimonu");
@@ -51,7 +52,7 @@ function SignUp() {
         routeNavigate("/otp");
       }
     } catch (error) {
-      alert(error);
+      toast.error(error);
       // console.log(error);
     }
   };
@@ -81,8 +82,8 @@ function SignUp() {
     
 
     } else {
-      alert("fill full data");
-      // console.log(errorMessage);
+      toast.error("fill full data");
+      console.log(errorMessage);
     }
   };
   return (

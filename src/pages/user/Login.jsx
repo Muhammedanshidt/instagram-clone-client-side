@@ -8,11 +8,11 @@ import Microsoft from "../../asset/microsoft.png";
 import { useState, useContext } from "react";
 import axios from "axios";
 import Clintcontex from "../userContext/ClientContext";
-// import { toast } from "react-toastify"
+import { toast } from "react-hot-toast"
 
 function Login() {
   const navigate = useNavigate();
-  // const {userData} = useContext(Clintcontex)
+  const {userData} = useContext(Clintcontex)
   // const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -21,22 +21,28 @@ function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
-      alert("Please enter fields");
+      toast.error("Please enter fields");
       return;
     }
     console.log("hai");
+    try {
     const response = await axios.post("http://localhost:3003/user/login",
       {
         email: email,
         password: password,
+        userData
       },
-      // { withCredentials: true }
+      { withCredentials: true }
     );
     
     if (response.data.success === true) {
       navigate("/profile");
     } else {
-      alert(response.data.message);
+      toast.error(response.data.message);
+    }
+  }catch (error){
+  console.log('Login error:', error);
+      toast.error('An error occurred, please try again later.');
     }
   };
   return (

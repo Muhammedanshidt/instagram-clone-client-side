@@ -3,11 +3,14 @@ import { useState, useContext } from "react";
 import Clintcontex from "../userContext/ClientContext";
 import { useNavigate } from "react-router";
 import axios from "axios";
+import toast from "react-hot-toast";
+
 
 function UserOtp() {
   const [otp, setOtp] = useState("");
   const { userData } = useContext(Clintcontex);
   const navigate = useNavigate();
+  console.log(userData);
 
   // /otpverify
 
@@ -28,13 +31,12 @@ function UserOtp() {
       );
       
       console.log(backendResponse.data.success);
-      // console.log(userData);
 
       if (backendResponse.data.success === true) {
-        alert("OTP Verified Successfully");
+       toast.success("OTP Verified Successfully");
         navigate("/login");
       } else {
-        alert("Invalid OTP");
+        toast.error("Invalid OTP");
       }
     } catch (error) {
       // console.log(`Error : ${error}`);
@@ -85,3 +87,10 @@ function UserOtp() {
 }
 
 export default UserOtp;
+
+
+// // clearing cookies for logout 
+// const logOut = tryCatch(async(req, res) => {
+//   res.clearCookie('token');
+//   res.send('Cookie cleared successfully');
+// })

@@ -66,12 +66,13 @@ console.log(userData)
           <div className='flex gap-8 mt-6'>
             <p> <span className='font-medium'>{userData.post?.length}</span>  posts</p>
             <p> <span className='font-medium'>{userData.following?.length}</span>  followers</p>
-            <p> <span className='font-medium'>456</span>  following</p>
+            <p> <span className='font-medium'>{userData.post?.length}</span>  following</p>
           </div>
           <div className="mt-5">
             <p  className='font-medium font-mono text-lg mb-2'>{userData?.fullname}</p>
-            <p>MERN STACK Developer</p>
-            <p>photography</p>
+            <div className="w-60 h-24">
+            <p>{userData?.bio}</p>
+            </div>
           </div>
            
         </div>

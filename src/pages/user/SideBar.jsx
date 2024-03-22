@@ -22,11 +22,12 @@ const SideBar = () => {
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
+
   const navigate = useNavigate();
 
   return (
     <div>
-      <div className=" h-screen flex ">
+      <div className=" h-screen flex  " >
         {/* Sidebar */}
         <div
           className={`bg-white text-white w-60 h-screen border-r ${
@@ -37,7 +38,9 @@ const SideBar = () => {
             <img src={TitleImage} alt="logo" className="h-[32px]  ml-5" />
           </div>
           <div className="h-[440px] p-4 pt-0 flex-col justify-start ">
-            <div className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg ">
+            <div className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg "
+              onClick={() => navigate("/home")}
+              >
               <div>
                 <GoHomeFill className="size-6 " />
               </div>
@@ -143,35 +146,21 @@ const SideBar = () => {
             </div>
           </div>
           <div
-            onClick={toggleMenu}
             className="flex  text-black h-[30px] m-8 flex gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg"
-          >
-            {menuOpen && (
-              <div className=" absolute left-8 bottom-16 origin-top-left w-56 h-64 bg-slate-200 shadow-xl divide-y rounded-lg  divide-gray-100 ring-1 ring-black ring-opacity-5 focus:outline-none">
-                <div className=" absolute bottom-3 py-1">
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    role="menuitem"
-                    tabIndex="-1"
-                    id="menu-item-0"
-                  >
-                    Saved
-                  </a>
-                  <a
-                    href="#"
-                    className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    role="menuitem"
-                    tabIndex="-1"
-                    id="menu-item-1"
-                  >
-                    Item 2
-                  </a>
-                </div>
-              </div>
-            )}
+           onClick={()=>document.getElementById('my_modal_2').showModal()}
+
+          >          
             <AiOutlineMenu className="size-6" />
             <p>More</p>
+            <dialog id="my_modal_2" className="modal">
+             <div className="modal-box">
+               <h3 className="font-bold text-lg">Hello!</h3>
+             <p className="py-4">Press ESC key or click outside to close</p>
+            </div>
+            <form method="dialog" className="modal-backdrop">
+             <button>close</button>
+          </form>
+          </dialog>
           </div>
         </div>
         <div className="">
