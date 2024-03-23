@@ -13,17 +13,25 @@ import TitleImage from "../../asset/title.png";
 import { Outlet } from "react-router";
 import { useNavigate } from "react-router";
 import { IoIosImages } from "react-icons/io";
+import Creat from "../user/sideBarPages/CreatPost"
 // import "./SideBar.css";
 
 const SideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const [image,setImage] = useState([])
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
   };
 
   const navigate = useNavigate();
+
+const handleClickCreate = (e) => {
+ document.getElementById('my_modal_3')
+ navigate("/create")
+
+}
 
   return (
     <div>
@@ -90,16 +98,18 @@ const SideBar = () => {
 
             <div
               className=" focus-div flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg "
-              onClick={() => document.getElementById("my_modal_3").showModal()}
+             onClick={handleClickCreate} 
             >
               <div>
                 <CgAddR className="size-6 rounded-" />
               </div>
               <p>Creat</p>
             </div>
+  
+              {/* <Creat/> */}
 
             {/* UPLOAD IMAGE */}
-            <dialog id="my_modal_3" className="modal rounded-3xl shadow-2xl">
+            {/* <dialog id="my_modal_3" className="modal rounded-3xl shadow-2xl">
               <div className="modal-box ">
                 <form method="dialog">
                   <button className="btn btn-sm text-xl font-bold  btn-circle btn-ghost absolute right-2 top-2 p-2">
@@ -126,14 +136,14 @@ const SideBar = () => {
                   <input
                     type="file"
                     id="fileInput"
-                    className="hidden"
-                    onChange={(e) => e.target.files}
+                    // className="hidden"
+                    onChange={(e) => setImage(e.target.files)}
                     multiple
                     accept="image/*"
                   />
                 </div>
               </div>
-            </dialog>
+            </dialog> */}
 
             <div
               onClick={() => navigate("/profile")}
@@ -208,5 +218,6 @@ const SideBar = () => {
       </div>
     </div>
   );
-};
+          }
 export default SideBar;
+

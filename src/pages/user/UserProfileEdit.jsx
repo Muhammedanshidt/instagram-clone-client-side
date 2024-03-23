@@ -5,6 +5,7 @@ import { Spinner } from "@material-tailwind/react";
 import Clintcontex from "../userContext/ClientContext";
 import toast from "react-hot-toast";
 import { RxCross2 } from "react-icons/rx";
+import { useNavigate } from "react-router";
 
 function UserProfileEdit() {
   const [valueCount, setValueCount] = useState(0);
@@ -13,6 +14,8 @@ function UserProfileEdit() {
   const [bio, setBio] = useState("");
   const [outPass, setOutPass] = useState("");
   const { userData } = useContext(Clintcontex);
+
+  const navigate = useNavigate()
 
   // console.log(userData);
 
@@ -45,43 +48,6 @@ function UserProfileEdit() {
     }
   };
 
-  // const uploadFile = async () => {
-
-  //   if (!img) {
-  //     console.log('No file selected');
-  //     return;
-  //   }
-
-  //   const data = new FormData();
-
-  //   data.append('file',img);
-  //   data.append('upload_preset', 'userProfileImages');
-
-  //   try {
-      
-  //   console.log(CLOUDINARY_URL)
-
-  //     const response = await axios.post(api, data);
-  //   console.log("hai")
-
-  //     const { secure_url } = response.data;
-  //     console.log(secure_url);
-  //     return secure_url;
-  //   } catch (error) {
-  //     console.log('Error uploading file:', error);
-  //   }
-  // };
-
-  // const signatureUploadFile = async (folder)
-
-  // const handleSubmit = async () => {
-  //   try {
-  //     const imgUrl = await uploadFile("image");
-  //     // console.log('submitted', imgUrl);
-  //   } catch (error) {
-  //     console.log(error);
-  //   }
-  // };
 
   // const logOutInput = (e) =>{
   //   const passwordOut = e.target.value
@@ -119,24 +85,18 @@ function UserProfileEdit() {
     if (data.error) {
       throw new Error(data.error.message);
     }
-    alert("success ful")
+    toast.success("success ful")
 
     console.log(data)
   
-    const backendResponse = await axios.post('http://localhost:3003/user/userimage', {
-      imageUrl:data.secure_url,
-      email: userData.email
-     
-    });
+         const backendResponse = await axios.post('http://localhost:3003/user/userProfileImage', {
+        imageUrl:data.secure_url,
+        email: userData.email
+       
+      });
 
   }
   
-
-
-
-
-
-
 
 
   const logOutDone = async () => {
@@ -150,6 +110,7 @@ function UserProfileEdit() {
         { withCredentials: true }
       );
       toast.success(logBack.data.message);
+      navigate("/login");
     } catch (error) {
       console.log(error);
     }

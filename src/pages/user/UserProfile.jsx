@@ -25,7 +25,7 @@ console.log(userData)
     <div className='w-full h-screen overflow-auto'>
     <div className='flex '>
         <div className='w-[350px] h-[250px]  flex justify-center items-center '>
-        <img className='rounded-full w-[150px] border border-3 border-gray-300' src={Profile}  alt="profile"/>
+        <img className=' w-fit size-24 rounded-full border border-3 border-gray-300' src={userData?.profileimage}  alt="profile"/>
         </div>
         <div className=' w-[700px] h-[250px]  flex-col '>
           <div className='flex gap-6 mt-6'>

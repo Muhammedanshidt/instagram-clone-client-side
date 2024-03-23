@@ -11,7 +11,7 @@
   import UserSaved from './pages/user/UserSaved';
   import UserNotification from './pages/user/UserNotification'
   import UserOtp from './pages/user/UserOtp';
-  import CreatPost from './pages/user/CreatPost'
+  import CreatPost from './pages/user/sideBarPages/CreatPost'
   import EditProfile from './pages/user/UserProfileEdit'
   import Clintcontex from './pages/userContext/ClientContext';
   import { useEffect, useState } from 'react';
