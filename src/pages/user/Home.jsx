@@ -1,29 +1,62 @@
-import React, { useContext } from 'react';
-import { PiDotsThreeBold } from "react-icons/pi";
+import React, { useContext, useState } from 'react';
+// import { PiDotsThreeBold } from "react-icons/pi";
 import Clintcontex from "../userContext/ClientContext";
+import axios from 'axios';
+// import { useSelect } from '@material-tailwind/react';
+// import { CgProfile } from "react-icons/cg";  
+
 const Home = () => {
 
 const {userData} = useContext(Clintcontex)  
 
-console.log(userData);
+const [signUser,setSignUser] =useState([{}])
+
+
+const getUser = async () => {
+  if(userData._id !== null){
+    try{
+    const response = await axios.get('http://localhost:3003/user/getuser')
+  
+    setSignUser(response.data)
+    //  console.log("Get User Data",response.data);
+     console.log("user data", signUser)
+    //  console.log(response.data);
+
+    //  console.log(name);
+    }catch(err){
+      console.log("Error",err)
+    }
+    
+}else{
+  alert( "Please Login First")
+}
+}
+
+// console.log(userData);
+
   return ( 
+    
     <div className="flex"> 
-<div className='bg-slate-50'>
-  <div className=" p-4 mx-32" >
+<div className='bg-fuchsia-600'>
+  <div className=" p-4 mx-24" >
   <div className="bg-white border rounded-sm max-w-md">
     <div className="flex items-center px-4 py-3">
       <img
         className="h-8 w-8 rounded-full"
         src='https://img.freepik.com/premium-vector/user-profile-icon-flat-style-member-avatar-vector-illustration-isolated-background-human-permission-sign-business-concept_157943-15752.jpg'
+        alt='Avatar'
       />
       <div className="ml-3 ">
         <span className="text-sm font-semibold antialiased block leading-tight">
           8fact
         </span>
-       
+        
       </div>
     </div>
-    <img src="https://picsum.photos/id/244/900/900" />
+    <img 
+    src="https://picsum.photos/id/244/900/900" 
+    alt='Description'
+     />
     <div className="flex items-center justify-between mx-4 mt-3 mb-2">
       <div className="flex gap-5">
         <svg fill="#262626" height={24} viewBox="0 0 48 48" width={24}>
@@ -52,8 +85,32 @@ console.log(userData);
  
 </div>
 
+ {/* user show profile side */}
+
+                <div className='w-fit'>
+                  <button className='bg-rose-600 w-fit h-fit mx-10 my-10' onClick={getUser}>show</button>
+              <div className='w-full h-fit '>
+               
+                {
+                signUser.map((item) => (
+                  <div className=' rounded-full bg-gray-200 flex w-full m-2 p-2'>
+                  <img
+                  src={item.profileimage||"https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
+                  className='w-16 rounded-full h-16 border-[1px] border-black '
+                  alt='image'
+                  />
+                  <p className='my-3 mx-3 font-semibold '>{item.username}</p>
+                  <button className='mx-auto my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded float-right h-fit' >Follow</button>
+
+                  </div>
+                ))
+                }
+                    </div>
+                      </div>
+
+
+
    </div>
   );
 };
-
 export default Home;

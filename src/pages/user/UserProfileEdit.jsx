@@ -65,7 +65,7 @@ function UserProfileEdit() {
 
 
     if(!img){
-      alert("no image in input")
+      toast.error("no image in input")
       return
     }
     console.log("start")
@@ -73,13 +73,14 @@ function UserProfileEdit() {
 
     const formData = new FormData();
     formData.append('file', imgfile);
-    formData.append('upload_preset',presetimg );
+    formData.append('upload_preset',presetimg);
     formData.append('api_key', apikey);
     console.log("uploading")
     const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudname}/image/upload`, {
       method: 'POST',
       body: formData,
     });
+    console.log("iojm");
 
     const data = await response.json();
     if (data.error) {
