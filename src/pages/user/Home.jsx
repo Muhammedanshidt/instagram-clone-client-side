@@ -1,17 +1,19 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 // import { PiDotsThreeBold } from "react-icons/pi";
 import Clintcontex from "../userContext/ClientContext";
 import axios from 'axios';
 // import { useSelect } from '@material-tailwind/react';
 // import { CgProfile } from "react-icons/cg";  
+import {Link} from "react-router-dom"
 
 const Home = () => {
 
 const {userData} = useContext(Clintcontex)  
 
-const [signUser,setSignUser] =useState([{}])
+const [signUser,setSignUser] =useState([])
 
 
+useEffect(()=>{
 const getUser = async () => {
   if(userData._id !== null){
     try{
@@ -31,10 +33,14 @@ const getUser = async () => {
   alert( "Please Login First")
 }
 }
+getUser()
+} ,[]);
+
 
 // console.log(userData);
 
   return ( 
+    
     
     <div className="flex"> 
 <div className='bg-fuchsia-600'>
@@ -88,18 +94,22 @@ const getUser = async () => {
  {/* user show profile side */}
 
                 <div className='w-fit'>
-                  <button className='bg-rose-600 w-fit h-fit mx-10 my-10' onClick={getUser}>show</button>
-              <div className='w-full h-fit '>
-               
+                  {/* <button className='bg-rose-600 w-fit h-fit mx-10 my-10' onClick={getUser}>show</button>  */}
+              <div className='w-full h-fit ' >
                 {
                 signUser.map((item) => (
+                 
                   <div className=' rounded-full bg-gray-200 flex w-full m-2 p-2'>
+                     <Link to ={`/user/${item.username}`}> 
+                    <div className='flex'>
                   <img
                   src={item.profileimage||"https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
                   className='w-16 rounded-full h-16 border-[1px] border-black '
                   alt='image'
                   />
                   <p className='my-3 mx-3 font-semibold '>{item.username}</p>
+                  </div>
+                  </Link>
                   <button className='mx-auto my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded float-right h-fit' >Follow</button>
 
                   </div>
@@ -108,9 +118,8 @@ const getUser = async () => {
                     </div>
                       </div>
 
-
-
    </div>
-  );
-};
+  )
+  };
+
 export default Home;

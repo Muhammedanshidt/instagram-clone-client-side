@@ -15,10 +15,11 @@
   import EditProfile from './pages/user/UserProfileEdit'
   import Clintcontex from './pages/userContext/ClientContext';
   import { useEffect, useState } from 'react';
-  import { toast, Toaster } from "react-hot-toast";
+  import {Toaster } from "react-hot-toast";
   import { jwtDecode } from "jwt-decode";
   import { isEqual } from "lodash";
   import axios from 'axios';
+import AnotherUserProfile from './pages/user/AnotherUserProfile';
 
   // axios.defaults.baseURL  = "https://instagram-clone-server-side-thqi.onrender.com/user/ ";
   function App() {
@@ -87,6 +88,8 @@
                 <Route path="/home" element={<Home />} />
                 <Route path="/create" element={<CreatPost />} />
                 <Route path='/profile/edit' element={<EditProfile />} />
+              <Route path='/user/:userId' element={<AnotherUserProfile/>}/>
+
 
                 <Route path='/profile' element={<UserProfile />}>
                   <Route path='/profile/' element={<UserPost />} />
