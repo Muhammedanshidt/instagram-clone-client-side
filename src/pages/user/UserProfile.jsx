@@ -18,7 +18,7 @@ const {userData} = useContext(Clintcontex)
 // if(Object.keys(userData).length ===0){
 //     window.location.reload()
 // }
-console.log(userData)
+// console.log(userData)
 
   return (
 
@@ -65,8 +65,9 @@ console.log(userData)
           </div>
           <div className='flex gap-8 mt-6'>
             <p> <span className='font-medium'>{userData.post?.length}</span>  posts</p>
-            <p> <span className='font-medium'>{userData.following?.length}</span>  followers</p>
-            <p> <span className='font-medium'>{userData.post?.length}</span>  following</p>
+            <p> <span className='font-medium'>{userData.followers?.length}</span>  followers</p>
+          {console.log(userData,userData._id)}
+            <p> <span className='font-medium'>{userData.following?.length}</span>  following</p>
           </div>
           <div className="mt-5">
             <p  className='font-medium font-mono text-lg mb-2'>{userData?.fullname}</p>
@@ -83,7 +84,7 @@ console.log(userData)
         <IoMdGrid className='size-5'/>
         Posts
        </p>
-       
+          
        <p onClick={()=> navigate('/profile/saved')} className=' profileIcon font-medium flex text-sm cursor-pointer hover:bg-gray-200 rounded-md hover:p-1 '>
        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" viewBox="0 0 24 24" fill='#6B7280'>
     <path d="M 4 2 L 4 22 L 12 19 L 20 22 L 20 2 L 6 2 L 4 2 z"></path>

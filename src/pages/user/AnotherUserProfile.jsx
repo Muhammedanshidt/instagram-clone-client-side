@@ -24,6 +24,7 @@ console.log(userId)
 useEffect(() =>{
 
   const  getUserInfo = async ()=>{
+    if(userData){
       try {
           const res= await axios.post("http://localhost:3003/user/findUser",{username:userId})
         console.log("halllooo");
@@ -34,23 +35,56 @@ useEffect(() =>{
         alert("Error")
       }
     }
+  }
    getUserInfo();
 } , [userData])
 
 
 // following 
 
-const [follow,setFollow]  = useState()
+// const [follow,setFollow]  = useState()
 
 const followHandler= async (e) =>{ 
-  e.preventDefault()
+  // e.preventDefault()
+  let userId = findUser._id;
+  let currentUserId = userData._id;
+  console.log("current User Id ",currentUserId,"\n Follower User ID : ",userId )
+  if(userId !== currentUserId ){
   try{
   const res = await  axios.put('http://localhost:3003/user/follow',{user:findUser,owner:userData})
   console.log(res.data);
+
   }catch(error){
     console.log(error);
   }
 }
+else{
+  alert("You can't follow yourself!")
+}
+}
+
+const unFollowHandler = async (e) => {
+  
+  try {
+    const result = await axios.delete('http://localhost:3003/user/unfollow',{user:findUser,owner:userData} )
+    console.log(result.data);
+    window.location.reload()
+  
+    
+  } catch (error) {
+    
+  }
+}
+
+// const checkingFollow = userData.following.includes[findUser._id];
+const checkingFollow = userData.following && userData.following.includes(findUser._id);
+// console.log(checkingFollow);
+
+const checkingUnFollow = userData.followers && userData.followers.includes(findUser._id);
+
+
+
+
 
   return (
 
@@ -62,8 +96,16 @@ const followHandler= async (e) =>{
         <div className=' w-[700px] h-[250px]  flex-col '>
           <div className='flex gap-6 mt-6'>
             <p className='text-lg font-'>{findUser?.username}</p>
+
+          {
+            !checkingFollow ?(
             <button className='bg-blue-600 text-white p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg ' onClick={followHandler}>Follow</button>
-            <button className='bg-gray-500 text-white p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg  'onClick={followHandler}>Following</button>
+            ):(
+            <button className='bg-gray-500 text-white p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg  'onClick={unFollowHandler}>Following</button>
+            )
+          }
+
+
     
           </div>
           <div className='flex gap-8 mt-6'>

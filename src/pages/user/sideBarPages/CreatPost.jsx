@@ -69,15 +69,18 @@ function CreatPost() {
     console.log("uploading")
     console.log(formData);
     try{
-      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudname}/image/upload`,{
-        method:"POST",
-        body: formData,
-      });
+      const response = await fetch(`https://api.cloudinary.com/v1_1/${cloudname}/image/upload`, {
+      method: 'POST',
+      body: formData,
+    });
       alert("success")
-      console.log(response);
+      console.log(response.url);
+      
      }catch(err){
        console.log(err)}  
      }
+
+    
 
     // console.log(data)
   
@@ -127,8 +130,7 @@ function CreatPost() {
                    id="fileInput"
                    className="hidden "
                    onChange={selectImage}
-                   multiple
-                   accept="image/*"
+                  //  accept="image/*"
                  />
                </div>
              </div>

@@ -95,11 +95,11 @@ getUser()
 
                 <div className='w-fit'>
                   {/* <button className='bg-rose-600 w-fit h-fit mx-10 my-10' onClick={getUser}>show</button>  */}
-              <div className='w-full h-fit ' >
+              <div className='w-full h-fit py-10' >
                 {
                 signUser.map((item) => (
                  
-                  <div className=' rounded-full bg-gray-200 flex w-full m-2 p-2'>
+                  <div className=' rounded-full bg-gray-200 flex justify-center w-full m-2 py-2'>
                      <Link to ={`/user/${item.username}`}> 
                     <div className='flex'>
                   <img
@@ -110,7 +110,7 @@ getUser()
                   <p className='my-3 mx-3 font-semibold '>{item.username}</p>
                   </div>
                   </Link>
-                  <button className='mx-auto my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded float-right h-fit' >Follow</button>
+                  {/* <button className='mx-auto my-2 bg-blue-500 hover:bg-blue-700 text-white font-bold py-1 px-2 rounded float-right h-fit' >Follow</button> */}
 
                   </div>
                 ))
