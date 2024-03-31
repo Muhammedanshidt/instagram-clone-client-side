@@ -14,6 +14,10 @@ function AnotherUserProfile() {
     const navigate = useNavigate()
 const {userData} = useContext(Clintcontex)
 const [findUser,setFindUser] = React.useState([]) 
+const [follow,setFollow]  = useState();
+
+
+
 
 // if(Object.keys(userData).length ===0){
 //     window.location.reload()
@@ -21,7 +25,18 @@ const [findUser,setFindUser] = React.useState([])
 console.log(findUser);
 const {userId} = useParams()
 console.log(userId)
+
+const checkingFollow = userData.following && userData.following.includes(findUser._id);
+
 useEffect(() =>{
+
+//   const checkingFollow = userData.following && userData.following.includes(findUser._id);
+
+// if(checkingFollow){
+//   setFollow(true)
+// }else{
+//   setFollow(false)
+// }
 
   const  getUserInfo = async ()=>{
     if(userData){
@@ -36,23 +51,30 @@ useEffect(() =>{
       }
     }
   }
-   getUserInfo();
-} , [userData])
+   getUserInfo(); 
+   
+   if(checkingFollow){
+     setFollow(true)
+   }else{
+     setFollow(false)
+   }  
+} , [checkingFollow,userData])
 
 
 // following 
 
-// const [follow,setFollow]  = useState()
 
 const followHandler= async (e) =>{ 
   // e.preventDefault()
   let userId = findUser._id;
   let currentUserId = userData._id;
-  console.log("current User Id ",currentUserId,"\n Follower User ID : ",userId )
+
   if(userId !== currentUserId ){
   try{
   const res = await  axios.put('http://localhost:3003/user/follow',{user:findUser,owner:userData})
   console.log(res.data);
+  setFollow(true)
+  window.location.reload();
 
   }catch(error){
     console.log(error);
@@ -61,27 +83,52 @@ const followHandler= async (e) =>{
 else{
   alert("You can't follow yourself!")
 }
-}
+};
 
 const unFollowHandler = async (e) => {
   
   try {
     const result = await axios.delete('http://localhost:3003/user/unfollow',{user:findUser,owner:userData} )
     console.log(result.data);
-    window.location.reload()
-  
+    setFollow(false)
+    
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+const [followers,setFollowers] = useState([])
+
+const getFollowers = async () => {
+  console.log("get Follower");
+
+  try {
+
+    const response = await axios.get('')
     
   } catch (error) {
     
   }
+  setFollowers(findUser.followers)
+  
+  document.getElementById('my_modal_get_followers').showModal()
+  console.log(followers);
 }
 
+
+
 // const checkingFollow = userData.following.includes[findUser._id];
-const checkingFollow = userData.following && userData.following.includes(findUser._id);
-// console.log(checkingFollow);
+// // console.log(checkingFollow);
 
-const checkingUnFollow = userData.followers && userData.followers.includes(findUser._id);
 
+// const checkingFollow = userData.following && userData.following.includes(findUser._id);
+
+
+// const checkingUnFollow = userData.followers && userData.followers.includes(findUser._id);
+
+
+
+// const checkingUnFollow = userData.followers && userData.followers.includes(findUser._id);
 
 
 
@@ -98,7 +145,7 @@ const checkingUnFollow = userData.followers && userData.followers.includes(findU
             <p className='text-lg font-'>{findUser?.username}</p>
 
           {
-            !checkingFollow ?(
+            !follow ?(
             <button className='bg-blue-600 text-white p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg ' onClick={followHandler}>Follow</button>
             ):(
             <button className='bg-gray-500 text-white p-1 text-sm font-medium w-[90px] h-[30px] rounded-lg  'onClick={unFollowHandler}>Following</button>
@@ -110,8 +157,8 @@ const checkingUnFollow = userData.followers && userData.followers.includes(findU
           </div>
           <div className='flex gap-8 mt-6'>
             <p> <span className='font-medium'>{findUser.post?.length}</span>  posts</p>
-            <p> <span className='font-medium'>{findUser.following?.length}</span>  followers</p>
-            <p> <span className='font-medium'>{findUser.followers?.length}</span>  following</p>
+            <p onClick={getFollowers}> <span className='font-medium'>{findUser.followers?.length}</span>  followers</p>
+            <p> <span className='font-medium'>{findUser.following?.length}</span>  following</p>
           </div>
           <div className="mt-5">
             <p  className='font-medium font-mono text-lg mb-2'>{findUser?.fullname}</p>
@@ -135,6 +182,29 @@ const checkingUnFollow = userData.followers && userData.followers.includes(findU
         Posts
        </p> */} 
     </div>
+
+    <dialog id="my_modal_get_followers" className="modal rounded-3xl p-6">
+  <div className="modal-box ">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <div className='w-72 h-96 bg-slate-500 p-2'>
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      {
+        followers.map((item) => (
+          <div className='w-full h-16 bg-amber-300'>
+          <img
+          src={item.profileimage || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
+          className='w-12 rounded-full'
+          />
+          <p>{item.username}</p>
+    
+           </div>
+        ))
+      }
+      </div>
+    </form>
+  </div>
+</dialog>
 
     <Outlet/>
   

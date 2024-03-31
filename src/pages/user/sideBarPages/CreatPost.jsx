@@ -31,7 +31,7 @@ function CreatPost() {
     }if(preview){    
     }
   }
-  const selectImage = (e) => {
+  const   selectImage = (e) => {
    const file = e.target.files[0];
     setImage(file);
     const modalUpload = document.getElementById("my_modal_3")

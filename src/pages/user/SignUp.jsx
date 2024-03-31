@@ -19,6 +19,7 @@ function SignUp() {
 
   const { userData, setUserData } = useContext(Clintcontex);
       console.log(userData);
+      
   const [formFillData, setFormFillData] = useState(initialFormData);
   const [errorMessage, setErrorMessage] = useState({});
 
