@@ -107,16 +107,17 @@ const getFollowers = async (userData) => {
 
   try {
     const response = await axios.get('http://localhost:3003/user/getfollowers',{params:{owner:userData}})
-    console.log(response.data)
-    
-  } catch (error) {
-    console.log(error);
-  }
-
-  // setFollowers(userData?.followers)
-  
+   const followersData = response.data
+    // console.log(followersData)
+    setFollowers(followersData)
   console.log(followers);
+} catch (err) {
+  console.log(err)
 }
+}
+    
+
+  
 
 
 
@@ -190,14 +191,14 @@ const getFollowers = async (userData) => {
   <div className="modal-box ">
     <form method="dialog">
       {/* if there is a button in form, it will close the modal */}
-      <div className='w-72 h-96 bg-slate-500 p-2'>
+      <div className='w-72 h-96 '>
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       {
         followers.map((item) => (
-          <div className='w-full h-16 bg-amber-300'>
+          <div className='w-full h-16 bg-slate-100 flex p-1 gap-3 items-center rounded-md m-1'>
           <img
           src={item.profileimage || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
-          className='w-12 rounded-full'
+          className='size-12 rounded-full'
           />
           <p>{item.username}</p>
     
