@@ -22,9 +22,9 @@ const [follow,setFollow]  = useState();
 // if(Object.keys(userData).length ===0){
 //     window.location.reload()
 // }
-console.log(findUser);
+// console.log(findUser);
 const {userId} = useParams()
-console.log(userId)
+// console.log(userId)
 
 const checkingFollow = userData.following && userData.following.includes(findUser._id);
 
@@ -45,7 +45,7 @@ useEffect(() =>{
         console.log("halllooo");
           // console.log(res.data); 
           setFindUser(res.data)  
-         // console.log('this is the data',res.data)
+        //  console.log('this is the data',res.data)
       } catch (error) {
         alert("Error")
       }
@@ -99,19 +99,22 @@ const unFollowHandler = async (e) => {
 
 const [followers,setFollowers] = useState([])
 
-const getFollowers = async () => {
+const getFollowers = async (userData) => {
+  // e.preventDefault()
   console.log("get Follower");
+  console.log(userData);
+  document.getElementById('my_modal_get_followers').showModal()
 
   try {
-
-    const response = await axios.get('')
+    const response = await axios.get('http://localhost:3003/user/getfollowers',{params:{owner:userData}})
+    console.log(response.data)
     
   } catch (error) {
-    
+    console.log(error);
   }
-  setFollowers(findUser.followers)
+
+  // setFollowers(userData?.followers)
   
-  document.getElementById('my_modal_get_followers').showModal()
   console.log(followers);
 }
 
@@ -157,7 +160,7 @@ const getFollowers = async () => {
           </div>
           <div className='flex gap-8 mt-6'>
             <p> <span className='font-medium'>{findUser.post?.length}</span>  posts</p>
-            <p onClick={getFollowers}> <span className='font-medium'>{findUser.followers?.length}</span>  followers</p>
+            <p onClick={() => getFollowers (findUser)} className='cursor-pointer'> <span className='font-medium'>{findUser.followers?.length}</span>  followers</p>
             <p> <span className='font-medium'>{findUser.following?.length}</span>  following</p>
           </div>
           <div className="mt-5">
