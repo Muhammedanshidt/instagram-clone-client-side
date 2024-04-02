@@ -72,7 +72,7 @@ const followHandler= async (e) =>{
   if(userId !== currentUserId ){
   try{
   const res = await  axios.put('http://localhost:3003/user/follow',{user:findUser,owner:userData})
-  console.log(res.data);
+  // console.log(res.data);
   setFollow(true)
   window.location.reload();
 
@@ -86,15 +86,23 @@ else{
 };
 
 const unFollowHandler = async (e) => {
+  console.log("unFollow");
+  let userId = findUser._id;
+  let currentUserId = userData._id;
+
   
   try {
-    const result = await axios.delete('http://localhost:3003/user/unfollow',{user:findUser,owner:userData} )
-    console.log(result.data);
+    const  res = await axios.delete('http://localhost:3003/user/unfollow',{ data : {userId,currentUserId}})
+    console.log(res.data);
     setFollow(false)
+    window.location.reload();
+    // console.log(result.data);
+    // setFollow(false)
     
   } catch (error) {
     console.log(error);
   }
+
 }
 
 const [followers,setFollowers] = useState([])
@@ -115,24 +123,27 @@ const getFollowers = async (userData) => {
   console.log(err)
 }
 }
-    
 
+
+
+const [following,setFollowing] = useState([])
+
+const getFollowing = async (userData) => {
+
+  document.getElementById('my_modal_get_following').showModal()
+
+  try {
+      const res = await axios.get('http://localhost:3003/user/getfollowing',{params:{owner:userData}})
+    const followingData = res.data
+    setFollowing(followingData)
+    console.log(followingData)
+  } catch (error) {
+    console.log(error);
+
+  }
   
+}    
 
-
-
-// const checkingFollow = userData.following.includes[findUser._id];
-// // console.log(checkingFollow);
-
-
-// const checkingFollow = userData.following && userData.following.includes(findUser._id);
-
-
-// const checkingUnFollow = userData.followers && userData.followers.includes(findUser._id);
-
-
-
-// const checkingUnFollow = userData.followers && userData.followers.includes(findUser._id);
 
 
 
@@ -162,7 +173,7 @@ const getFollowers = async (userData) => {
           <div className='flex gap-8 mt-6'>
             <p> <span className='font-medium'>{findUser.post?.length}</span>  posts</p>
             <p onClick={() => getFollowers (findUser)} className='cursor-pointer'> <span className='font-medium'>{findUser.followers?.length}</span>  followers</p>
-            <p> <span className='font-medium'>{findUser.following?.length}</span>  following</p>
+            <p onClick={() => getFollowing (findUser)} className='cursor-pointer'> <span className='font-medium'>{findUser.following?.length}</span>  following</p>
           </div>
           <div className="mt-5">
             <p  className='font-medium font-mono text-lg mb-2'>{findUser?.fullname}</p>
@@ -187,6 +198,8 @@ const getFollowers = async (userData) => {
        </p> */} 
     </div>
 
+    {/* GET FOLLOWERS USERS */}
+
     <dialog id="my_modal_get_followers" className="modal rounded-3xl p-6">
   <div className="modal-box ">
     <form method="dialog">
@@ -195,6 +208,31 @@ const getFollowers = async (userData) => {
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       {
         followers.map((item) => (
+          <div className='w-full h-16 bg-slate-100 flex p-1 gap-3 items-center rounded-md m-1'>
+          <img
+          src={item.profileimage || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
+          className='size-12 rounded-full'
+          />
+          <p>{item.username}</p>
+    
+           </div>
+        ))
+      }
+      </div>
+    </form>
+  </div>
+</dialog>
+
+ {/* GET FOLLOWING USERS */}
+
+<dialog id="my_modal_get_following" className="modal rounded-3xl p-6">
+  <div className="modal-box ">
+    <form method="dialog">
+      {/* if there is a button in form, it will close the modal */}
+      <div className='w-72 h-96 '>
+      <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+      {
+        following.map((item) => (
           <div className='w-full h-16 bg-slate-100 flex p-1 gap-3 items-center rounded-md m-1'>
           <img
           src={item.profileimage || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
