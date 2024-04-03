@@ -80,8 +80,7 @@ function UserProfileEdit() {
       method: 'POST',
       body: formData,
     });
-    console.log("iojm");
-
+    
     const data = await response.json();
     if (data.error) {
       throw new Error(data.error.message);
