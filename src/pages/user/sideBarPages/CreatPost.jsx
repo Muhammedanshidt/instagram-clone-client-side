@@ -92,7 +92,7 @@ function CreatPost() {
       
  const backendResponse = await axios.post('http://localhost:3003/user/post', {
   imageUrl: data.secure_url,
-  email: userData.email,
+  id: userData._id,
   caption: caption,
 });
 
