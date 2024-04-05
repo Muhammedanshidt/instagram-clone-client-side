@@ -3,11 +3,8 @@ import toast from 'react-hot-toast';
 // import { CgAddR } from "react-icons/cg";
 import { IoIosImages } from "react-icons/io";
 import Clintcontex from '../../userContext/ClientContext';
+import { useNavigate } from 'react-router';
 import axios from "axios";
-
-
-
-// import { useNavigate } from 'react-router';
 
 
 function CreatPost() {
@@ -17,7 +14,7 @@ function CreatPost() {
 
   const {userData} =  useContext(Clintcontex);
 
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
 
   const apikey = "237691142669394";
   const cloudname = "dvxrfsr4e"
@@ -86,8 +83,6 @@ function CreatPost() {
     });
       alert("success")
       console.log(response.url);
-  
-
       const data = await response.json()
       
  const backendResponse = await axios.post('http://localhost:3003/user/post', {
@@ -95,6 +90,8 @@ function CreatPost() {
   id: userData._id,
   caption: caption,
 });
+
+
 
       console.log(backendResponse.data);  
      }catch(err){
@@ -162,8 +159,8 @@ function CreatPost() {
           <textarea value={caption} onChange={captionHandle} className='bg-gray-100 m-3 w-80 h-10 border-s-2 focus:outline-none' placeholder='caption ...' />
           <div className='p-3 flex justify-between'>
             <div className='flex space-x-8 '>
-            <button className='bg-blue-500 text-white py-1 px-2 rounded-lg'>cancel</button>
-            <button className='bg-blue-500 text-white py-1 px-2 rounded-lg'>edit</button>
+            <button className='bg-blue-500 text-white py-1 px-2 rounded-lg' onClick={() => navigate(setPreview(null))}>cancel</button>
+            {/* <button className='bg-blue-500 text-white py-1 px-2 rounded-lg'>edit</button> */}
             </div>
             <button className='bg-blue-500 text-white py-1 px-2 rounded-lg' onClick={handleSubmit}>post</button>
           </div>

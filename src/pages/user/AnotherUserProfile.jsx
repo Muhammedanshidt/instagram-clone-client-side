@@ -130,11 +130,14 @@ const [following,setFollowing] = useState([])
 
 const getFollowing = async (userData) => {
 
+
   document.getElementById('my_modal_get_following').showModal()
+
 
   try {
       const res = await axios.get('http://localhost:3003/user/getfollowing',{params:{owner:userData}})
     const  followingData = await res.data
+  // console.log("iudnf");
     setFollowing(followingData)
     console.log(followingData)
   } catch (error) {
@@ -232,10 +235,10 @@ const getFollowing = async (userData) => {
       <div className='w-72 h-96 '>
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       {
-      following.length === 0 ? 
+    //   following.length === 0 ? 
       
-      <p className='text-red-500 text-lg font-bold text-center'>You are not Following anyone yet!.</p>
-     :
+    //   <p className='text-red-500 text-lg font-bold text-center'>You are not Following anyone yet!.</p>
+    //  :
         following.map((item) => (
           <div className='w-full h-16 bg-slate-100 flex p-1 gap-3 items-center rounded-md m-1'>
           <img
