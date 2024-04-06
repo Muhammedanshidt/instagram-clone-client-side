@@ -86,6 +86,9 @@ function UserProfile() {
               </div>
             </dialog>
           </div>
+
+          
+
           <div className="flex gap-8 mt-6">
             <p>
               {" "}
@@ -143,12 +146,11 @@ function UserProfile() {
           </svg>{" "}
           Saved
         </p>
-        <p className=" profileIcon font-medium flex text-sm  hover:bg-gray-200 rounded-md hover:p-1">
+        <p className=" profileIcon font-medium flex text-sm  hover:bg-gray-200 rounded-md hover:p-1" >
           <FaHeart className="size-5" />
           Likes
         </p>
       </div>
-
       <Outlet />
     </div>
   );

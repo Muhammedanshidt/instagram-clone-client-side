@@ -51,6 +51,9 @@ useEffect(() =>{
       }
     }
   }
+
+
+  
    getUserInfo(); 
    
    if(checkingFollow){
@@ -59,6 +62,38 @@ useEffect(() =>{
      setFollow(false)
    }  
 } , [checkingFollow,userData])
+
+
+
+
+
+const [post,setPost] = useState([]);
+
+useEffect( () => {
+
+   const shoPost  = async () => {
+    if(userData){
+      try {
+        const response = await axios.get('http://localhost:3003/user/getUserPost',{params:{ownerId:findUser}})
+        if(response.data.length > 0){
+        // console.log(response);
+        const {data} = response
+        // console.log(data,"uhfuierufyeuy");
+        setPost(data)
+        console.log(post);
+      }else{
+        console.log("not get tin any data");
+      }
+        
+      } catch (error) {
+        console.log(error);
+        alert(error.message)
+      }
+    }
+   }
+   shoPost();
+}
+, [findUser])
 
 
 // following 
@@ -188,18 +223,19 @@ const getFollowing = async (userData) => {
 
     </div>
     <hr className='mb-6 ml-20 w-[900px] border-t border-gray-300'/>
-    <div className=' p-4 w-full h-fit bg-orange-300 '>
-      <div className=' flex w-80'>
-        <img 
-        src={findUser?.profileimage}
-        className='border-gray-950 border-2'
-        />
-      </div>
-       {/* <p onClick={()=> navigate('/profile/')} className=' profileIcon font-medium flex text-sm cursor-pointer  hover:bg-gray-200 rounded-md hover:p-1'>
-        <IoMdGrid className='size-5'/>
-        Posts
-       </p> */} 
-    </div>
+
+    {post.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6 mx-6">
+          {post.map((item, index) => (
+            <div key={index}>
+              <img className="h-auto max-w-full rounded-lg" src={item.imgUrl} alt="" />
+            </div>
+          ))}
+        </div>
+      ) : (
+        <p>No posts found</p>
+      )}
+     
 
     {/* GET FOLLOWERS USERS */}
 
@@ -213,11 +249,10 @@ const getFollowing = async (userData) => {
         followers.map((item) => (
           <div className='w-full h-16 bg-slate-100 flex p-1 gap-3 items-center rounded-md m-1'>
           <img
-          src={item.profileimage || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
+          src={item.post || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
           className='size-12 rounded-full'
           />
           <p>{item.username}</p>
-    
            </div>
         ))
       }

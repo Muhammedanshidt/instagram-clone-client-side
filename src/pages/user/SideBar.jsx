@@ -35,14 +35,14 @@ const handleClickCreate = (e) => {
 
   return (
     <div>
-      <div className=" h-screen flex  " >
+      <div className=" h-screen flex " >
         {/* Sidebar */}
         <div
-          className={`bg-white text-white w-60 h-screen border-r ${
+          className={`fixed bg-white text-white w-60 h-screen border-r ${
             isSidebarOpen ? "block" : "hidden"
           } sm:block `}
         >
-          <div className="text-white h-24 flex items-center justify-start pl-3 ">
+          <div className="text-white h-24 flex items-center justify-start pl-3  ">
             <img src={TitleImage} alt="logo" className="h-[32px]  ml-5" />
           </div>
           <div className="h-[440px] p-4 pt-0 flex-col justify-start ">
@@ -173,7 +173,7 @@ const handleClickCreate = (e) => {
           </dialog>
           </div>
         </div>
-        <div className="">
+        <div className="ml-56">
           <Outlet />
         </div>
 
