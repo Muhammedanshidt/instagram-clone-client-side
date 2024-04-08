@@ -25,7 +25,7 @@ function UserProfile() {
       <div className="flex ">
         <div className="w-[350px] h-[250px]  flex justify-center items-center ">
           <img
-            className=" w-fit size-24 rounded-full border border-3 border-gray-300"
+            className=" object-contain size-24 rounded-full border border-3 border-gray-300"
             src={userData?.profileimage}
             alt="profile"
           />

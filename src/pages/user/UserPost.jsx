@@ -3,6 +3,7 @@ import { useEffect } from 'react'
 import Clintcontex from '../userContext/ClientContext'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 // import bcrypt from 'bcryptjs'
 
 function UserPost() {
@@ -14,7 +15,7 @@ function UserPost() {
   const [post,setPost] = useState([]);
   // const [hashId,setHashId]=useState("");
   const [selectedPost, setSelectedPost] = useState(null);
-
+   const [like,setLike] = useState(false)
 useEffect( () => {
 
    const shoPost  = async () => {
@@ -76,7 +77,7 @@ const openModal = (item) => {
        className='h-full w-[400px] '/>
       </div>
 }
-      <div className='h-full w-[350px] bg-orange-400 border-l-2 border-gray-200'>
+      <div className='h-full w-[350px] bg-white border-l-2 border-gray-200'>
         <div
         className='flex p-2 bg-white'
         >
@@ -87,10 +88,26 @@ const openModal = (item) => {
           <p className='p-2 font-semibold'>{userData?.username}</p>
         </div>
         <hr/>
-        <div className='h-[260px] w-full bg-cyan-500'></div>
-        <div className='p-2 text-xs'>
-          <span>{selectedPost?.caption}</span><br/>
-          <a href={`https://www.instagram.com/p/${selectedPost?.code}/`} target='_blank'></a>
+        <div className='h-[260px] w-full bg-white'>
+            {
+              selectedPost?.caption ?
+          <div className='flex p-2 gap-3 bg-slate-100 w-full h-fit'>
+            <img src={userData?.profileimage}
+            className='size-6  object-contain rounded-full'/>
+           <span>{selectedPost?.caption}</span><br/>
+        </div>:null
+            }
+        <hr/>
+        </div>
+        <div className='p-2 text-xs bg-slate-100 h-20'>
+            <div className='h-fit w-fit' onClick={()=> (setLike(!like))}>
+                  {
+                    like ?(
+                      <i className="text-red-500 text-3xl"><IoMdHeart /></i>       
+                  ):
+                   <i className="text-3xl"><IoMdHeartEmpty /></i>       
+                  }
+            </div>
 
         </div>
       </div>
