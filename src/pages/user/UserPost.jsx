@@ -44,18 +44,19 @@ const openModal = (item) => {
 }
 
 const likeHandler = async () => {
-  (setLike(!like))
 try{
   if(selectedPost){
     console.log("ihrfuu");
+
+
     const response = await axios.post('http://localhost:3003/user/userLike', { ownerId: userData._id, postId: selectedPost._id });
-  
+   (setLike(!like))
+
   }
 }
 catch(error){
   console.log("iede",error);
-}
-  
+} 
 }
 
   return (

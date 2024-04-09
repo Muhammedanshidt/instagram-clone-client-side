@@ -45,27 +45,27 @@ const handleClickCreate = (e) => {
           <div className="text-white h-24 flex items-center justify-start pl-3  ">
             <img src={TitleImage} alt="logo" className="h-[32px]  ml-5" />
           </div>
-          <div className="h-[440px] p-4 pt-0 flex-col justify-start ">
-            <div className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg "
+          <div className="h-[440px] p-4  flex-col justify-start  ">
+            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
               onClick={() => navigate("/home")}
               >
               <div>
                 <GoHomeFill className="size-6 " />
-              </div>
+              </div> 
               <p>Home</p>
             </div>
            
 
-            <div className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg">
+            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg ">
               <div>
                 <IoSearchOutline className="size-6" />
               </div>
-              <p>Search</p>
+              <p >Search</p>
             </div>
 
             <div
               onClick={() => navigate("/explore")}
-              className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg "
+              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
             >
               <div>
                 <MdOutlineExplore className="size-6 " />
@@ -73,7 +73,7 @@ const handleClickCreate = (e) => {
               <p>Explore</p>
             </div>
 
-            <div className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg">
+            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg">
               <div>
                 <img src={Reel} alt="logo" />
               </div>
@@ -82,7 +82,7 @@ const handleClickCreate = (e) => {
 
             <div
               onClick={() => navigate("/inbox")}
-              className=" focus-div flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg"
+              className=" focus-div flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
             >
               <div>
                 <RiMessengerLine className="size-6 " />
@@ -90,7 +90,7 @@ const handleClickCreate = (e) => {
               <p>Messages</p>
             </div>
 
-            <div className="flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg">
+            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg">
               <div>
                 <IoHeartOutline className="size-6" />
               </div>
@@ -98,7 +98,7 @@ const handleClickCreate = (e) => {
             </div>
 
             <div
-              className=" focus-div flex text-black p-4 gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg "
+              className=" focus-div flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
              onClick={handleClickCreate} 
             >
               <div>
@@ -148,7 +148,7 @@ const handleClickCreate = (e) => {
 
             <div
               onClick={() => navigate("/profile")}
-              className="flex text-black p-4 gap-[15px] cursor-pointer "
+              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer  hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg focus:text-blue-950"
             >
               <div>
                 <CgProfile className="size-6" />
