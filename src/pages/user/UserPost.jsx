@@ -43,7 +43,20 @@ const openModal = (item) => {
 
 }
 
-
+const likeHandler = async () => {
+  (setLike(!like))
+try{
+  if(selectedPost){
+    console.log("ihrfuu");
+    const response = await axios.post('http://localhost:3003/user/userLike', { ownerId: userData._id, postId: selectedPost._id });
+  
+  }
+}
+catch(error){
+  console.log("iede",error);
+}
+  
+}
 
   return (
     <div>
@@ -52,7 +65,7 @@ const openModal = (item) => {
           {post.map((item, index) =>(
             <Link to={`/profile?id=${item._id}`}>
             <div key={index} onClick={()=> openModal (item)}>
-              <img className="h-auto max-w-full rounded-lg" src={item.imgUrl} alt="" />
+              <img className="h-auto max-w-full rounded-lg " src={item.imgUrl} alt="" />
             </div>
             </Link>
           ))}
@@ -100,7 +113,7 @@ const openModal = (item) => {
         <hr/>
         </div>
         <div className='p-2 text-xs bg-slate-100 h-20'>
-            <div className='h-fit w-fit' onClick={()=> (setLike(!like))}>
+            <div className='h-fit w-fit' onClick={()=> likeHandler ()}>
                   {
                     like ?(
                       <i className="text-red-500 text-3xl"><IoMdHeart /></i>       

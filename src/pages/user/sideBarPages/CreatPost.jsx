@@ -30,6 +30,7 @@ function CreatPost() {
     const modalCreate = document.getElementById("my_modal_3")
     if(modalCreate){
       modalCreate.hidden = false
+      
     }if(preview){    
     }
   }
