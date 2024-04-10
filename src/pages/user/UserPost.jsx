@@ -43,14 +43,18 @@ const openModal = (item) => {
 
 }
 
+
+
+
 const likeHandler = async () => {
 try{
+ 
   if(selectedPost){
     console.log("ihrfuu");
 
 
     const response = await axios.post('http://localhost:3003/user/userLike', { ownerId: userData._id, postId: selectedPost._id });
-   (setLike(!like))
+   
 
   }
 }
@@ -114,14 +118,18 @@ catch(error){
         <hr/>
         </div>
         <div className='p-2 text-xs bg-slate-100 h-20'>
-            <div className='h-fit w-fit' onClick={()=> likeHandler ()}>
-                  {
-                    like ?(
+                  
+                 <div className='h-fit w-fit' onClick={()=> likeHandler (selectedPost._id)}>
+                    {
+                    selectedPost.like ?(
+                      
                       <i className="text-red-500 text-3xl"><IoMdHeart /></i>       
                   ):
-                   <i className="text-3xl"><IoMdHeartEmpty /></i>       
-                  }
-            </div>
+                   <i className="text-3xl"><IoMdHeartEmpty /></i>
+                }
+                 </div>
+
+                  
 
         </div>
       </div>
