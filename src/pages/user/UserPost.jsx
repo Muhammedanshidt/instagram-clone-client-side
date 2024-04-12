@@ -55,6 +55,7 @@ try{
 
     const response = await axios.post('http://localhost:3003/user/userLike', { ownerId: userData._id, postId: selectedPost._id });
    console.log(response.data);
+   const data = response.data
 
   }
 }
