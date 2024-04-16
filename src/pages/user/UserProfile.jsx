@@ -25,10 +25,11 @@ function UserProfile() {
       <div className="flex ">
         <div className="w-[350px] h-[250px]  flex justify-center items-center ">
           <img
-            className=" object-contain size-24 rounded-full border border-3 border-gray-300"
+            className=" object-cover size-32 rounded-full border border-3 border-gray-300 flex-shrink-0"
             src={userData?.profileimage}
-            alt="profile"
+            alt="profile "
           />
+          
         </div>
         <div className=" w-[700px] h-[250px]  flex-col ">
           <div className="flex gap-6 mt-6">
