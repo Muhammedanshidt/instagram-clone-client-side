@@ -26,7 +26,6 @@ const getUser = async () => {
     //  console.log("Get User Data",response.data);
     //  console.log("", signUser)
     //  console.log(response.data);
-
     //  console.log(name);
     }catch(err){
       console.log("Error",err)

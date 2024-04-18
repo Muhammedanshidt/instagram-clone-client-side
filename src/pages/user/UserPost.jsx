@@ -4,6 +4,8 @@ import Clintcontex from "../userContext/ClientContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import { constant } from "lodash";
+import { values } from "lodash";
 // import bcrypt from 'bcryptjs'
 
 function UserPost() {
@@ -38,14 +40,6 @@ function UserPost() {
   }, [userData]);
 
 
-
-
-
-
-
-
-
-
   const openModal = (item) => {
     setSelectedPost(item);
     console.log(item._id);
@@ -69,6 +63,49 @@ function UserPost() {
       console.log("iede", error);
     }
   };
+
+  const [commentValue,setCommentValue] =  useState('');
+
+  // const commentInputHandler = (event) => {
+  //   const value = event.target.value
+  //   setCommentValue(value);
+  //   console.log(commentValue);
+  //   console.log(selectedPost);
+  // }
+
+  const inputRef = React.useRef(null)
+
+  const  submitComment = async()=>{
+    console.log("hello");
+    try{
+      const commentValue =inputRef.current.value;
+    if(commentValue == 0){
+      alert("no value")
+    }
+    else{
+
+      if (inputRef.current) {
+        inputRef.current.value = '';
+    }
+    
+    const res = await axios.post('http://localhost:3003/user/userComment', {
+      ownerId: userData._id,
+      postId: selectedPost._id,
+      commentvalue: commentValue
+  });
+
+
+    const {user,post} = res.data
+    console.log(res.data);
+    // console.log(user?user:null,"userdata")
+    // console.log(post,"postData");
+
+    }
+  } catch(err){
+    console.log("error in submitting the comment ", err);
+  }
+
+  }
 
   return (
     <div>
@@ -161,9 +198,11 @@ function UserPost() {
                      type="text"
                      className="p-[7px] w-full outline-none"
                      placeholder="  Add a comment..."
+                    //  onChange={commentInputHandler}
+                    ref={inputRef}
                       />
-                      <div className="m-1 text-sm cursor-pointer text-gray-500 font-semibold">Post</div>
-
+                  <div className="m-1 text-sm cursor-pointer text-gray-500 font-semibold" onClick={() => submitComment()}>Post</div>
+            
                   </div>
               </div>
             </div>

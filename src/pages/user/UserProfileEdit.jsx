@@ -85,7 +85,7 @@ function UserProfileEdit() {
     if (data.error) {
       throw new Error(data.error.message);
     }
-    toast.success("success ful")
+    toast.success("success full")
 
     console.log(data)
   
