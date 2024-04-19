@@ -17,6 +17,13 @@ function UserPost() {
   // const [hashId,setHashId]=useState("");
   const [selectedPost, setSelectedPost] = useState(null);
   const [like, setLike] = useState(false);
+  const [commentedUser, setCommentedUser] = useState([]);
+  const [commentedPost,setCommentedPost] = useState([])
+  const [mapComment,setMapComment] = useState([])
+
+  // useEffect(() => {
+  //   getAllPost();
+  // }, []);
 
 
   useEffect(() => {
@@ -25,11 +32,16 @@ function UserPost() {
         try {
           const response = await axios.get(
             "http://localhost:3003/user/getUserPost",
-            { params: { ownerId: userData } }
+            { params: { Id: userData._id, postId: userData.post } }
           );
+          
           const { data } = response;
-          console.log(data);
-          setPost(data);
+          console.log("post",data);
+          // console.log(data.postData);
+          setMapComment(data.postData)
+          setPost(data.posts);
+          
+
         } catch (error) {
           console.log(error);
           alert(error.message);
@@ -57,7 +69,7 @@ function UserPost() {
         console.log("after axios");
         const data = response.data;
         console.log(data, "this is the responce from server");
-
+     
       }
     } catch (error) {
       console.log("iede", error);
@@ -65,13 +77,6 @@ function UserPost() {
   };
 
   const [commentValue,setCommentValue] =  useState('');
-
-  // const commentInputHandler = (event) => {
-  //   const value = event.target.value
-  //   setCommentValue(value);
-  //   console.log(commentValue);
-  //   console.log(selectedPost);
-  // }
 
   const inputRef = React.useRef(null)
 
@@ -94,11 +99,20 @@ function UserPost() {
       commentvalue: commentValue
   });
 
+  const { data } = res;
+  const { user, post } = data;
+  
+  
+  if(user && post){
 
-    const {user,post} = res.data
-    console.log(res.data);
-    // console.log(user?user:null,"userdata")
-    // console.log(post,"postData");
+    setCommentedUser(user);
+    setCommentedPost(post);
+  }
+
+  console.log(commentedUser)
+  console.log(commentedPost)
+  console.log(selectedPost.comments);
+  
 
     }
   } catch(err){
@@ -141,9 +155,9 @@ function UserPost() {
               ✕
             </button>
           </form>
-          <div className="flex w-[750px] h-[400px]">
+          <div className="flex w-[750px] h-[450px]">
             {post && (
-              <div className="h-[400px] w-[400px] flex justify-center items-center">
+              <div className="h-full w-fit flex justify-center items-center" >
                 <img
                   src={selectedPost?.imgUrl}
                   alt={selectedPost?.caption}
@@ -155,7 +169,7 @@ function UserPost() {
               <div className="flex p-2 bg-white">
                 <img
                   src={userData?.profileimage}
-                  className="size-10 object-contain rounded-full"
+                  className="size-10 object-cover rounded-full"
                 />
                 <p className="p-2 font-semibold">{userData?.username}</p>
               </div>
@@ -165,14 +179,39 @@ function UserPost() {
                   <div className="flex px-2 py-1 gap-3 bg-slate-100 w-full h-fit">
                     <img
                       src={userData?.profileimage}
-                      className="size-6  object-contain rounded-full"
+                      className="size-6  object-cover rounded-full"
                     />
                     <p>{selectedPost?.caption}</p>
                   </div>
                 ) : null}
                 <hr />
+                <div className="h-full px-3 py-3 overflow-x-hidden overflow-y-scrol overscroll-none" id="scrollTabHide">
+                  {
+                    mapComment?.comments 
+                    ?.map((comment,index) => {
+                      console.log(comment);
+
+                      return(
+                        <div className="bg-gray-200 w-full h-14 mt-2" >
+                          <div className="flex gap-2 p-1">
+                            <img 
+                            src={comment?.userId?.profileimage}
+                            className="size-8  object-cover rounded-full"
+
+                            />
+                            <p className="text-xs">{comment?.userId?.username}</p>
+                            <span>{comment?.text}</span>
+                            <div>
+                            </div>
+                            
+                          </div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
               </div>
-              <div className="text-xs h-fit border-t-2">
+              <div className="text-xs h-fit border-t-2 mt-8">
                 <div
                   className="h-fit w-fit"
                   onClick={() => likeHandler(selectedPost._id)}
@@ -191,6 +230,10 @@ function UserPost() {
                   {/* {console.log(selectedPost,"before like")} */}
                   <p className="text-lg px-1"> {selectedPost?.like?.length}</p>
                 </div>
+                  
+                </div>
+                <div>
+
                 <hr/>
                   <div className="flex items-center">
                     <p className="text-lg">😊</p>
