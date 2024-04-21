@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from 'react'
 import Clintcontex from '../userContext/ClientContext'
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import UserPost from './UserPost';
 
 function UserExplore() {
 
@@ -49,7 +50,7 @@ useEffect(() => {
     {post.map((item, index)=>(
     <div className="grid gap-4">
         <div key={index}>
-            <img className="h-auto max-w-full rounded-lg object-cover object-center" src={item.imgUrl} alt={item.caption}/>
+            <img className="h-auto max-w-full rounded-lg object-cover object-center" src={item.imgUrl} alt={item.caption} onClick={() =>(<UserPost/>)}/>
         </div>
     </div>
     ))}

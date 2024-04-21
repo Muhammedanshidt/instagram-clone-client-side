@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { constant } from "lodash";
-import { values } from "lodash";
+import { values } from "lodash";  
 // import bcrypt from 'bcryptjs'
 
 function UserPost() {
@@ -20,12 +20,13 @@ function UserPost() {
   const [commentedUser, setCommentedUser] = useState([]);
   const [commentedPost,setCommentedPost] = useState([])
   const [mapComment,setMapComment] = useState([])
+  // const [openPostId,setOpenPostId] = useState("")
 
   // useEffect(() => {
   //   getAllPost();
   // }, []);
 
-
+// 
   useEffect(() => {
     const shoPost = async () => {
       if (userData) {
@@ -66,8 +67,12 @@ function UserPost() {
           { ownerId: userData._id, postId: selectedPost._id }
           
         );
+
         console.log("after axios");
         const data = response.data;
+
+
+
         console.log(data, "this is the responce from server");
      
       }
@@ -186,29 +191,27 @@ function UserPost() {
                 ) : null}
                 <hr />
                 <div className="h-full px-3 py-3 overflow-x-hidden overflow-y-scrol overscroll-none" id="scrollTabHide">
-                  {
-                    mapComment?.comments 
-                    ?.map((comment,index) => {
-                      console.log(comment);
+                {
+  selectedPost?.comments
+    ?.filter((comment) => selectedPost?._id == comment.postId)
+    .map((comment, index) => {
+      console.log(mapComment)
+      return (
+        <div className="bg-gray-200 w-full h-14 mt-2" key={index}>
+          <div className="flex gap-2 p-1">
+            <img
+              src={mapComment}
+              className="size-8  object-cover rounded-full"
+            />
+            <p className="text-xs">{selectedPost?.comments?.userId?.username}</p>
+            <span>{comment?.text}</span>
+            <div></div>
+          </div>
+        </div>
+      );
+    })
+}
 
-                      return(
-                        <div className="bg-gray-200 w-full h-14 mt-2" >
-                          <div className="flex gap-2 p-1">
-                            <img 
-                            src={comment?.userId?.profileimage}
-                            className="size-8  object-cover rounded-full"
-
-                            />
-                            <p className="text-xs">{comment?.userId?.username}</p>
-                            <span>{comment?.text}</span>
-                            <div>
-                            </div>
-                            
-                          </div>
-                        </div>
-                      )
-                    })
-                  }
                 </div>
               </div>
               <div className="text-xs h-fit border-t-2 mt-8">
@@ -216,7 +219,8 @@ function UserPost() {
                   className="h-fit w-fit"
                   onClick={() => likeHandler(selectedPost._id)}
                 >
-                  {like ? (
+
+                  { like ? (
                     <i className="text-red-500 text-2xl">
                       <IoMdHeart />
                     </i>

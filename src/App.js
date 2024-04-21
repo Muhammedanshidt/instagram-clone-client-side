@@ -13,6 +13,7 @@
   import UserOtp from './pages/user/UserOtp';
   import CreatPost from './pages/user/sideBarPages/CreatPost'
   import EditProfile from './pages/user/UserProfileEdit'
+import UserSearch from './pages/user/UserSearch';
   import Clintcontex from './pages/userContext/ClientContext';
   import { useEffect, useState } from 'react';
   import {Toaster } from "react-hot-toast";
@@ -98,6 +99,8 @@ import AnotherUserProfile from './pages/user/AnotherUserProfile';
                 <Route path='/explore' element={<UserExplore />} />
                 <Route path='/inbox' element={<UserMessage />} />
                 <Route path='/notification' element={<UserNotification />} />
+                <Route path='/search' element={<UserSearch />} />
+
 
               </Route>
 

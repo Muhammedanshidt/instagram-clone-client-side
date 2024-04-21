@@ -13,13 +13,13 @@ import TitleImage from "../../asset/title.png";
 import { Outlet } from "react-router";
 import { useNavigate } from "react-router";
 import { IoIosImages } from "react-icons/io";
-import Creat from "../user/sideBarPages/CreatPost"
+import Creat from "../user/sideBarPages/CreatPost";
 // import "./SideBar.css";
 
 const SideBar = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
-  const [image,setImage] = useState([])
+  const [image, setImage] = useState([]);
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -27,15 +27,24 @@ const SideBar = () => {
 
   const navigate = useNavigate();
 
-const handleClickCreate = (e) => {
- document.getElementById('my_modal_3')
- navigate("/create")
+  const handleClickCreate = (e) => {
+    document.getElementById("my_modal_3");
+    navigate("/create");
+  };
 
-}
+  const [isOpen, setIsOpen] = useState(false);
+
+  const toggleModal = () => {
+    setIsOpen(!isOpen);
+  };
+
+  
+    
+
 
   return (
     <div>
-      <div className=" h-screen flex " >
+      <div className=" h-screen flex ">
         {/* Sidebar */}
         <div
           className={`fixed bg-white text-white w-60 h-screen border-r ${
@@ -46,22 +55,28 @@ const handleClickCreate = (e) => {
             <img src={TitleImage} alt="logo" className="h-[32px]  ml-5" />
           </div>
           <div className="h-[440px] p-4  flex-col justify-start  ">
-            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
+            <div
+              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
               onClick={() => navigate("/home")}
-              >
+            >
               <div>
                 <GoHomeFill className="size-6 " />
-              </div> 
+              </div>
               <p>Home</p>
             </div>
-           
 
-            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg ">
+            <div
+              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
+              onClick={()=>document.getElementById('my_modal_4').showModal()}
+
+            >
               <div>
                 <IoSearchOutline className="size-6" />
               </div>
-              <p >Search</p>
+              <p>Search</p>
             </div>
+
+            
 
             <div
               onClick={() => navigate("/explore")}
@@ -99,15 +114,15 @@ const handleClickCreate = (e) => {
 
             <div
               className=" focus-div flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
-             onClick={handleClickCreate} 
+              onClick={handleClickCreate}
             >
               <div>
                 <CgAddR className="size-6 rounded-" />
               </div>
               <p>Creat</p>
             </div>
-  
-              {/* <Creat/> */}
+
+            {/* <Creat/> */}
 
             {/* UPLOAD IMAGE */}
             {/* <dialog id="my_modal_3" className="modal rounded-3xl shadow-2xl">
@@ -158,20 +173,19 @@ const handleClickCreate = (e) => {
           </div>
           <div
             className="flex  text-black h-[30px] m-8 flex gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg"
-           onClick={()=>document.getElementById('my_modal_2').showModal()}
-
-          >          
+            onClick={() => document.getElementById("my_modal_2").showModal()}
+          >
             <AiOutlineMenu className="size-6" />
             <p>More</p>
             <dialog id="my_modal_2" className="modal">
-             <div className="modal-box">
-               <h3 className="font-bold text-lg">Hello!</h3>
-             <p className="py-4">Press ESC key or click outside to close</p>
-            </div>
-            <form method="dialog" className="modal-backdrop">
-             <button>close</button>
-          </form>
-          </dialog>
+              <div className="modal-box">
+                <h3 className="font-bold text-lg">Hello!</h3>
+                <p className="py-4">Press ESC key or click outside to close</p>
+              </div>
+              <form method="dialog" className="modal-backdrop">
+                <button>close</button>
+              </form>
+            </dialog>
           </div>
         </div>
         <div className="ml-56">
@@ -219,6 +233,5 @@ const handleClickCreate = (e) => {
       </div>
     </div>
   );
-          }
+};
 export default SideBar;
-
