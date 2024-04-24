@@ -1,12 +1,17 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { MdClear } from "react-icons/md";
+import { Link } from "react-router-dom";
+
 const UserSearch = () => {
-  const [searchTerm, setSearchTerm] = React.useState([]);
+  const [searchTerm, setSearchTerm] = useState([]);
+  const [resData,setResData] = useState([])
 
   const onchangeInput =async (e) => {
     
     const  value = e.target.value;
+
+    console.log(value);
   
     try{
 
@@ -16,7 +21,9 @@ const UserSearch = () => {
       }
     })
     const  data = res.data;
-    setSearchTerm(data);
+
+    setSearchTerm(value);
+    setResData(data);
     console.log(data);
   }
   catch(err){
@@ -29,6 +36,7 @@ const UserSearch = () => {
 
   const clearInput = () => {
     inputRef.current.value = "";
+    setSearchTerm([]);
   };
 
   return (
@@ -54,18 +62,20 @@ const UserSearch = () => {
 
       <div className=" w-full h-fit p-3 border mr-3">
       {
-  searchTerm ?
-  (
-    <div className="flex gap-4">
-    <img 
-    src={searchTerm[0]?.profileimage}
-    className="size-10 rounded-full"
-    />
-    <h1 className=" w-fit h-fit">{searchTerm[0]?.username }</h1>
-    </div>
-  )
-   : null
+  resData
+    ? resData
+        .filter((item) => searchTerm === item.username)
+        .map((item, index) => (
+          <Link to={`/user/${item.username}`} key={index}>
+            <div className="flex gap-4">
+              <img src={item.profileimage} className="w-10 h-10 rounded-full" />
+              <h1>{item.username}</h1>
+            </div>
+          </Link>
+        ))
+    : null
 }
+
 
       </div>
     </div>

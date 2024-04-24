@@ -4,29 +4,20 @@ import Clintcontex from "../userContext/ClientContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import { constant } from "lodash";
-import { values } from "lodash";
-// import bcrypt from 'bcryptjs'
 
-function UserPost() {
+const postComponent = () => {
+
   const { userData } = useContext(Clintcontex);
 
-  // console.log(userData);
 
   const [post, setPost] = useState([]);
-  // const [hashId,setHashId]=useState("");
   const [selectedPost, setSelectedPost] = useState([]);
   const [like, setLike] = useState(false);
   const [commentedUser, setCommentedUser] = useState([]);
   const [commentedPost, setCommentedPost] = useState([]);
   const [mapComment, setMapComment] = useState([]);
-  // const [openPostId,setOpenPostId] = useState("")
 
-  // useEffect(() => {
-  //   getAllPost();
-  // }, []);
 
-  //
   useEffect(() => {
     const shoPost = async () => {
       if (userData) {
@@ -52,6 +43,7 @@ function UserPost() {
     shoPost();
   }, [userData]);
 
+
   const openModal = (item) => {
     setSelectedPost(item)
     // item.like.include(userId) ? setLike(true):setLike(false)
@@ -60,6 +52,7 @@ function UserPost() {
     console.log(selectedPost,"onselect post");
 
   };
+
   const likeHandler = async () => {
     try {
       if (selectedPost) {
@@ -78,10 +71,8 @@ function UserPost() {
       console.log("iede", error);
     }
   };
+
   
-
-  const [commentValue, setCommentValue] = useState("");
-
   const inputRef = React.useRef(null);
 
   const submitComment = async () => {
@@ -118,34 +109,11 @@ function UserPost() {
     }
   };
 
-  console.log(post,"nuuo")
 
   return (
     <div>
-      {post.length > 0 ? (        
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6 mx-6">
-          {post?.map((item, index) => {
-            return (
-              <div key={index}>
-                <Link to={`/profile?id=${item?._id}`}>
-                  <img
-                    className="h-auto max-w-full rounded-lg"
-                    src={item?.imgUrl}
-                    alt=""
-                    onClick={() => openModal(item)}
-                  />
-                </Link>
-              </div>
-            );
-          })}
-        </div>
-      ) : (
-        <p>No posts found</p>
-      )}
 
-      {/* You can open the modal using document.getElementById('ID').showModal() method */}
-
-      <dialog id="postModal" className="modal">
+<dialog id="postModal" className="modal">
         {console.log(selectedPost)}
         <div className="modal-box">
           <form method="dialog">
@@ -256,8 +224,9 @@ function UserPost() {
           </div>
         </div>
       </dialog>
+      
     </div>
-  );
+  )
 }
 
-export default UserPost;
+export default postComponent

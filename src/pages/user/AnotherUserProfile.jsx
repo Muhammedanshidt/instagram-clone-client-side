@@ -42,8 +42,8 @@ useEffect(() =>{
     if(userData){
       try {
           const res= await axios.post("http://localhost:3003/user/findUser",{username:userId})
-        // console.log("halllooo");
-          // console.log(res.data); 
+        console.log("halllooo");
+          console.log(res.data); 
           setFindUser(res.data)  
         //  console.log('this is the data',res.data)
       } catch (error) {
@@ -51,8 +51,6 @@ useEffect(() =>{
       }
     }
   }
-
-
   
    getUserInfo(); 
    

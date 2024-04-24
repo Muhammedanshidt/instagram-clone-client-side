@@ -38,13 +38,9 @@ const SideBar = () => {
     setIsOpen(!isOpen);
   };
 
-  
-    
-
-
   return (
     <div>
-      <div className=" h-screen flex ">
+      <div className=" h-screen flex " id="scrollTabHide">
         {/* Sidebar */}
         <div
           className={`fixed bg-white text-white w-60 h-screen border-r ${
@@ -67,7 +63,9 @@ const SideBar = () => {
 
             <div
               className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
-              onClick={()=>document.getElementById('my_modal_4').showModal()}
+              // onClick={()=>document.getElementById('my_modal_4').showModal()}
+              onClick={() => navigate("/search")}
+
 
             >
               <div>
