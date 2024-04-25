@@ -5,7 +5,7 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
-const postComponent = () => {
+const PostComponent = (props) => {
 
   const { userData } = useContext(Clintcontex);
 
@@ -16,32 +16,39 @@ const postComponent = () => {
   const [commentedUser, setCommentedUser] = useState([]);
   const [commentedPost, setCommentedPost] = useState([]);
   const [mapComment, setMapComment] = useState([]);
+  const [currentPost,setCurrentPost] = useState()
+  
+
+  console.log(props ,"passing to com");
 
 
-  useEffect(() => {
-    const shoPost = async () => {
-      if (userData) {
-        try {
-          const response = await axios.get(
-            "http://localhost:3003/user/getOwnPost",
-            {
-              params: { Id: userData._id },
-            }
-          );
-          const {post} = response.data;
-          console.log(post);
-          setPost(post);
+// console.log(name);
+  
 
-        } catch (error) {
-          console.error("Error fetching post:", error);
-        }
-        // console.log(data.postData);
-        // setMapComment(data.postData)
+  // useEffect(() => {
+  //   const shoPost = async () => {
+  //     if (userData) {
+  //       try {
+  //         const response = await axios.get(
+  //           "http://localhost:3003/user/getOwnPost",
+  //           {
+  //             params: { Id: userData._id },
+  //           }
+  //         );
+  //         const {post} = response.data;
+  //         console.log(post);
+  //         setPost(post);
+
+  //       } catch (error) {
+  //         console.error("Error fetching post:", error);
+  //       }
+  //       // console.log(data.postData);
+  //       // setMapComment(data.postData)
         
-      }
-    };
-    shoPost();
-  }, [userData]);
+  //     }
+  //   };
+  //   shoPost();
+  // }, [userData]);
 
 
   const openModal = (item) => {
@@ -113,12 +120,14 @@ const postComponent = () => {
   return (
     <div>
 
+      {/* <h1>hello</h1> */}
+{/* 
 <dialog id="postModal" className="modal">
         {console.log(selectedPost)}
         <div className="modal-box">
-          <form method="dialog">
+          <form method="dialog"> */}
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            {/* <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
@@ -197,7 +206,6 @@ const postComponent = () => {
                       </i>
                     </div>
                   )}
-                  {/* {console.log(selectedPost,"before like")} */}
                   <p className="text-lg px-1"> {selectedPost?.like?.length}</p>
                 </div>
               </div>
@@ -223,10 +231,10 @@ const postComponent = () => {
             </div>
           </div>
         </div>
-      </dialog>
+      </dialog> */}
       
     </div>
   )
 }
 
-export default postComponent
+export default PostComponent
