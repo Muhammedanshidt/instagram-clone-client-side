@@ -19,106 +19,118 @@ const PostComponent = (props) => {
   const [currentPost,setCurrentPost] = useState()
   
 
-  console.log(props ,"passing to com");
+  // console.log(props ,"passing to com");
+
+
+  useEffect (() => {
+  setCurrentPost(props.myProp || "661a2ca50480d4865c3035af")
+  console.log(currentPost);
+  // console.log(props ,"passing to com");
+  
+
+  },[currentPost])
+
+  console.log(currentPost);
 
 
 // console.log(name);
   
 
-  // useEffect(() => {
-  //   const shoPost = async () => {
-  //     if (userData) {
-  //       try {
-  //         const response = await axios.get(
-  //           "http://localhost:3003/user/getOwnPost",
-  //           {
-  //             params: { Id: userData._id },
-  //           }
-  //         );
-  //         const {post} = response.data;
-  //         console.log(post);
-  //         setPost(post);
+  useEffect(() => {
+    const shoPost = async () => {
+      if (currentPost) {
+        try {
+          const response = await axios.get(
+            "http://localhost:3003/user/getPost",
+            {
+              params: { Id: currentPost },
+            }
+          );
+          // const {post} = response.data;
+          // console.log(post);
+          // setPost(post);
 
-  //       } catch (error) {
-  //         console.error("Error fetching post:", error);
-  //       }
+        } catch (error) {
+          console.error("Error fetching post:", error);
+        }
   //       // console.log(data.postData);
   //       // setMapComment(data.postData)
         
-  //     }
-  //   };
-  //   shoPost();
-  // }, [userData]);
-
-
-  const openModal = (item) => {
-    setSelectedPost(item)
-    // item.like.include(userId) ? setLike(true):setLike(false)
-    setLike(item.like.includes(userData._id));  
-    document.getElementById("postModal").showModal();
-    console.log(selectedPost,"onselect post");
-
-  };
-
-  const likeHandler = async () => {
-    try {
-      if (selectedPost) {
-        const response = await axios.post(
-          "http://localhost:3003/user/userLike",
-          { ownerId: userData._id, postId: selectedPost._id }
-          
-        );
-        setLike(!like);
-        console.log("after axios");
-        const data = response.data;
-
-        console.log(data, "this is the responce from server");
       }
-    } catch (error) {
-      console.log("iede", error);
-    }
-  };
+    };
+  //   shoPost();
+  }, [userData]);
+
+
+  // const openModal = (item) => {
+  //   setSelectedPost(item)
+  //   // item.like.include(userId) ? setLike(true):setLike(false)
+  //   setLike(item.like.includes(userData._id));  
+  //   document.getElementById("postModal").showModal();
+  //   console.log(selectedPost,"onselect post");
+
+  // };
+
+  // const likeHandler = async () => {
+  //   try {
+  //     if (selectedPost) {
+  //       const response = await axios.post(
+  //         "http://localhost:3003/user/userLike",
+  //         { ownerId: userData._id, postId: selectedPost._id }
+          
+  //       );
+  //       setLike(!like);
+  //       console.log("after axios");
+  //       const data = response.data;
+
+  //       console.log(data, "this is the responce from server");
+  //     }
+  //   } catch (error) {
+  //     console.log("iede", error);
+  //   }
+  // };
 
   
-  const inputRef = React.useRef(null);
+  // const inputRef = React.useRef(null);
 
-  const submitComment = async () => {
-    console.log("hello");
-    try {
-      const commentValue = inputRef.current.value;
-      if (commentValue == 0) {
-        alert("no value");
-      } else {
-        if (inputRef.current) {
-          inputRef.current.value = "";
-        }
+  // const submitComment = async () => {
+  //   console.log("hello");
+  //   try {
+  //     const commentValue = inputRef.current.value;
+  //     if (commentValue == 0) {
+  //       alert("no value");
+  //     } else {
+  //       if (inputRef.current) {
+  //         inputRef.current.value = "";
+  //       }
 
-        const res = await axios.post("http://localhost:3003/user/userComment", {
-          ownerId: userData._id,
-          postId: selectedPost._id,
-          commentvalue: commentValue,
-        });
+  //       const res = await axios.post("http://localhost:3003/user/userComment", {
+  //         ownerId: userData._id,
+  //         postId: selectedPost._id,
+  //         commentvalue: commentValue,
+  //       });
 
-        const { data } = res;
-        const { user, post } = data;
+  //       const { data } = res;
+  //       const { user, post } = data;
 
-        if (user && post) {
-          setCommentedUser(user);
-          setCommentedPost(post);
-        }
+  //       if (user && post) {
+  //         setCommentedUser(user);
+  //         setCommentedPost(post);
+  //       }
 
-        console.log(commentedUser);
-        console.log(commentedPost);
-        console.log(selectedPost.comments);
-      }
-    } catch (err) {
-      console.log("error in submitting the comment ", err);
-    }
-  };
+  //       console.log(commentedUser);
+  //       console.log(commentedPost);
+  //       console.log(selectedPost.comments);
+  //     }
+  //   } catch (err) {
+  //     console.log("error in submitting the comment ", err);
+  //   }
+  // };
 
 
   return (
     <div>
+
 
       {/* <h1>hello</h1> */}
 {/* 
