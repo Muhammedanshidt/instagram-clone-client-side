@@ -5,67 +5,70 @@ import axios from "axios";
 import { Link } from "react-router-dom";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 
-const PostComponent = (props) => {
-
+const PostComponent = ({ myProp}) => {
   const { userData } = useContext(Clintcontex);
-
-
+  console.log('myProp:', myProp);
   const [post, setPost] = useState([]);
   const [selectedPost, setSelectedPost] = useState([]);
   const [like, setLike] = useState(false);
   const [commentedUser, setCommentedUser] = useState([]);
   const [commentedPost, setCommentedPost] = useState([]);
   const [mapComment, setMapComment] = useState([]);
-  const [currentPost,setCurrentPost] = useState()
-  
+  const [currentPost, setCurrentPost] = useState();
+  // const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // console.log(props ,"passing to com");
-
-
-  useEffect (() => {
-  setCurrentPost(props.myProp || "661a2ca50480d4865c3035af")
-  console.log(currentPost);
-  // console.log(props ,"passing to com");
-  
-
-  },[currentPost])
-
-  console.log(currentPost);
+console.log("this is postcomponent");
+  console.log( myProp ,"passing to com");
 
 
-// console.log(name);
-  
-
+  // const randomNumber = Math.floor(Math.random() * 1000) + 1;
   useEffect(() => {
+  
+    setCurrentPost(myProp || "661a2d2a0480d4865c3035da");
+     // setCurrentPost(props.myProp || "661a2ca50480d4865c3035af");
+    // setCurrentPost(props.myProp || "661a2d120480d4865c3035d7");
+    console.log(currentPost);
+    
+
     const shoPost = async () => {
+      console.log("before pass");
       if (currentPost) {
         try {
           const response = await axios.get(
-            "http://localhost:3003/user/getPost",
+            "http://localhost:3003/user/grtPostModal",
             {
-              params: { Id: currentPost },
+              params: { currentPost },
             }
           );
-          // const {post} = response.data;
-          // console.log(post);
-          // setPost(post);
-
+          const posts = response.data;
+          console.log(posts, "response data");
+          setPost(posts);
+          setMapComment(posts.comments);
+          if (post) {
+           document.getElementById(currentPost).showModal() 
+          }
+           // Open the modal
         } catch (error) {
           console.error("Error fetching post:", error);
         }
-  //       // console.log(data.postData);
-  //       // setMapComment(data.postData)
-        
       }
-    };
-  //   shoPost();
-  }, [userData]);
+    }; 
+shoPost();
+  },[myProp]);
+  
+
+  console.log(currentPost);
+
+  // console.log(name);
+
+
+
 
 
   // const openModal = (item) => {
   //   setSelectedPost(item)
   //   // item.like.include(userId) ? setLike(true):setLike(false)
-  //   setLike(item.like.includes(userData._id));  
+  //   setLike(item.like.includes(userData._id));
   //   document.getElementById("postModal").showModal();
   //   console.log(selectedPost,"onselect post");
 
@@ -77,7 +80,7 @@ const PostComponent = (props) => {
   //       const response = await axios.post(
   //         "http://localhost:3003/user/userLike",
   //         { ownerId: userData._id, postId: selectedPost._id }
-          
+
   //       );
   //       setLike(!like);
   //       console.log("after axios");
@@ -90,7 +93,6 @@ const PostComponent = (props) => {
   //   }
   // };
 
-  
   // const inputRef = React.useRef(null);
 
   // const submitComment = async () => {
@@ -127,19 +129,17 @@ const PostComponent = (props) => {
   //   }
   // };
 
-
   return (
     <div>
 
 
-      {/* <h1>hello</h1> */}
-{/* 
-<dialog id="postModal" className="modal">
-        {console.log(selectedPost)}
+      <dialog id={currentPost} className={`modal ${post?"block":"hidden"}`}>
+        {console.log(post,"uioguiguiotfghkluio")}
+
         <div className="modal-box">
-          <form method="dialog"> */}
+          <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            {/* <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
@@ -147,29 +147,31 @@ const PostComponent = (props) => {
             {post && (
               <div className="h-full w-fit flex justify-center items-center">
                 <img
-                  src={selectedPost?.imgUrl}
-                  alt={selectedPost?.caption}
+                  src={post?.imgUrl}
+                  alt={post?.caption}
                   className="h-full w-[400px] "
                 />
               </div>
             )}
             <div className="h-full w-[350px] bg-white border-l-2 border-gray-200">
-              <div className="flex p-2 bg-white">
+            <Link to={`/user/${post?.userId?.username}`}>
+              <div className="flex p-2">
                 <img
-                  src={userData?.profileimage}
+                  src={post?.userId?.profileimage}
                   className="size-10 object-cover rounded-full"
                 />
-                <p className="p-2 font-semibold">{userData?.username}</p>
+                <p className="p-2 font-semibold">{post?.userId?.username}</p>
               </div>
+              </Link>
               <hr />
               <div className="h-[260px] w-full bg-white">
-                {selectedPost?.caption ? (
+                {post?.caption ? (
                   <div className="flex px-2 py-1 gap-3 bg-slate-100 w-full h-fit">
                     <img
-                      src={userData?.profileimage}
+                      src={post?.userId?.profileimage}
                       className="size-6  object-cover rounded-full"
                     />
-                    <p>{selectedPost?.caption}</p>
+                    <p>{post?.caption}</p>
                   </div>
                 ) : null}
                 <hr />
@@ -177,10 +179,11 @@ const PostComponent = (props) => {
                   className="h-full px-3 py-3 overflow-x-hidden overflow-y-scrol overscroll-none"
                   id="scrollTabHide"
                 >
-                  {selectedPost?.comments
-                    ?.filter((comment) => selectedPost?._id == comment.postId)
+                  {console.log("check work or not")}
+                  {mapComment
+                    // ?.filter((comment) => comment.postId === post?._id)
                     .map((comment, index) => {
-                      console.log(mapComment);
+                      console.log(comment, "map comment");
                       return (
                         <div
                           className="bg-gray-200 w-full h-14 mt-2"
@@ -188,14 +191,15 @@ const PostComponent = (props) => {
                         >
                           <div className="flex gap-2 p-1">
                             <img
-                              src={mapComment}
+                              src={comment?.userId?.profileimage}
                               className="size-8  object-cover rounded-full"
                             />
-                            <p className="text-xs">
-                              {selectedPost?.comments?.userId?.username}
+                            <div className="gap-2">
+                            <p className="text-base">
+                              {comment?.userId?.username}
                             </p>
                             <span>{comment?.text}</span>
-                            <div></div>
+                            </div>
                           </div>
                         </div>
                       );
@@ -205,7 +209,7 @@ const PostComponent = (props) => {
               <div className="text-xs h-fit border-t-2 mt-8">
                 <div
                   className="h-fit w-fit cursor-pointer"
-                  onClick={() => likeHandler(selectedPost._id)}
+                  // onClick={() => likeHandler(selectedPost._id)}
                 >
                   {like ? (
                     <i className="text-red-500 text-2xl">
@@ -218,7 +222,7 @@ const PostComponent = (props) => {
                       </i>
                     </div>
                   )}
-                  <p className="text-lg px-1"> {selectedPost?.like?.length}</p>
+                  <p className="text-lg px-1"> {post?.like?.length}</p>
                 </div>
               </div>
               <div>
@@ -230,11 +234,11 @@ const PostComponent = (props) => {
                     className="p-[7px] w-full outline-none"
                     placeholder="  Add a comment..."
                     //  onChange={commentInputHandler}
-                    ref={inputRef}
+                    // ref={inputRef}
                   />
                   <div
                     className="m-1 text-sm cursor-pointer text-gray-500 font-semibold"
-                    onClick={() => submitComment()}
+                    // onClick={() => submitComment()}
                   >
                     Post
                   </div>
@@ -243,10 +247,10 @@ const PostComponent = (props) => {
             </div>
           </div>
         </div>
-      </dialog> */}
+      </dialog>
       
     </div>
-  )
-}
+  );
+};
 
-export default PostComponent
+export default PostComponent;

@@ -78,30 +78,9 @@ const Home = () => {
 
   const showModal = (item) => {
     console.log(item);
-    console.log("gugy");
-
-    setShowComponent(!showComponent);
     setPostId(item);
-    // const myObject = { key1: item  };
-    return (
-      <div className="">
-        {showComponent && item? (
-          <div>
-            
-            <PostComponent myProp={postId} />
-          </div>
-        ) : (
-          <div className="z-20">
-            <p>
-              Lorem ipsum dolor, sit amet consectetur adipisicing elit.
-              Blanditiis perspiciatis repellat mollitia non vel odio amet labore
-              cupiditate nostrum voluptatum! Culpa provident quia optio nesciunt
-              quidem earum distinctio vitae voluptatibus!
-            </p>
-          </div>
-        )}
-      </div>
-    );
+    postId && setShowComponent(true);
+    console.log(showComponent);
   };
 
   // console.log(post,"ohigiuiguviy");
@@ -128,21 +107,25 @@ const Home = () => {
 
   return (
     <div className="flex ">
-      <PostComponent />
+      {showComponent && <div>{<PostComponent myProp={postId} />}</div>}
 
       <div className=" ml-14 w-[600px] object-cover ">
         {post.length > 0 ? (
           post.map((item, index) => (
             <div className="">
               <div className=" w-fit h-fit mt-4 border-t border-black">
-                <div className="w-full h-fit p-2 flex gap-3">
-                  <img
-                    src={item.userId.profileimage}
-                    className="size-10 rounded-full"
-                    alt=""
-                  />
-                  <p>{item?.userId?.username}</p>
-                </div>
+
+                <Link to={`/user/${item?.userId?.username}`}>
+                          <div className="w-fit h-fit p-2 flex gap-3 cursor-pointer">
+                          <img
+                            src={item.userId.profileimage}
+                            className="size-10 rounded-full"
+                            alt=""
+                          />
+                          <p>{item?.userId?.username}</p>
+                        </div>
+                        </Link>
+              
                 <div
                   key={index}
                   className="p-1 flex justify-center items-center"
@@ -176,8 +159,10 @@ const Home = () => {
                     <p className="text-lg px-1"> {item?.like?.length}</p>
                   </div>
                   <div
-                    className="w-fit h-fit"
-                    onClick={() => showModal(item?._id)}
+                    className="w-fit h-fit cursor-pointer"
+                    onClick={() => {
+                      showModal(item?._id);
+                    }}
                   >
                     <FaRegComment className="text-xl text-zinc-800" />
                   </div>
