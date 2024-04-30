@@ -14,6 +14,7 @@ import { Outlet } from "react-router";
 import { useNavigate } from "react-router";
 import { IoIosImages } from "react-icons/io";
 import Creat from "../user/sideBarPages/CreatPost";
+import UserNotification from "./UserNotification";
 // import "./SideBar.css";
 
 const SideBar = () => {
@@ -34,16 +35,20 @@ const SideBar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const toggleModal = () => {
+  // const toggleModal = () => {
+  //   setIsOpen(!isOpen);
+  // };
+  
+  const notificationHandle  = () => {
+    console.log("clicked");
     setIsOpen(!isOpen);
-  };
-
+  }
   return (
     <div>
-      <div className=" h-screen flex " id="scrollTabHide">
+      <div className=" h-screen w-screen " id="scrollTabHide">
         {/* Sidebar */}
         <div
-          className={`fixed bg-white text-white w-60 h-screen border-r ${
+          className={`fixed bg-white text-white w-[20%] h-screen border-r ${
             isSidebarOpen ? "block" : "hidden"
           } sm:block `}
         >
@@ -103,11 +108,16 @@ const SideBar = () => {
               <p>Messages</p>
             </div>
 
-            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg">
+            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
+            // onClick={()=> <UserNotification/>
+            onClick={notificationHandle}
+            >
               <div>
                 <IoHeartOutline className="size-6" />
               </div>
               <p>Notifications</p>
+              
+      <UserNotification {...{isOpen,setIsOpen}}/>
             </div>
 
             <div
@@ -186,7 +196,7 @@ const SideBar = () => {
             </dialog>
           </div>
         </div>
-        <div className="ml-56">
+        <div className="ml-60 h-full w-[80%] " id="scrollTabHide">
           <Outlet />
         </div>
 

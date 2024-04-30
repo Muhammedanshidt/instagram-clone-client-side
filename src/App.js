@@ -102,7 +102,7 @@ import AnotherUserProfile from './pages/user/AnotherUserProfile';
                 </Route>
                 <Route path='/explore' element={<UserExplore />} />
                 <Route path='/inbox' element={<UserMessage />} />
-                <Route path='/notification' element={<UserNotification />} />
+                {/* <Route path='/notification' element={<UserNotification />} /> */}
                 <Route path='/search' element={<UserSearch />} />
 
 

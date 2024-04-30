@@ -101,7 +101,8 @@ const Home = () => {
   };
 
   return (
-    <div className="flex ">
+    
+    <div className="flex" id="scrollTabHide">
     
 
       <div className=" ml-14 w-[600px] object-cover ">
@@ -117,7 +118,7 @@ const Home = () => {
 
       {/* user show profile side */}
 
-      <div className="w-fit fixed right-20">
+      <div className="w-fit fixed right-20 h-screen" id="scrollTabHide">
         {/* <button className='bg-rose-600 w-fit h-fit mx-10 my-10' onClick={getUser}>show</button>  */}
         <div className="w-full h-fit py-10 ">
           {signUser.map((item) => (
