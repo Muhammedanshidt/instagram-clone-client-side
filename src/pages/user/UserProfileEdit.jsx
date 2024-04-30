@@ -19,6 +19,8 @@ function UserProfileEdit() {
 
   // console.log(userData);
 
+  // console.log(userData);
+
   // const clearCookie = (cookie) => {
   //   document.cookie =
   // }
@@ -129,11 +131,13 @@ function UserProfileEdit() {
   const editName = async (e) => {
     e.preventDefault();
     console.log(editUserName + " " + editFullName);
+    console.log(userData.email);
     try {
       const res = await axios.post(
         "http://localhost:3003/user/editUser",
-        {nameUser:editUserName,nameFull:editFullName},
+        {nameUser:editUserName,nameFull:editFullName,email:userData.email},
       );
+      console.log(res);
     } catch (error) {
       console.log(error);
     }
@@ -181,7 +185,7 @@ function UserProfileEdit() {
             <h1 className="text-gray-400 ">{userData.fullname}</h1>
           </div>
         </div>
-        <div className="mt-7 ml-28 gap-8">
+        <div className="mt-7 ml-60 gap-8">
           <label className="bg-blue-400 hover:bg-blue-600 text-white text-sm font-semibold rounded-md py-2 px-2 cursor-pointer w-fit">
             Change photo
             <input
@@ -192,12 +196,7 @@ function UserProfileEdit() {
             />
           </label>
         </div>
-        <button
-          className="bg-blue-400 hover:bg-blue-600 text-white text-sm font-semibold rounded-md  cursor-pointer px-4 py-2 h-fit w-fit mt-6 ml-8"
-          onClick={() => document.getElementById("my_modal_edit").showModal()}
-        >
-          Edit
-        </button>
+       
       </div>
       
       {img && (

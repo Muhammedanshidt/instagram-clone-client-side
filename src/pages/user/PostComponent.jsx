@@ -4,9 +4,12 @@ import Clintcontex from "../userContext/ClientContext";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
+import InputEmoji from "react-input-emoji"; 
 
-const PostComponent = ({ myProp}) => {
+  const PostComponent = ({ myProp}) => {
   const { userData } = useContext(Clintcontex);
+
+  const [id,setId] = useState(myProp)
   console.log('myProp:', myProp);
   const [post, setPost] = useState([]);
   const [selectedPost, setSelectedPost] = useState([]);
@@ -17,43 +20,65 @@ const PostComponent = ({ myProp}) => {
   const [currentPost, setCurrentPost] = useState();
   // const [isModalOpen, setIsModalOpen] = useState(false);
 
+
+  const { modalOpen, setModalOpen } = useContext(Clintcontex);
+
+
 console.log("this is postcomponent");
   console.log( myProp ,"passing to com");
 
+ 
+  
 
-  // const randomNumber = Math.floor(Math.random() * 1000) + 1;
+  // const element = document.getElementById(currentPost)
+
+  // if(myProp){
+  //   setCurrentPost(myProp)
+  // }
+  // console.log(currentPost);
+
+  // if (modalOpen === true) {
+  //   element.showModal();
+  //   // document.getElementById(currentPost)
+  //   // setModalOpen(true);
+  // }
+
   useEffect(() => {
   
-    setCurrentPost(myProp || "661a2d2a0480d4865c3035da");
-     // setCurrentPost(props.myProp || "661a2ca50480d4865c3035af");
-    // setCurrentPost(props.myProp || "661a2d120480d4865c3035d7");
-    console.log(currentPost);
-    
 
+    
+//     if (modalOpen && currentPost) {
+//   document.getElementById(currentPost).showModal();
+// }
+
+    
     const shoPost = async () => {
-      console.log("before pass");
-      if (currentPost) {
+
+      console.log("before pass",myProp);
+      
         try {
           const response = await axios.get(
             "http://localhost:3003/user/grtPostModal",
             {
-              params: { currentPost },
+              params: { currentPost:id },
             }
           );
+
           const posts = response.data;
           console.log(posts, "response data");
           setPost(posts);
           setMapComment(posts.comments);
-          if (post) {
-           document.getElementById(currentPost).showModal() 
-          }
+          // if (post) {
+          // document.getElementById(currentPost).showModal() 
+          // }
            // Open the modal
         } catch (error) {
           console.error("Error fetching post:", error);
         }
-      }
+      
     }; 
-shoPost();
+shoPost()
+
   },[myProp]);
   
 
@@ -93,54 +118,65 @@ shoPost();
   //   }
   // };
 
-  // const inputRef = React.useRef(null);
 
-  // const submitComment = async () => {
-  //   console.log("hello");
-  //   try {
-  //     const commentValue = inputRef.current.value;
-  //     if (commentValue == 0) {
-  //       alert("no value");
-  //     } else {
-  //       if (inputRef.current) {
-  //         inputRef.current.value = "";
-  //       }
 
-  //       const res = await axios.post("http://localhost:3003/user/userComment", {
-  //         ownerId: userData._id,
-  //         postId: selectedPost._id,
-  //         commentvalue: commentValue,
-  //       });
 
-  //       const { data } = res;
-  //       const { user, post } = data;
+  const inputRef = React.useRef(null);
 
-  //       if (user && post) {
-  //         setCommentedUser(user);
-  //         setCommentedPost(post);
-  //       }
+  const submitComment = async () => {
+    console.log("hello");
+    console.log(post._id);
+    try {
+      const commentValue = inputRef.current.value;
+      
+      if (commentValue == 0) {
+        alert("no value");
+      } else {
+        if (inputRef.current) {
+          inputRef.current.value = "";
+        }
+        
 
-  //       console.log(commentedUser);
-  //       console.log(commentedPost);
-  //       console.log(selectedPost.comments);
-  //     }
-  //   } catch (err) {
-  //     console.log("error in submitting the comment ", err);
-  //   }
-  // };
+        const res = await axios.post("http://localhost:3003/user/userComment", {
+          ownerId: userData._id,
+          postId: post._id,
+          commentvalue: commentValue,
+        });
+
+        console.log(res);
+        
+        const {  postData } = res.data;
+
+        // console.log(postData);
+
+        if ( postData) {
+          // setCommentedUser(user);
+          setCommentedPost(postData);
+        }
+
+        // console.log(commentedUser);
+        // console.log(commentedPost);
+        // console.log(selectedPost.comments);
+      }
+    } catch (err) {
+      console.log("error in submitting the comment ", err);
+    }
+  };
 
   return (
+    
     <div>
-
-
-      <dialog id={currentPost} className={`modal ${post?"block":"hidden"}`}>
+   
+      <dialog id={myProp}>
         {console.log(post,"uioguiguiotfghkluio")}
-
         <div className="modal-box">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
-            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
+            //  onClick={setCurrentPost("")}
+             >
               ✕
+
             </button>
           </form>
           <div className="flex w-[750px] h-[450px]">
@@ -234,11 +270,11 @@ shoPost();
                     className="p-[7px] w-full outline-none"
                     placeholder="  Add a comment..."
                     //  onChange={commentInputHandler}
-                    // ref={inputRef}
+                    ref={inputRef}
                   />
                   <div
                     className="m-1 text-sm cursor-pointer text-gray-500 font-semibold"
-                    // onClick={() => submitComment()}
+                    onClick={() => submitComment()}
                   >
                     Post
                   </div>
@@ -248,8 +284,9 @@ shoPost();
           </div>
         </div>
       </dialog>
-      
+       
     </div>
+
   );
 };
 

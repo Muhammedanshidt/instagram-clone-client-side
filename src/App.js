@@ -27,6 +27,8 @@ import AnotherUserProfile from './pages/user/AnotherUserProfile';
     // const [formFillData,setFormFillData] = useState("")
     const [userData, setUserData] = useState({});
     const [auth,setauth] =useState(false) ;
+    const [modalOpen, setModalOpen] = useState(false);
+
     console.log("before use effect");
 
     console.log(userData);
@@ -68,6 +70,8 @@ import AnotherUserProfile from './pages/user/AnotherUserProfile';
     const clientData = {
       userData,
       setUserData,
+      modalOpen,
+      setModalOpen
     }
 
     return (
