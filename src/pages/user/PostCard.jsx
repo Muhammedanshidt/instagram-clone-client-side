@@ -48,7 +48,7 @@ function PostCard({item,likeHandler,like}) {
           {item?.userId?.username}
         </span>
         <span className="ml-2 text-sm">{item.caption}</span>
-      </div>
+      </div>  
       {<div>{<PostComponent myProp={item._id} />}</div>}
       <div className="text-xs h-fit m-1 flex gap-2">
         <div

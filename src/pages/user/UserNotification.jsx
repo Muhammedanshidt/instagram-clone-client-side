@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useContext, useState } from "react";
 import Clintcontex from "../userContext/ClientContext";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 const UserNotification = ({ isOpen, setIsOpen }) => {
   console.log(isOpen);
@@ -53,6 +54,7 @@ const UserNotification = ({ isOpen, setIsOpen }) => {
           getFollowers.slice().reverse().map((item,index) => {
             return(
               <div className="w-full h-fit mt-3 overflow-hidden hover:bg-neutral-100 rounded-xl">
+               <Link to={`/user/${item.username}`}>
                 <div className="flex p-2 gap-5">
                 <img src={item?.profileimage}
                 className="size-10 rounded-full object-cover"/>
@@ -61,6 +63,7 @@ const UserNotification = ({ isOpen, setIsOpen }) => {
                 <p className="font-medium">started following you</p>
                 </div>
                 </div>
+                </Link>
               </div>
 
             )
@@ -70,11 +73,19 @@ const UserNotification = ({ isOpen, setIsOpen }) => {
       {
           getLikes.slice().reverse().map((item,index) => {
             return(
-              <div className="w-full h-fit mt-3 overflow-hidden hover:bg-neutral-100 rounded-xl">
-                <div className="flex p-2 gap-5">
-                <img src={item?.like?.profileimage}
-                className="size-10 rounded-full object-cover"/>
+              
+              <div key={index} className="w-full h-fit mt-3 overflow-hidden hover:bg-neutral-100 rounded-xl">
+                <div className="flex p-2">
+                  {item.like.map((like,index) =>(
+                   <div key={index} className="w-fit flex-wrap mr-1">
+                    
+                    <p className="text-sm">{like.username}</p>
+                    </div>
+                  )
+                )}
+              
                 <p className="font-semibold">liked your post</p>
+                <img src={item?.imgUrl}  className="size-10 rounded-full object-cover ml-1" />
                 </div>
               </div>
 

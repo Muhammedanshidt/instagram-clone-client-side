@@ -2,7 +2,7 @@ import React, { useContext, useEffect,useState } from 'react'
 // import Profile from '../../asset/profile photo.jpg'
 import { IoIosSettings } from "react-icons/io";
 import { IoMdGrid } from "react-icons/io";
-// import SaveIcon from '../../asset/save icon.png'
+import { Link } from 'react-router-dom';
 import { FaHeart } from "react-icons/fa";
 import { Outlet, useNavigate, useParams } from 'react-router';
 import './UserProfile.css'
@@ -16,6 +16,8 @@ const {userData} = useContext(Clintcontex)
 const [findUser,setFindUser] = React.useState([]) 
 const [follow,setFollow]  = useState();
 
+const [userFollowers,setUserFollowers] = useState(0)
+// const [userFollowing,setUserFollowing] = useState(0)
 
 
 
@@ -44,7 +46,9 @@ useEffect(() =>{
           const res= await axios.post("http://localhost:3003/user/findUser",{username:userId})
         console.log("halllooo");
           console.log(res.data); 
-          setFindUser(res.data)  
+          setFindUser(res.data) 
+          setUserFollowers(res.data.followers.length) 
+          // setUserFollowing(res.data.following.length) 
         //  console.log('this is the data',res.data)
       } catch (error) {
         alert("Error")
@@ -78,6 +82,7 @@ useEffect( () => {
         const {data} = response
         // console.log(data,"uhfuierufyeuy");
         setPost(data)
+
         console.log(post);
       }else{
         console.log("not get tin any data");
@@ -94,7 +99,17 @@ useEffect( () => {
 , [findUser])
 
 
-// following 
+
+// const followersCount = findUser?.followers?.length||0;
+// console.log(followersCount);
+// const followingCount  = findUser?.following?.length;
+// console.log(followingCount);
+
+// // following 
+
+
+
+console.log(userFollowers,'userFollowers');
 
 
 const followHandler= async (e) =>{ 
@@ -103,11 +118,13 @@ const followHandler= async (e) =>{
   let currentUserId = userData._id;
 
   if(userId !== currentUserId ){
+  setFollow(true)
+  setUserFollowers(preState => preState + 1 )
+
   try{
   const res = await  axios.put('http://localhost:3003/user/follow',{user:findUser,owner:userData})
   // console.log(res.data);
-  setFollow(true)
-  window.location.reload();
+  // window.location.reload();
 
   }catch(error){
     console.log(error);
@@ -122,13 +139,15 @@ const unFollowHandler = async (e) => {
   console.log("unFollow");
   let userId = findUser._id;
   let currentUserId = userData._id;
+  setFollow(false)
+  setUserFollowers(preState => preState - 1 )
+
 
   
   try {
     const  res = await axios.delete('http://localhost:3003/user/unfollow',{ data : {userId,currentUserId}})
     console.log(res.data);
-    setFollow(false)
-    window.location.reload();
+    // window.location.reload();
     // console.log(result.data);
     // setFollow(false)
     
@@ -208,7 +227,7 @@ const getFollowing = async (userData) => {
           </div>
           <div className='flex gap-8 mt-6'>
             <p> <span className='font-medium'>{findUser.post?.length}</span>  posts</p>
-            <p onClick={() => getFollowers (findUser)} className='cursor-pointer'> <span className='font-medium'>{findUser.followers?.length}</span>  followers</p>
+            <p onClick={() => getFollowers (findUser)} className='cursor-pointer'> <span className='font-medium'>{userFollowers}</span>  followers</p>
             <p onClick={() => getFollowing (findUser)} className='cursor-pointer'> <span className='font-medium'>{findUser.following?.length}</span>  following</p>
           </div>
           <div className="mt-5">
@@ -245,6 +264,7 @@ const getFollowing = async (userData) => {
       <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
       {
         followers.map((item) => (
+          <Link to={`/user/${item.username}`}>
           <div className='w-full h-16 bg-slate-100 flex p-1 gap-3 items-center rounded-md m-1'>
           <img
           src={item.post || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
@@ -252,6 +272,7 @@ const getFollowing = async (userData) => {
           />
           <p>{item.username}</p>
            </div>
+           </Link>
         ))
       }
       </div>
@@ -273,6 +294,7 @@ const getFollowing = async (userData) => {
     //   <p className='text-red-500 text-lg font-bold text-center'>You are not Following anyone yet!.</p>
     //  :
         following.map((item) => (
+          <Link to={`/user/${item.username}`}>
           <div className='w-full h-16 bg-slate-100 flex p-1 gap-3 items-center rounded-md m-1'>
           <img
           src={item.profileimage || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
@@ -281,6 +303,7 @@ const getFollowing = async (userData) => {
           <p>{item.username}</p>
     
            </div>
+           </Link>
         ))
       }
       </div>

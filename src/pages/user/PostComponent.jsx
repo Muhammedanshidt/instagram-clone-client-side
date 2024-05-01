@@ -99,24 +99,25 @@ shoPost()
 
   // };
 
-  // const likeHandler = async () => {
-  //   try {
-  //     if (selectedPost) {
-  //       const response = await axios.post(
-  //         "http://localhost:3003/user/userLike",
-  //         { ownerId: userData._id, postId: selectedPost._id }
+  const likeHandler = async (item) => {
+    console.log(item,'item');
+    try {
+      if (item) {
+        const response = await axios.post(
+          "http://localhost:3003/user/userLike",
+          { ownerId: userData._id, postId: item._id }
 
-  //       );
-  //       setLike(!like);
-  //       console.log("after axios");
-  //       const data = response.data;
+        );
+        setLike(!like);
+        console.log("after axios");
+        const data = response.data;
 
-  //       console.log(data, "this is the responce from server");
-  //     }
-  //   } catch (error) {
-  //     console.log("iede", error);
-  //   }
-  // };
+        console.log(data, "this is the responce from server");
+      }
+    } catch (error) {
+      console.log("iede", error);
+    }
+  };
 
 
 
@@ -195,7 +196,7 @@ shoPost()
                 <img
                   src={post?.userId?.profileimage}
                   className="size-10 object-cover rounded-full"
-                />
+                />  
                 <p className="p-2 font-semibold">{post?.userId?.username}</p>
               </div>
               </Link>
@@ -245,7 +246,7 @@ shoPost()
               <div className="text-xs h-fit border-t-2 mt-8">
                 <div
                   className="h-fit w-fit cursor-pointer"
-                  // onClick={() => likeHandler(selectedPost._id)}
+                  onClick={() => likeHandler(post._id)}
                 >
                   {like ? (
                     <i className="text-red-500 text-2xl">

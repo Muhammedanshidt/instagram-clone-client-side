@@ -60,7 +60,7 @@ function UserPost() {
     console.log(selectedPost,"onselect post");
 
   };
-  const likeHandler = async () => {
+  const   likeHandler = async () => {
     try {
       if (selectedPost) {
         const response = await axios.post(
