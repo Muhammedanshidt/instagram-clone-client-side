@@ -39,7 +39,7 @@ const UserNotification = ({ isOpen, setIsOpen }) => {
 
   return (
     <div
-      className={`fixed top-0 left-0 h-screen p-2 bg-white text-black transition-all duration-1000 ease-in-out ${
+      className={`fixed top-0 left-0 h-screen p-2 bg-white text-black transition-all duration-500 ease-in-out ${
         isOpen ? "w-[30%]" : "w-0"
       }`}
     >

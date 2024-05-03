@@ -12,6 +12,7 @@
     "@testing-library/user-event": "^13.5.0",
     "axios": "^1.6.7",
     "bcryptjs": "^2.4.3",
+    "date-fns": "^3.6.0",
     "flowbite-react": "^0.9.0",
     "gatsby": "^5.13.3",
     "jwt-decode": "^4.0.0",
