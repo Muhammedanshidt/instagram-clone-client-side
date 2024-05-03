@@ -43,14 +43,14 @@ useEffect(() => {
 
 
   return (
-    <div className='w-full h-screen overflow-auto ml-6'>
+    <div className='w-full h-screen overflow-auto ml-6 '>
         {
             post.length > 0 ?
-<div className="grid grid-cols-2 gap-2 md:grid-cols-4 my-2 ">
+<div className="grid grid-cols-2 gap-2 md:grid-cols-4 my-2">
     {post.map((item, index)=>(
-    <div className="grid gap-4">
+    <div className="grid gap-4 bg-slate-500">
         <div key={index}>
-            <img className="h-auto max-w-full rounded-lg object-cover object-center" src={item.imgUrl} alt={item.caption} onClick={() =>(<UserPost/>)}/>
+            <img className="h-full rounded-lg object-cover object-center" src={item.imgUrl} alt={item.caption} onClick={() =>(<UserPost/>)}/>
         </div>
     </div>
     ))}

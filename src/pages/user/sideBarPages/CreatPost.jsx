@@ -104,11 +104,11 @@ function CreatPost() {
 
 
   return (
-    <div>
+    <div id='scrollTabHide'>
               {/* UPLOAD IMAGE */}
 
 
-              <div id='main' className=" mx-60 my-36 shadow-2xl justify-center items- z-10">
+              <div id='main scrollTabHide' className=" mx-60 shadow-2xl justify-center">
              
              <div id="my_modal_3"  >
               
@@ -131,7 +131,7 @@ function CreatPost() {
                  </h1>
                  <label
                    htmlFor="fileInput"
-                   className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-md px-3 py-2 mx-20 my-6 cursor-pointer"
+                   className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-md px-3 py-2 mx-40 align-middle my-6 cursor-pointer"
                  >
                    Select From Computer
                  </label>
@@ -147,8 +147,8 @@ function CreatPost() {
            </div>
                 {
                   !preview && (
-                <div className='m-64 w-fit flex justify-items-center '>
-                  <button className='fixed align-top mx-44 bg-blue-500 rounded-2xl py-2 px-7 font-semibold text-white ' onClick={clickCreate}>create</button>
+                <div className=' absolute mx-96 -z-20 top-36 w-fit flex justify-items-center '>
+                  <button className='fixed align-top bg-blue-500 rounded-2xl py-2 px-7 font-semibold text-white ' onClick={clickCreate}>create</button>
                 </div>
                   )}
 

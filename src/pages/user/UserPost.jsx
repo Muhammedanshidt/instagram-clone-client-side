@@ -7,6 +7,11 @@ import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { constant } from "lodash";
 import { values } from "lodash";
 // import bcrypt from 'bcryptjs'
+import { MdMoreHoriz } from "react-icons/md";
+import { MdDelete } from "react-icons/md";
+import { MdCancel } from "react-icons/md";
+import { RiImageEditFill } from "react-icons/ri";
+import toast from "react-hot-toast";
 
 function UserPost() {
   const { userData } = useContext(Clintcontex);
@@ -21,6 +26,8 @@ function UserPost() {
   const [commentedPost, setCommentedPost] = useState([]);
   const [mapComment, setMapComment] = useState([]);
   // const [openPostId,setOpenPostId] = useState("")
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
 
   // useEffect(() => {
   //   getAllPost();
@@ -37,36 +44,53 @@ function UserPost() {
               params: { Id: userData._id },
             }
           );
-          const {post} = response.data;
+          const { post } = response.data;
           console.log(post);
           setPost(post);
-
         } catch (error) {
           console.error("Error fetching post:", error);
         }
         // console.log(data.postData);
         // setMapComment(data.postData)
-        
       }
     };
     shoPost();
   }, [userData]);
 
   const openModal = (item) => {
-    setSelectedPost(item)
+    setSelectedPost(item);
     // item.like.include(userId) ? setLike(true):setLike(false)
-    setLike(item.like.includes(userData._id));  
+    setLike(item.like.includes(userData._id));
     document.getElementById("postModal").showModal();
-    console.log(selectedPost,"onselect post");
-
+    console.log(selectedPost, "onselect post");
   };
-  const   likeHandler = async () => {
+
+  const deletePost = async (id) => {
+    console.log(id, "delete button clicked");
+    const userId = userData._id;
+    const postId = id;
+    try {
+      if (postId && userId) {
+        console.log(id);
+        const res = await axios.delete(
+          `http://localhost:3003/user/postDelete/${userId}/${postId}`
+        );
+        res.data.successful
+          ? toast.success(res.data.successful)
+          : toast.error();
+        window.location.reload();
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const likeHandler = async () => {
     try {
       if (selectedPost) {
         const response = await axios.post(
           "http://localhost:3003/user/userLike",
           { ownerId: userData._id, postId: selectedPost._id }
-          
         );
         setLike(!like);
         console.log("after axios");
@@ -78,7 +102,6 @@ function UserPost() {
       console.log("iede", error);
     }
   };
-  
 
   const [commentValue, setCommentValue] = useState("");
 
@@ -118,18 +141,41 @@ function UserPost() {
     }
   };
 
-  console.log(post,"nuuo")
+  // console.log(post, "nuuo");
+
+  const textRef = React.useRef(null);
+
+  const editCaption = async (Id) => {
+    const userId = userData._id;
+
+    console.log("hekk");
+
+    const editTextValue = textRef.current.value;
+
+    if (editTextValue == 0) {
+      alert("no value");
+    } else {
+      textRef.current.value = "";
+    }
+
+    const res = await axios.put("http://localhost:3003/user/editCaption", {
+      text: editTextValue,
+      userId: userId,
+      postId: Id,
+    });
+    console.log(res.data);
+  };
 
   return (
     <div>
-      {post.length > 0 ? (        
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6 mx-6">
+      {post.length > 0 ? (
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6 mx-6 w-[97%] p-1">
           {post?.map((item, index) => {
             return (
-              <div key={index}>
+              <div key={index} className="cursor-pointer w-fit h-fit">
                 <Link to={`/profile?id=${item?._id}`}>
                   <img
-                    className="h-auto max-w-full rounded-lg"
+                    className="h-60 w-[350px] rounded-lg"
                     src={item?.imgUrl}
                     alt=""
                     onClick={() => openModal(item)}
@@ -145,7 +191,7 @@ function UserPost() {
 
       {/* You can open the modal using document.getElementById('ID').showModal() method */}
 
-      <dialog id="postModal" className="modal">
+      <dialog id="postModal" className="modal ">
         {console.log(selectedPost)}
         <div className="modal-box">
           <form method="dialog">
@@ -156,15 +202,15 @@ function UserPost() {
           </form>
           <div className="flex w-[750px] h-[450px]">
             {post && (
-              <div className="h-full w-fit flex justify-center items-center">
+              <div className="h-full w-full flex justify-center items-center">
                 <img
                   src={selectedPost?.imgUrl}
                   alt={selectedPost?.caption}
-                  className="h-full w-[400px] "
+                  className="h-full w-fit "
                 />
               </div>
             )}
-            <div className="h-full w-[350px] bg-white border-l-2 border-gray-200">
+            <div className="h-full w-full bg-white border-l-2 border-gray-200">
               <div className="flex p-2 bg-white">
                 <img
                   src={userData?.profileimage}
@@ -172,15 +218,87 @@ function UserPost() {
                 />
                 <p className="p-2 font-semibold">{userData?.username}</p>
               </div>
+              <div
+                className="w-fit h-fit relative left-[290px] bottom-12 "
+                onClick={() => setOpenDelete((prevOpen) => !prevOpen)}
+              >
+                <MdMoreHoriz className="text-3xl" />
+                <div
+                  className={`w-fit h-fit px-3 py-1 absolute right-4 top-3 bg-slate-200 opacity-80 rounded-lg z-40 ${
+                    openDelete ? "block" : "hidden"
+                  }`}
+                >
+                  <ul className="p-1">
+                    {console.log(openDelete)}
+                    <div className="flex w-full hover:bg-red-600 hover:text-white hover:font-semibold cursor-pointer px-2 mt-1 rounded-sm">
+                      <MdDelete className="mt-1 mr-3 text-lg" />
+                      <li onClick={() => deletePost(selectedPost._id)}>
+                        {" "}
+                        <span>Delete</span>
+                      </li>
+                    </div>
+                    <div className="flex w-full hover:bg-slate-600  hover:text-white cursor-pointer px-2 mt-1 rounded-sm">
+                      <MdCancel className="mt-1 mr-3 text-lg" />
+                      <li>Cancel</li>
+                    </div>
+                    <div
+                      className=" flex w-full hover:bg-blue-600  hover:text-white cursor-pointer px-2 mt-1 rounded-sm"
+                      onClick={() =>
+                        document.getElementById("editPost").showModal()
+                      }
+                    >
+                      <RiImageEditFill className="mt-1 mr-3 text-lg" />
+                      <li>Edit</li>
+                    </div>
+                  </ul>
+                </div>
+              </div>
+              <dialog id="editPost" className="modal rounded-3xl shadow-2xl">
+                <div className="modal-box ">
+                  <div className="w-[500px] h-fit">
+                    <div className="w-full h-fit flex justify-between">
+                      <form method="dialog">
+                        <button className="btn btn-sm text-xl font-bold  btn-circle btn-ghost  p-2">
+                          ✕
+                        </button>
+                      </form>
+
+                      <h3 className="font-bold mt-3 w-fit ">Edit info</h3>
+                      <div
+                        className=" w-fit h-fit p-2 mt-1 font-semibold text-blue-600 hover:text-black cursor-pointer"
+                        onClick={() => editCaption(selectedPost._id)}
+                      >
+                        Done
+                      </div>
+                    </div>
+                    <hr className=" border-black" />
+                    <div className=" h-fit w-full flex">
+                      <div className="bg-slate-500 w-[50%] h-[50%] ">
+                        <img src={selectedPost.imgUrl} className="h-fit" />
+                      </div>
+                      <div>
+                        <textarea
+                          className="outline-none p-1"
+                          cols="30"
+                          rows="10"
+                          ref={textRef}
+                          placeholder="edit your image caption ..."
+                        ></textarea>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </dialog>
               <hr />
-              <div className="h-[260px] w-full bg-white">
+              <div className="h-56 w-full bg-white ">
                 {selectedPost?.caption ? (
-                  <div className="flex px-2 py-1 gap-3 bg-slate-100 w-full h-fit">
+                  <div className="flex px-2 py-1 gap-3 bg-slate-100 w-full h-fit relative bottom-6">
                     <img
                       src={userData?.profileimage}
                       className="size-6  object-cover rounded-full"
                     />
                     <p>{selectedPost?.caption}</p>
+                    {/* <hr /> */}
                   </div>
                 ) : null}
                 <hr />

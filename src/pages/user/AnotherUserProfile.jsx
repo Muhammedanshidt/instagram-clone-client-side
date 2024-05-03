@@ -8,6 +8,7 @@ import { Outlet, useNavigate, useParams } from 'react-router';
 import './UserProfile.css'
 import Clintcontex from '../userContext/ClientContext';
 import axios from 'axios';
+import PostComponent from './PostComponent';
 
 
 function AnotherUserProfile() {
@@ -198,14 +199,9 @@ const getFollowing = async (userData) => {
   }
   
 }    
-
-
-
-
-
   return (
 
-    <div className='w-full h-screen overflow-auto'>
+    <div className='w-full h-screen overflow-auto' id='scrollTabHide'>
     <div className='flex '>
         <div className='w-[350px] h-[250px]  flex justify-center items-center '>
         <img className=' w-fit size-24 rounded-full border border-3 border-gray-300' src={findUser?.profileimage}  alt="profile"/>
@@ -242,10 +238,12 @@ const getFollowing = async (userData) => {
     <hr className='mb-6 ml-20 w-[900px] border-t border-gray-300'/>
 
     {post.length > 0 ? (
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6 mx-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6 mx-6 w-[97%] p-1">
           {post.map((item, index) => (
-            <div key={index}>
-              <img className="h-auto max-w-full rounded-lg" src={item.imgUrl} alt="" />
+            <div key={index} className='cursor-pointer w-fit h-fit'>
+      {<div>{<PostComponent myProp={item._id} />}</div>}
+
+              <img className="h-60 w-[350px] rounded-lg" src={item.imgUrl} alt="" />
             </div>
           ))}
         </div>

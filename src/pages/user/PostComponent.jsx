@@ -217,7 +217,7 @@ shoPost()
                   id="scrollTabHide"
                 >
                   {console.log("check work or not")}
-                  {mapComment
+                  {mapComment.slice().reverse()
                     // ?.filter((comment) => comment.postId === post?._id)
                     .map((comment, index) => {
                       console.log(comment, "map comment");

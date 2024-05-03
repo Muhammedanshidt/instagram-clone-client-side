@@ -40,7 +40,7 @@ const UserNotification = ({ isOpen, setIsOpen }) => {
   return (
     <div
       className={`fixed top-0 left-0 h-screen p-2 bg-white text-black transition-all duration-1000 ease-in-out ${
-        isOpen ? "w-[30%]" : "w-0 overflow-hidden"
+        isOpen ? "w-[30%]" : "w-0"
       }`}
     >
       <h1 className="m-2 text-2xl font-bold overflow-hidden ">Notifications</h1>

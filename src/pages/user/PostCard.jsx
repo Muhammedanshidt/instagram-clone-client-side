@@ -29,7 +29,7 @@ function PostCard({item,likeHandler,like}) {
       <Link to={`/user/${item?.userId?.username}`}>
         <div className="w-fit h-fit p-2 flex gap-3 cursor-pointer">
           <img
-            src={item.userId.profileimage}
+            src={item.userId?.profileimage}
             className="size-10 rounded-full"
             alt=""
           />

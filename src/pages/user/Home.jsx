@@ -127,7 +127,7 @@ const Home = () => {
                 <div className="flex">
                   <img
                     src={
-                      item.profileimage ||
+                      item?.profileimage ||
                       "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"
                     }
                     className="w-16 rounded-full h-16 border-[1px] border-black "
