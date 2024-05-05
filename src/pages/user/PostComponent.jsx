@@ -52,7 +52,7 @@ const PostComponent = ({ myProp }) => {
     // }
 
     const shoPost = async () => {
-      console.log("before pass", myProp);
+      // console.log("before pass", myProp);
 
       try {
         const response = await axios.get(
@@ -63,7 +63,7 @@ const PostComponent = ({ myProp }) => {
         );
 
         const posts = response.data;
-        console.log(posts, "response data");
+        // console.log(posts, "response data");
         setPost(posts);
         setMapComment(posts.comments);
         // if (post) {
@@ -75,9 +75,9 @@ const PostComponent = ({ myProp }) => {
       }
     };
     shoPost();
-  }, [myProp]);
+  }, []);
 
-  console.log(currentPost);
+  // console.log(currentPost);
 
   // console.log(name);
 
@@ -99,7 +99,7 @@ const PostComponent = ({ myProp }) => {
           { ownerId: userData._id, postId: item._id }
         );
         setLike(!like);
-        console.log("after axios");
+        // console.log("after axios");
         const data = response.data;
 
         console.log(data, "this is the responce from server");
@@ -134,7 +134,7 @@ const PostComponent = ({ myProp }) => {
 
         const { postData } = res.data;
 
-        // console.log(postData);
+        console.log(postData, "hihihichdsnckdncksnc");
 
         if (postData) {
           // setCommentedUser(user);
@@ -151,17 +151,20 @@ const PostComponent = ({ myProp }) => {
   };
 
   const openModal = () => {
-     document.getElementById("editComment").showModal();  
-  }
+    document.getElementById("editComment").showModal();
+  };
+
+  const editCommentHandle = (comment) => {
+    // console.log(comment.postId._id, "iam muhammed anshid");
+    console.log(comment._id);
+    // console.log(comment);
+    console.log(userData.comments);
 
 
-  const editCommentHandle = () => {
-    // console.log(data,id,"oug;'iyfcvvigiu")
-    console.log("iuuybiyyi");
-    document
-    .getElementById("editComment")
-    .showModal()
-  }
+    // const check = userData.comments.includes(comment.postId._id)
+
+    // console.log(check);
+  };
 
   return (
     <div>
@@ -219,7 +222,7 @@ const PostComponent = ({ myProp }) => {
                     .reverse()
                     // ?.filter((comment) => comment.postId === post?._id)
                     .map((comment, index) => {
-                      console.log(comment, "map comment");
+                      // console.log(comment, "map comment");
                       return (
                         <div className=" w-full h-fit mt-2" key={index}>
                           <div className="flex gap-2 p-1 ">
@@ -239,11 +242,16 @@ const PostComponent = ({ myProp }) => {
                                   )}{" "}
                                   ago
                                 </p>
-                                <MdMoreHoriz
-                                  onClick={() =>
-                                    setOpenDelete((prevOpen) => !prevOpen)
-                                  }
-                                />
+                                <div>
+                                  <MdMoreHoriz
+                                    onClick={
+                                      () => editCommentHandle(comment)
+
+                                      // setOpenDelete((prevOpen) => !prevOpen)
+                                    }
+                                  />
+                                  {/* {console.log(comment,"delete map")} */}
+                                </div>
                               </div>
                               <div className=" w-[80%] overflow-auto">
                                 <span>{comment?.text}</span>
@@ -264,6 +272,7 @@ const PostComponent = ({ myProp }) => {
                                     <li>
                                       {" "}
                                       <span>Delete</span>
+                                      {console.log(comment?.text, "delete")}
                                     </li>
                                   </div>
                                   <div className="flex w-full  hover:text-green-700 hover:font-medium cursor-pointer px-2 mt-1 rounded-sm">
@@ -272,14 +281,19 @@ const PostComponent = ({ myProp }) => {
                                   </div>
                                   <div
                                     className=" flex w-full hover:text-blue-700  cursor-pointer px-2 mt-1 rounded-sm"
-                                    onClick={() =>
-                                      document.getElementById("editComment").showModal()
-                                    }
+                                    onClick={() => {
+                                      // setShowModal(true);
+                                      // if (showModal) {
+                                      document
+                                        .getElementById("editComment")
+                                        .showModal();
+                                      // }
+                                    }}
                                   >
                                     <RiImageEditFill className="mt-1 mr-3 text-lg" />
                                     <li>Edit</li>
-                                    
-                                    {console.log(comment?.text)}
+
+                                    {/* {console.log(comment?.text)} */}
                                   </div>
                                 </ul>
                               </div>
@@ -288,29 +302,41 @@ const PostComponent = ({ myProp }) => {
                         </div>
                       );
                     })}
-               
-              <dialog id="editComment" className="modal rounded-3xl shadow-2xl">
-                <div className="modal-box ">
-                <div>
-                      <div className="p-2 w-fit h-fit mb-4">
-                      <div className="flex justify-between p-3 font-semibold">
-                        <div className="hover:text-red-600 p-1 cursor-pointer">Cancel</div>
-                        <div className="hover:text-blue-600 p-1 cursor-pointer">Done</div>
-                      </div>
-                      <textarea
-                          className="outline-double p-1"
-                          cols="30"
-                          rows="3"
-                          // value={}
-//                           ref={textRef}
-//                           placeholder="edit your image caption ..."
-                        ></textarea>
+
+                  <dialog
+                    id="editComment"
+                    className="modal rounded-3xl shadow-2xl"
+                  >
+                    <div className="modal-box ">
+                      <div>
+                        <div className="p-2 w-fit h-fit mb-4">
+                          <div className="flex justify-between p-3 font-semibold">
+                            <div
+                              className="hover:text-red-600 p-1 cursor-pointer"
+                              onClick={() => {
+                                // setShowModal(false);
+                                document.getElementById("editComment").close();
+                              }}
+                            >
+                              Cancel
+                            </div>
+                            <div className="hover:text-blue-600 p-1 cursor-pointer">
+                              Done
+                            </div>
+                          </div>
+                          <textarea
+                            className="outline-double p-1"
+                            cols="30"
+                            rows="3"
+                            // value={}
+                            //                           ref={textRef}
+                            //                           placeholder="edit your image caption ..."
+                          ></textarea>
+                        </div>
                       </div>
                     </div>
-                 
-                </div>
-              </dialog>
-              <hr />
+                  </dialog>
+                  <hr />
                 </div>
               </div>
 
