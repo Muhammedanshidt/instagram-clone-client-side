@@ -13,44 +13,30 @@ import PostComponent from './PostComponent';
 
 function AnotherUserProfile() {
     const navigate = useNavigate()
-const {userData} = useContext(Clintcontex)
+const {userData,setModalOpen} = useContext(Clintcontex)
 const [findUser,setFindUser] = React.useState([]) 
 const [follow,setFollow]  = useState();
 
 const [userFollowers,setUserFollowers] = useState(0)
-// const [userFollowing,setUserFollowing] = useState(0)
 
-
-
-// if(Object.keys(userData).length ===0){
-//     window.location.reload()
-// }
-// console.log(findUser);
 const {userId} = useParams()
-// console.log(userId)
+
 
 const checkingFollow = userData.following && userData.following.includes(findUser._id);
 
 useEffect(() =>{
 
-//   const checkingFollow = userData.following && userData.following.includes(findUser._id);
 
-// if(checkingFollow){
-//   setFollow(true)
-// }else{
-//   setFollow(false)
-// }
 
   const  getUserInfo = async ()=>{
     if(userData){
       try {
-          const res= await axios.post("http://localhost:3003/user/findUser",{username:userId})
+          const res= await axios.post("findUser",{username:userId})
         console.log("halllooo");
           console.log(res.data); 
           setFindUser(res.data) 
           setUserFollowers(res.data.followers.length) 
-          // setUserFollowing(res.data.following.length) 
-        //  console.log('this is the data',res.data)
+
       } catch (error) {
         alert("Error")
       }
@@ -77,11 +63,11 @@ useEffect( () => {
    const shoPost  = async () => {
     if(userData){
       try {
-        const response = await axios.get('http://localhost:3003/user/getUserPost',{params:{ownerId:findUser}})
+        const response = await axios.get('getUserPost',{params:{ownerId:findUser}})
         if(response.data.length > 0){
         // console.log(response);
         const {data} = response
-        // console.log(data,"uhfuierufyeuy");
+        console.log(data,"uhfuierufyeuy");  
         setPost(data)
 
         console.log(post);
@@ -101,12 +87,7 @@ useEffect( () => {
 
 
 
-// const followersCount = findUser?.followers?.length||0;
-// console.log(followersCount);
-// const followingCount  = findUser?.following?.length;
-// console.log(followingCount);
 
-// // following 
 
 
 
@@ -123,9 +104,7 @@ const followHandler= async (e) =>{
   setUserFollowers(preState => preState + 1 )
 
   try{
-  const res = await  axios.put('http://localhost:3003/user/follow',{user:findUser,owner:userData})
-  // console.log(res.data);
-  // window.location.reload();
+  const res = await  axios.put('follow',{user:findUser,owner:userData})
 
   }catch(error){
     console.log(error);
@@ -146,11 +125,8 @@ const unFollowHandler = async (e) => {
 
   
   try {
-    const  res = await axios.delete('http://localhost:3003/user/unfollow',{ data : {userId,currentUserId}})
+    const  res = await axios.delete('unfollow',{ data : {userId,currentUserId}})
     console.log(res.data);
-    // window.location.reload();
-    // console.log(result.data);
-    // setFollow(false)
     
   } catch (error) {
     console.log(error);
@@ -167,7 +143,7 @@ const getFollowers = async (userData) => {
   document.getElementById('my_modal_get_followers').showModal()
 
   try {
-    const response = await axios.get('http://localhost:3003/user/getfollowers',{params:{owner:userData}})
+    const response = await axios.get('getfollowers',{params:{owner:userData}})
    const followersData = response.data
     // console.log(followersData)
     setFollowers(followersData)
@@ -188,7 +164,7 @@ const getFollowing = async (userData) => {
 
 
   try {
-      const res = await axios.get('http://localhost:3003/user/getfollowing',{params:{owner:userData}})
+      const res = await axios.get('getfollowing',{params:{owner:userData}})
     const  followingData = await res.data
   // console.log("iudnf");
     setFollowing(followingData)
@@ -198,7 +174,17 @@ const getFollowing = async (userData) => {
 
   }
   
-}    
+  
+} 
+
+// const { userData, setModalOpen } = useContext(Clintcontex);
+const showModal = (item) => {
+  console.log(item);
+  // setPostId(item);
+  setModalOpen(true);
+  // console.log(showComponent);
+  document.getElementById(item._id).showModal();
+};
   return (
 
     <div className='w-full h-screen overflow-auto' id='scrollTabHide'>
@@ -240,8 +226,12 @@ const getFollowing = async (userData) => {
     {post.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 gap-4 my-6 mx-6 w-[97%] p-1">
           {post.map((item, index) => (
-            <div key={index} className='cursor-pointer w-fit h-fit'>
-      {<div>{<PostComponent myProp={item._id} />}</div>}
+            
+            <div key={index} className='cursor-pointer w-fit h-fit'
+            onClick={() => showModal(item)}
+          >
+              <div>{console.log(item )}</div>
+              {<div>{<PostComponent myProp={item._id} />}</div>}
 
               <img className="h-60 w-[350px] rounded-lg" src={item.imgUrl} alt="" />
             </div>

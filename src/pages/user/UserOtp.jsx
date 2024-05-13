@@ -5,7 +5,6 @@ import { useNavigate } from "react-router";
 import axios from "axios";
 import toast from "react-hot-toast";
 
-
 function UserOtp() {
   const [otp, setOtp] = useState("");
   const { userData } = useContext(Clintcontex);
@@ -24,16 +23,16 @@ function UserOtp() {
 
   const submitOtp = async () => {
     try {
-        
-        const backendResponse = await axios.post("http://localhost:3003/user/otp",
-        {userData,otp},
+      const backendResponse = await axios.post(
+        "otp",
+        { userData, otp },
         { withCredentials: true }
       );
-      
+
       console.log(backendResponse.data.success);
 
       if (backendResponse.data.success === true) {
-       toast.success("OTP Verified Successfully");
+        toast.success("OTP Verified Successfully");
         navigate("/login");
       } else {
         toast.error("Invalid OTP");
@@ -67,9 +66,7 @@ function UserOtp() {
                   </div>
                 </div>
 
-                 
-                <div  className="flex flex-col space-y-5 cursor-pointer">
-                  
+                <div className="flex flex-col space-y-5 cursor-pointer">
                   <button
                     onClick={submitOtp}
                     className="flex flex-row items-center justify-center text-center w-full border rounded-xl outline-none py-5 bg-blue-700 border-none text-white text-sm shadow-sm"
@@ -88,8 +85,7 @@ function UserOtp() {
 
 export default UserOtp;
 
-
-// // clearing cookies for logout 
+// // clearing cookies for logout
 // const logOut = tryCatch(async(req, res) => {
 //   res.clearCookie('token');
 //   res.send('Cookie cleared successfully');

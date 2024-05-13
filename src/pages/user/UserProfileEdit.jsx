@@ -38,7 +38,7 @@ function UserProfileEdit() {
     setBio(bioValue);
     try {
       const bioRes = await axios.post(
-        "http://localhost:3003/user/profile/edit",
+        "edit",
         {
           bio: bioValue,
           userData: userData,
@@ -91,7 +91,7 @@ function UserProfileEdit() {
     console.log(data);
 
     const backendResponse = await axios.post(
-      "http://localhost:3003/user/userProfileImage",
+      "userProfileImage",
       {
         imageUrl: data.secure_url,
         email: userData.email,
@@ -105,7 +105,7 @@ function UserProfileEdit() {
 
     try {
       const logBack = await axios.post(
-        "http://localhost:3003/user/logout",
+        "logout",
         {},
         { withCredentials: true }
       );
@@ -134,7 +134,7 @@ function UserProfileEdit() {
     console.log(userData.email);
     try {
       const res = await axios.post(
-        "http://localhost:3003/user/editUser",
+        "editUser",
         {nameUser:editUserName,nameFull:editFullName,email:userData.email},
       );
       console.log(res);

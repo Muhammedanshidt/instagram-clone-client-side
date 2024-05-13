@@ -40,7 +40,7 @@ function UserPost() {
       if (userData) {
         try {
           const response = await axios.get(
-            "http://localhost:3003/user/getOwnPost",
+            "getOwnPost",
             {
               params: { Id: userData._id },
             }
@@ -74,7 +74,7 @@ function UserPost() {
       if (postId && userId) {
         console.log(id);
         const res = await axios.delete(
-          `http://localhost:3003/user/postDelete/${userId}/${postId}`
+          `postDelete/${userId}/${postId}`
         );
         res.data.successful
           ? toast.success(res.data.successful)
@@ -90,7 +90,7 @@ function UserPost() {
     try {
       if (selectedPost) {
         const response = await axios.post(
-          "http://localhost:3003/user/userLike",
+          "userLike",
           { ownerId: userData._id, postId: selectedPost._id }
         );
         setLike(!like);
@@ -119,7 +119,7 @@ function UserPost() {
           inputRef.current.value = "";
         }
 
-        const res = await axios.post("http://localhost:3003/user/userComment", {
+        const res = await axios.post("userComment", {
           ownerId: userData._id,
           postId: selectedPost._id,
           commentvalue: commentValue,
@@ -159,7 +159,7 @@ function UserPost() {
       textRef.current.value = "";
     }
 
-    const res = await axios.put("http://localhost:3003/user/editCaption", {
+    const res = await axios.put("editCaption", {
       text: editTextValue,
       userId: userId,
       postId: Id,
@@ -305,7 +305,7 @@ function UserPost() {
                 <hr />
                 <div
                   className="h-full px-3 py-3 overflow-x-hidden overflow-y-scrol overscroll-none"
-                  id="scrollTabHide"
+                  id="scrollTabHide"  
                 >
                   {selectedPost?.comments
                     ?.filter((comment) => selectedPost?._id == comment.postId)

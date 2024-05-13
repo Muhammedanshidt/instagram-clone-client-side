@@ -10,6 +10,8 @@ import { formatDistanceToNow } from "date-fns";
 import { MdDelete } from "react-icons/md";
 import { MdCancel } from "react-icons/md";
 import { RiImageEditFill } from "react-icons/ri";
+import toast from "react-hot-toast";
+
 
 const PostComponent = ({ myProp }) => {
   const { userData } = useContext(Clintcontex);
@@ -32,19 +34,6 @@ const PostComponent = ({ myProp }) => {
   console.log("this is postcomponent");
   console.log(myProp, "passing to com");
 
-  // const element = document.getElementById(currentPost)
-
-  // if(myProp){
-  //   setCurrentPost(myProp)
-  // }
-  // console.log(currentPost);
-
-  // if (modalOpen === true) {
-  //   element.showModal();
-  //   // document.getElementById(currentPost)
-  //   // setModalOpen(true);
-  // }
-  // const modal = document.getElementById("editComment");
 
   useEffect(() => {
     //     if (modalOpen && currentPost) {
@@ -56,7 +45,7 @@ const PostComponent = ({ myProp }) => {
 
       try {
         const response = await axios.get(
-          "http://localhost:3003/user/grtPostModal",
+          "grtPostModal",
           {
             params: { currentPost: id },
           }
@@ -66,10 +55,7 @@ const PostComponent = ({ myProp }) => {
         // console.log(posts, "response data");
         setPost(posts);
         setMapComment(posts.comments);
-        // if (post) {
-        // document.getElementById(currentPost).showModal()
-        // }
-        // Open the modal
+      
       } catch (error) {
         console.error("Error fetching post:", error);
       }
@@ -77,25 +63,13 @@ const PostComponent = ({ myProp }) => {
     shoPost();
   }, []);
 
-  // console.log(currentPost);
-
-  // console.log(name);
-
-  // const openModal = (item) => {
-  //   setSelectedPost(item)
-  //   // item.like.include(userId) ? setLike(true):setLike(false)
-  //   setLike(item.like.includes(userData._id));
-  //   document.getElementById("postModal").showModal();
-  //   console.log(selectedPost,"onselect post");
-
-  // };
 
   const likeHandler = async (item) => {
     console.log(item, "item");
     try {
       if (item) {
         const response = await axios.post(
-          "http://localhost:3003/user/userLike",
+          "userLike",
           { ownerId: userData._id, postId: item._id }
         );
         setLike(!like);
@@ -124,7 +98,7 @@ const PostComponent = ({ myProp }) => {
           inputRef.current.value = "";
         }
 
-        const res = await axios.post("http://localhost:3003/user/userComment", {
+        const res = await axios.post("userComment", {
           ownerId: userData._id,
           postId: post._id,
           commentvalue: commentValue,
@@ -135,6 +109,7 @@ const PostComponent = ({ myProp }) => {
         const { postData } = res.data;
 
         console.log(postData, "hihihichdsnckdncksnc");
+        console.log(postData.userId);
 
         if (postData) {
           // setCommentedUser(user);
@@ -154,18 +129,77 @@ const PostComponent = ({ myProp }) => {
     document.getElementById("editComment").showModal();
   };
 
+  const [commentId,setCommentId] = useState ()
+  const [postId,setPostId] = useState ()
+
   const editCommentHandle = (comment) => {
+
+    // console.log(comment.postId._id);
+
     // console.log(comment.postId._id, "iam muhammed anshid");
-    console.log(comment._id);
+    // console.log(comment._id);
     // console.log(comment);
     console.log(userData.comments);
 
 
-    // const check = userData.comments.includes(comment.postId._id)
+    const check = userData.comments.includes(comment._id)
 
-    // console.log(check);
+    console.log(check);
+    if (check) {
+  setOpenDelete((prevOpen) => !prevOpen)
+  setCommentId(comment._id)
+  setPostId(comment.postId?._id)
+  // console.log(postId._id);
+    }
   };
 
+  const deleteComment = async () => {
+   
+    console.log(commentId,"delete comment");
+    console.log(userData.comments);
+
+
+
+    const check = userData.comments.includes(commentId)
+
+    console.log(check);
+
+    const userId = userData._id
+
+
+    if (check) {
+
+      const res = await axios.delete(`commentDelete/${userId}/${commentId}/${postId}`)
+      res.data.successful
+          ? toast.success(res.data.successful)
+          : toast.error();
+    }
+    
+  }
+
+  // const commentRef = React.useRef(null);
+
+  const [text, setText] = useState();
+
+  
+  const handleChange = (event) => {
+    setText(event.target.value);
+    // console.log(text);
+  };
+
+  const editComment = async () => {
+
+    console.log(text);
+
+    const res = await axios.put("editComment",{
+      editedComment:text,
+      postId:postId,
+      commentId:commentId
+    })
+
+    console.log(res.data.data)
+
+  }
   return (
     <div>
       <dialog id={myProp}>
@@ -247,7 +281,6 @@ const PostComponent = ({ myProp }) => {
                                     onClick={
                                       () => editCommentHandle(comment)
 
-                                      // setOpenDelete((prevOpen) => !prevOpen)
                                     }
                                   />
                                   {/* {console.log(comment,"delete map")} */}
@@ -267,12 +300,15 @@ const PostComponent = ({ myProp }) => {
                               >
                                 <ul className="p-1">
                                   {/* {console.log(openDelete)} */}
-                                  <div className="flex w-full  hover:text-red-700  hover:font-semibold cursor-pointer px-2 mt-1 rounded-sm">
+                                  <div className="flex w-full  hover:text-red-700  hover:font-semibold cursor-pointer px-2 mt-1 rounded-sm"
+                                         onClick={
+                                          () => deleteComment()
+                                        }
+                                  >
                                     <MdDelete className="mt-1 mr-3 " />
                                     <li>
-                                      {" "}
                                       <span>Delete</span>
-                                      {console.log(comment?.text, "delete")}
+                                      {/* {console.log(comment?.text, "delete")} */}
                                     </li>
                                   </div>
                                   <div className="flex w-full  hover:text-green-700 hover:font-medium cursor-pointer px-2 mt-1 rounded-sm">
@@ -320,7 +356,8 @@ const PostComponent = ({ myProp }) => {
                             >
                               Cancel
                             </div>
-                            <div className="hover:text-blue-600 p-1 cursor-pointer">
+                            <div className="hover:text-blue-600 p-1 cursor-pointer"
+                            onClick={editComment}>
                               Done
                             </div>
                           </div>
@@ -328,9 +365,10 @@ const PostComponent = ({ myProp }) => {
                             className="outline-double p-1"
                             cols="30"
                             rows="3"
-                            // value={}
-                            //                           ref={textRef}
-                            //                           placeholder="edit your image caption ..."
+                            // value={text}
+                            onChange={(e)=>handleChange(e)}
+                            // ref={commentRef}
+                                                      placeholder="edit your image caption ..."
                           ></textarea>
                         </div>
                       </div>

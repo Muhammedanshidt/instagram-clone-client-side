@@ -1,4 +1,4 @@
-import React, { useState, useContext,} from "react";
+import React, { useState, useContext } from "react";
 import TitleImage from "../../asset/title.png";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
@@ -9,7 +9,6 @@ import axios from "axios";
 import toast from "react-hot-toast";
 
 function SignUp() {
- 
   const initialFormData = {
     email: "",
     fullname: "",
@@ -18,8 +17,8 @@ function SignUp() {
   };
 
   const { userData, setUserData } = useContext(Clintcontex);
-      console.log(userData);
-      
+  console.log(userData);
+
   const [formFillData, setFormFillData] = useState(initialFormData);
   const [errorMessage, setErrorMessage] = useState({});
 
@@ -34,14 +33,10 @@ function SignUp() {
   };
 
   const saveUser = async () => {
-    console.log("save user")
-    // if (Object.values(formFillData).some((value) => value === "")) {
-    //   alert("Please Fill All Fields");
-    //   return;
-    // }
-    // axios.post("http://localhost:3003/user/signup",formFillData).then(res=>console.log(res)).catch(err=>console.log(err))
+    console.log("save user");
+
     try {
-      const response = await axios.post("http://localhost:3003/user/signup", formFillData, {
+      const response = await axios.post("signup", formFillData, {
         withCredentials: true,
       });
       console.log("haimonu");
@@ -80,8 +75,6 @@ function SignUp() {
 
     if (Object.keys(formError.length === 0)) {
       saveUser();
-    
-
     } else {
       toast.error("fill full data");
       console.log(errorMessage);

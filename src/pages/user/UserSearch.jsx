@@ -15,7 +15,7 @@ const UserSearch = () => {
   
     try{
 
-    const res =  await axios.get("http://localhost:3003/user/userSearch",{
+    const res =  await axios.get("userSearch",{
       params: {
         userName : value
       }

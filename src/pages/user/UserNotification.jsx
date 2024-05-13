@@ -21,7 +21,7 @@ const UserNotification = ({ isOpen, setIsOpen }) => {
   useEffect(() => {
     const getdata = async () => {
       try {
-        const res = await axios.get("http://localhost:3003/user/notification", {
+        const res = await axios.get("notification", {
           params: { id: userData._id },
         });
 
@@ -29,7 +29,6 @@ const UserNotification = ({ isOpen, setIsOpen }) => {
 
         setgetFollowers(res.data.followers);
         setGetLikes(res.data?.post);
-       
       } catch (err) {
         console.log("");
       }
@@ -48,53 +47,55 @@ const UserNotification = ({ isOpen, setIsOpen }) => {
       <hr className="border-black" />
 
       {/* <div>{ console.log(getFollowers) } </div> */}
-      <div>{ console.log(getLikes) } </div>
-      
-        {
-          getFollowers.slice().reverse().map((item,index) => {
-            return(
-              <div className="w-full h-fit mt-3 overflow-hidden hover:bg-neutral-100 rounded-xl">
-               <Link to={`/user/${item.username}`}>
+      <div>{console.log(getLikes)} </div>
+
+      {getFollowers
+        .slice()
+        .reverse()
+        .map((item, index) => {
+          return (
+            <div className="w-full h-fit mt-3 overflow-hidden hover:bg-neutral-100 rounded-xl">
+              <Link to={`/user/${item.username}`}>
                 <div className="flex p-2 gap-5">
-                <img src={item?.profileimage}
-                className="size-10 rounded-full object-cover"/>
-                <div>
-                <p className="font-semibold">{item.username}</p>
-                <p className="font-medium">started following you</p>
+                  <img
+                    src={item?.profileimage}
+                    className="size-10 rounded-full object-cover"
+                  />
+                  <div>
+                    <p className="font-semibold">{item.username}</p>
+                    <p className="font-medium">started following you</p>
+                  </div>
                 </div>
-                </div>
-                </Link>
-              </div>
+              </Link>
+            </div>
+          );
+        })}
 
-            )
-          })
-        }
-
-      {
-          getLikes.slice().reverse().map((item,index) => {
-            return(
-              
-              <div key={index} className="w-full h-fit mt-3 overflow-hidden hover:bg-neutral-100 rounded-xl">
-                <div className="flex p-2">
-                  {item.like.map((like,index) =>(
-                   <div key={index} className="w-fit flex-wrap mr-1">
-                    
+      {getLikes
+        .slice()
+        .reverse()
+        .map((item, index) => {
+          return (
+            <div
+              key={index}
+              className="w-full h-fit mt-3 overflow-hidden hover:bg-neutral-100 rounded-xl"
+            >
+              <div className="flex p-2">
+                {item.like.map((like, index) => (
+                  <div key={index} className="w-fit flex-wrap mr-1">
                     <p className="text-sm">{like.username}</p>
-                    </div>
-                  )
-                )}
-              
+                  </div>
+                ))}
+
                 <p className="font-semibold">liked your post</p>
-                <img src={item?.imgUrl}  className="size-10 rounded-full object-cover ml-1" />
-                </div>
+                <img
+                  src={item?.imgUrl}
+                  className="size-10 rounded-full object-cover ml-1"
+                />
               </div>
-
-            )
-          })
-        }
-
-
-      
+            </div>
+          );
+        })}
     </div>
   );
 };

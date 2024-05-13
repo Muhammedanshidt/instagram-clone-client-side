@@ -21,8 +21,12 @@ import UserSearch from './pages/user/UserSearch';
   import { isEqual } from "lodash";
   import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
+import Messanger from './pages/user/UserMessenger/Messanger';
 
-  // axios.defaults.baseURL  = "https://instagram-clone-server-side-thqi.onrender.com/user/ ";
+  axios.defaults.baseURL  = "https://instagram-clone-server-side-thqi.onrender.com/user/ ";
+
+
+  
   function App() {
     // const [formFillData,setFormFillData] = useState("")
     const [userData, setUserData] = useState({});
@@ -46,7 +50,7 @@ import AnotherUserProfile from './pages/user/AnotherUserProfile';
           const userDetails = jwtDecode(cookieToken);
               const email = userDetails.email;
               console.log("Email:", email);
-          const backResponse = await axios.post("http://localhost:3003/user/access",
+          const backResponse = await axios.post("access",
             { email: email },
             { withCredentials: true }
           )
@@ -102,11 +106,14 @@ import AnotherUserProfile from './pages/user/AnotherUserProfile';
                 </Route>
                 <Route path='/explore' element={<UserExplore />} />
                 <Route path='/inbox' element={<UserMessage />} />
+                {/* <Route path='/messenger' element={<Messanger+ />} /> */}
                 {/* <Route path='/notification' element={<UserNotification />} /> */}
                 <Route path='/search' element={<UserSearch />} />
 
 
               </Route>
+
+              <Route path='/messenger' element={<Messanger />} />
 
             </Routes>
           </div>

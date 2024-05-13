@@ -26,7 +26,7 @@ const Home = () => {
       if (userData._id !== null) {
         try {
           const response = await axios.get(
-            "http://localhost:3003/user/getuser"
+            "getuser"
           );
           console.log(response);
           setSignUser(response.data);
@@ -51,7 +51,7 @@ const Home = () => {
       const getExplorePost = async () => {
         try {
           const response = await axios.get(
-            "http://localhost:3003/user/getExplorePost"
+            "getExplorePost"
           );
 
           console.log(response.data);
@@ -87,7 +87,7 @@ const Home = () => {
     try {
       if (postId) {
         const response = await axios.post(
-          "http://localhost:3003/user/userLike",
+          "userLike",
           { ownerId: userData._id, postId: postId }
         );
         console.log("after axios");

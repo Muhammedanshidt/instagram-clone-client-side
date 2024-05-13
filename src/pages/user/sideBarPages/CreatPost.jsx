@@ -86,7 +86,7 @@ function CreatPost() {
       console.log(response.url);
       const data = await response.json()
       
- const backendResponse = await axios.post('http://localhost:3003/user/post', {
+ const backendResponse = await axios.post('post', {
   imageUrl: data.secure_url,
   id: userData._id,
   caption: caption,
