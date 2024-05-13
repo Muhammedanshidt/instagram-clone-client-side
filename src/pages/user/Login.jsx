@@ -43,7 +43,7 @@ function Login() {
       }
     } catch (error) {
       console.log("Login error:", error);
-      toast.error("An error occurred, please try again later.");
+      toast.error(error);
     }
   };
   return (

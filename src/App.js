@@ -23,7 +23,9 @@ import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
 import Messanger from './pages/user/UserMessenger/Messanger';
 
-axios.defaults.baseURL = "https://instagram-clone-server-side-thqi.onrender.com/user/ ";
+
+axios.defaults.baseURL = "https://instagram-clone-server-side-thqi.onrender.com/user/";
+
 
 
 
