@@ -115,17 +115,16 @@ function Login() {
     console.log(userData);
   
     try {
-      const response = await axios.post("login", {
-        email: email,
-        password: password,
-      });
-  
-      console.log(response.data);
-  
       if (response.data.success === true) {
-        const token = response.headers['authorization'].split(' ')[1]; // Extract the token from the response headers
-        localStorage.setItem('token', token); // Store the token in localStorage
-        navigate("/profile");
+        const authHeader = response.headers['authorization'];
+        if (authHeader && authHeader.startsWith('Bearer ')) {
+          const token = authHeader.split(' ')[1];
+          localStorage.setItem('token', token); // Store the token in localStorage
+          navigate("/profile");
+        } else {
+          console.log('Authorization header is missing or improperly formatted.');
+          toast.error('An error occurred, please try again later.');
+        }
       } else {
         toast.error(response.data.message);
       }
@@ -133,6 +132,7 @@ function Login() {
       console.log('Login error:', error);
       toast.error('An error occurred, please try again later.');
     }
+    
   };
   
 
