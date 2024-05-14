@@ -1,3 +1,58 @@
+// import React from "react";
+// import "./Login.css";
+// import TitleImage from "../../asset/title.png";
+// import LoginImage from "../../asset/home-phones-2x.png";
+// import { useNavigate } from "react-router";
+// import PlayStore from "../../asset/playstore.png";
+// import Microsoft from "../../asset/microsoft.png";
+// import { useState, useContext } from "react";
+// import axios from "axios";
+// import Clintcontex from "../userContext/ClientContext";
+// import { toast } from "react-hot-toast";
+
+// function Login() {
+//   const navigate = useNavigate();
+//   const { userData } = useContext(Clintcontex);
+//   // const [username, setUsername] = useState("");
+//   const [email, setEmail] = useState("");
+//   const [password, setPassword] = useState("");
+//   // console.log(email);
+//   // console.log(password);
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     if (!email || !password) {
+//       toast.error("Please enter fields");
+//       return;
+//     }
+//     console.log("hai");
+//     try {
+//       const response = await axios.post(
+//         "login",
+//         {
+//           email: email,
+//           password: password,
+//           userData,
+//         },
+//         { withCredentials: true }
+//       );
+
+//       if (response.data.success === true) {
+//         navigate("/profile");
+//       } else {
+//         toast.error(response.data.message);
+//       }
+//     } catch (error) {
+//       console.log("Login error:", error);
+//       if (error.response) {
+//         toast.error(error.response.data.message);
+//       } else if (error.request) {
+//         toast.error("No response from server");
+//       } else {
+//         toast.error(error.message);
+//       }
+//     }
+//   };
+
 import React from "react";
 import "./Login.css";
 import TitleImage from "../../asset/title.png";
@@ -8,11 +63,11 @@ import Microsoft from "../../asset/microsoft.png";
 import { useState, useContext } from "react";
 import axios from "axios";
 import Clintcontex from "../userContext/ClientContext";
-import { toast } from "react-hot-toast";
+import { toast } from "react-hot-toast"
 
 function Login() {
   const navigate = useNavigate();
-  const { userData } = useContext(Clintcontex);
+  const {userData} = useContext(Clintcontex)
   // const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -24,32 +79,28 @@ function Login() {
       toast.error("Please enter fields");
       return;
     }
-    console.log("hai");
-    try {
-      const response = await axios.post(
-        "login",
-        {
-          email: email,
-          password: password,
-          // userData,
-        },
-        { withCredentials: true }
-      );
+    // console.log("hai");
+  console.log(userData);
 
-      if (response.data.success === true) {
-        navigate("/profile");
-      } else {
-        toast.error(response.data.message);
-      }
-    } catch (error) {
-      console.log("Login error:", error);
-      if (error.response) {
-        toast.error(error.response.data.message);
-      } else if (error.request) {
-        toast.error("No response from server");
-      } else {
-        toast.error(error.message);
-      }
+    try {
+    const response = await axios.post("login",
+      {
+        email: email,
+        password: password,
+      },
+      { withCredentials: true }
+    );
+
+    console.log(response.data);
+    
+    if (response.data.success === true) {
+      navigate("/profile");
+    } else {
+      toast.error(response.data.message);
+    }
+  }catch (error){
+  console.log('Login error:', error);
+      toast.error('An error occurred, please try again later.');
     }
   };
   return (

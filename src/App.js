@@ -23,12 +23,7 @@ import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
 import Messanger from './pages/user/UserMessenger/Messanger';
 
-
 axios.defaults.baseURL = "https://instagram-clone-server-side-thqi.onrender.com/user/";
-
-
-
-
 function App() {
 
   const [userData, setUserData] = useState({});
@@ -39,11 +34,11 @@ function App() {
 
   console.log(userData);
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
         const cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        
         console.log(cookieToken);
         if (!cookieToken) {
           console.log("Token not found");

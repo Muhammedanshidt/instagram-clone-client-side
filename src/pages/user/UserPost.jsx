@@ -17,7 +17,7 @@ import toast from "react-hot-toast";
 function UserPost() {
   const { userData } = useContext(Clintcontex);
 
-  // console.log(userData);
+  console.log(userData);
 
   const [post, setPost] = useState([]);
   // const [hashId,setHashId]=useState("");
