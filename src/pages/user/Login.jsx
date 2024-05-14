@@ -13,11 +13,9 @@ import { toast } from "react-hot-toast";
 function Login() {
   const navigate = useNavigate();
   const { userData } = useContext(Clintcontex);
-  // const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  // console.log(email);
-  // console.log(password);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
