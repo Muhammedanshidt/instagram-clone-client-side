@@ -73,36 +73,72 @@ function Login() {
   const [password, setPassword] = useState("");
   // console.log(email);
   // console.log(password);
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!email || !password) {
+  //     toast.error("Please enter fields");
+  //     return;
+  //   }
+  //   // console.log("hai");
+  // console.log(userData);
+
+  //   try {
+  //   const response = await axios.post("login",
+  //     {
+  //       email: email,
+  //       password: password,
+  //     },
+  //     { withCredentials: true }
+  //   );
+
+  //   console.log(response.data);
+    
+  //   if (response.data.success === true) {
+  //     navigate("/profile");
+  //   } else {
+  //     toast.error(response.data.message);
+  //   }
+  // }catch (error){
+  // console.log('Login error:', error);
+  //     toast.error('An error occurred, please try again later.');
+  //   }
+  // };
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       toast.error("Please enter fields");
       return;
     }
-    // console.log("hai");
-  console.log(userData);
-
+  
+    console.log(userData);
+  
     try {
-    const response = await axios.post("login",
-      {
+      const response = await axios.post("login", {
         email: email,
         password: password,
-      },
-      { withCredentials: true }
-    );
-
-    console.log(response.data);
-    
-    if (response.data.success === true) {
-      navigate("/profile");
-    } else {
-      toast.error(response.data.message);
-    }
-  }catch (error){
-  console.log('Login error:', error);
+      });
+  
+      console.log(response.data);
+  
+      if (response.data.success === true) {
+        const token = response.headers['authorization'].split(' ')[1]; // Extract the token from the response headers
+        localStorage.setItem('token', token); // Store the token in localStorage
+        navigate("/profile");
+      } else {
+        toast.error(response.data.message);
+      }
+    } catch (error) {
+      console.log('Login error:', error);
       toast.error('An error occurred, please try again later.');
     }
   };
+  
+
+
+
+
   return (
     <>
       <div className="container">
