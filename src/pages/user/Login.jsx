@@ -43,7 +43,13 @@ function Login() {
       }
     } catch (error) {
       console.log("Login error:", error);
-      toast.error(error);
+      if (error.response) {
+        toast.error(error.response.data.message);
+      } else if (error.request) {
+        toast.error("No response from server");
+      } else {
+        toast.error(error.message);
+      }
     }
   };
   return (

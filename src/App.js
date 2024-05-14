@@ -30,7 +30,7 @@ axios.defaults.baseURL = "https://instagram-clone-server-side-thqi.onrender.com/
 
 
 function App() {
-  
+
   const [userData, setUserData] = useState({});
   const [auth, setauth] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
@@ -89,13 +89,13 @@ function App() {
           {/* -- ROUTES ------- */}
 
           <Routes>
-            <Route path='/login' element={<Login />} />
+            <Route path='/' element={<Login />} />
             <Route path="/signup" element={<SignUp />} />
             <Route path='/otp' element={<UserOtp />} />
             {/* </Route> */}
 
-            {/* <Route path="/home" element={<Home/>}/> */}
-            <Route path="/" element={<SideBar />}>
+            
+            <Route path="" element={<SideBar />}>
               <Route path="/home" element={<Home />} />
               <Route path="/create" element={<CreatPost />} />
               <Route path='/profile/edit' element={<EditProfile />} />
@@ -107,15 +107,12 @@ function App() {
                 <Route path='/profile/saved' element={<UserSaved />} />
               </Route>
               <Route path='/explore' element={<UserExplore />} />
-              <Route path='/inbox' element={<UserMessage />} />
-              {/* <Route path='/messenger' element={<Messanger+ />} /> */}
-              {/* <Route path='/notification' element={<UserNotification />} /> */}
+              <Route path='/inbox' element={<Messanger />} />
+
               <Route path='/search' element={<UserSearch />} />
 
 
             </Route>
-
-            <Route path='/messenger' element={<Messanger />} />
 
           </Routes>
         </div>
