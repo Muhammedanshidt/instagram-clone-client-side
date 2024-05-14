@@ -40,8 +40,11 @@ function App() {
     const fetchData = async () => {
       try {
         const cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        
 
         console.log(cookieToken);
+
+
         if (!cookieToken) {
           console.log("Token not found");
           return;

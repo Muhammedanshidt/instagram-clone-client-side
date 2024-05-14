@@ -77,6 +77,8 @@ const Home = () => {
     }
   }, [userData]);
 
+  console.log(userData);
+
   
   // console.log(post,"ohigiuiguviy");
 
