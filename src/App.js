@@ -72,7 +72,9 @@ function App() {
     };
     fetchData();
   }, [userData])
-  console.log(auth);
+
+  console.log(userData);
+  
   const clientData = {
     userData,
     setUserData,
