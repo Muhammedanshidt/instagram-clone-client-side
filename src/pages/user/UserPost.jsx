@@ -207,7 +207,7 @@ function UserPost() {
                 <img
                   src={selectedPost?.imgUrl}
                   alt={selectedPost?.caption}
-                  className="h-full w-fit "
+                  className="h-full w-full "
                 />
               </div>
             )}
