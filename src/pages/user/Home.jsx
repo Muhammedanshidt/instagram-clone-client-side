@@ -110,7 +110,7 @@ const Home = () => {
       <div className=" ml-14 w-[600px] object-cover ">
         {post.length > 0 ? (
           post.map((item, index) => (
-            <PostCard {...{item,likeHandler,like,}} key={index} />
+            <PostCard {...{item,likeHandler,like,setLike}} key={index} />
            
           ))
         ) : (

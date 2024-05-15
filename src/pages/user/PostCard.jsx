@@ -18,7 +18,9 @@ function PostCard({item,likeHandler,like}) {
     // setPostId(item);
     setModalOpen(true);
     // console.log(showComponent);
+    setLike(item.like.includes(userData._id));
     document.getElementById(item._id).showModal();
+    
   };
 
 
@@ -55,7 +57,7 @@ function PostCard({item,likeHandler,like}) {
           className="h-fit w-fit cursor-pointer"
           onClick={() => likeHandler(item?._id)}
         >
-          {item?.like?.includes(userData._id) || like ? (
+          {item?.like?.includes(userData._id)? (
             <i className="text-red-500 text-2xl">
               <IoMdHeart />
             </i>
