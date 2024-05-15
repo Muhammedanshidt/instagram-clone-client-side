@@ -18,7 +18,7 @@ function PostCard({item,likeHandler,like}) {
     // setPostId(item);
     setModalOpen(true);
     // console.log(showComponent);
-    setLike(item.like.includes(userData._id));
+    // setLike(item.like.includes(userData._id));
     document.getElementById(item._id).showModal();
     
   };
