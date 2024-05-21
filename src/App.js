@@ -50,7 +50,7 @@ function App() {
         const userDetails = jwtDecode(cookieToken);
         const email = userDetails.email;
         console.log("Email:", email);
-        const backResponse = await axios.post("/access",
+        const backResponse = await axios.post("access",
           { email: email },
           { withCredentials: true }
         )
