@@ -6,18 +6,17 @@ import SideBar from './pages/user/SideBar';
 import UserProfile from './pages/user/UserProfile';
 import Home from './pages/user/Home'
 import UserExplore from './pages/user/UserExplore';
-import UserMessage from './pages/user/UserMessage';
 import UserPost from './pages/user/UserPost';
 import UserSaved from './pages/user/UserSaved';
 import UserNotification from './pages/user/UserNotification'
 import UserOtp from './pages/user/UserOtp';
 import CreatPost from './pages/user/sideBarPages/CreatPost'
-import EditProfile from './pages/user/UserProfileEdit'
+import EditProfile from './pages/user/UserProfileEdit';
 import UserSearch from './pages/user/UserSearch';
 import Clintcontex from './pages/userContext/ClientContext';
 import { useEffect, useState } from 'react';
 import { Toaster } from "react-hot-toast";
-import  jwtDecode  from "jwt-decode";
+import jwtDecode from "jwt-decode";
 import { isEqual } from "lodash";
 import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
@@ -25,7 +24,8 @@ import Messanger from './pages/user/UserMessenger/Messanger';
 
 axios.defaults.baseURL = "https://instagram-clone-server-side-thqi.onrender.com/user/";
 
-axios.defaults.withCredentials = true;
+// axios.defaults.withCredentials = true;
+
 function App() {
 
   const [userData, setUserData] = useState({});
@@ -50,7 +50,7 @@ function App() {
         const userDetails = jwtDecode(cookieToken);
         const email = userDetails.email;
         console.log("Email:", email);
-        const backResponse = await axios.post("access",
+        const backResponse = await axios.post("/access",
           { email: email },
           { withCredentials: true }
         )
