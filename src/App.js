@@ -16,7 +16,11 @@ import UserSearch from './pages/user/UserSearch';
 import Clintcontex from './pages/userContext/ClientContext';
 import { useEffect, useState } from 'react';
 import { Toaster } from "react-hot-toast";
+<<<<<<< HEAD
 import {jwtDecode} from 'jwt-decode';
+=======
+import {jwtDecode} from "jwt-decode";
+>>>>>>> ee3dd4c65be69d0b36fb75d3cf7de3fb966f94a7
 import { isEqual } from "lodash";
 import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
