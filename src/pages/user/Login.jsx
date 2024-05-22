@@ -34,7 +34,8 @@ function Login() {
       );
 
       if (response.data.success === true) {
-        console.log(response.data);
+        console.log(response.data.accessToken);
+        setCookieData(response.data.accessToken)
         navigate("/profile");
       } else {
         toast.error(response.data.message);

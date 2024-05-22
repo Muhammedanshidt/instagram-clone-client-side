@@ -39,29 +39,33 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        console.log('Cookie Token:', cookieToken);
+        // const cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
+        // console.log('Cookie Token:', cookieToken);
+        // console.log('Token:', cookieData);
 
-        if (!cookieToken) {
-          console.log("Token not found");
-          return;
-        }
-        const userDetails = jwtDecode(cookieToken);
-        const email = userDetails.email;
-        console.log("Email:", email);
-        const backResponse = await axios.post("access",
-          { email: email },
-          { withCredentials: true }
+        // if (!cookieToken) {
+        //   console.log("Token not found");
+        //   return;
+        // }
+
+        // const userDetails = jwtDecode(cookieToken);
+        // const email = userDetails.email;
+        // console.log("Email:", email);
+
+        const backResponse = await axios.get("access",
+        {withCredentials:true}
         )
-        setauth(true);
-        if (!backResponse.data.successful) {
-          return alert("no data available");
-        }
-        const value = backResponse.data.Data
-        console.log("backend value", value);
-        if (!isEqual(userData, value)) {
-          setUserData(value);
-        }
+        console.log("backResponse:", backResponse);
+
+        // setauth(true);
+        // if (!backResponse.data.successful) {
+        //   return alert("no data available");
+        // }
+        // const value = backResponse.data.Data
+        // console.log("backend value", value);
+        // if (!isEqual(userData, value)) {
+        //   setUserData(value);
+        // }
       }
       catch (error) {
         console.error('Error fetching data:', error);
