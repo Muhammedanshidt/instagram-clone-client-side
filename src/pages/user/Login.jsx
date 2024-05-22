@@ -12,7 +12,7 @@ import { toast } from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
-  const { userData } = useContext(Clintcontex);
+  const { userData, setCookieData, cookieData } = useContext(Clintcontex);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
@@ -29,20 +29,19 @@ function Login() {
         {
           email: email,
           password: password,
-          
         },
         { withCredentials: true }
       );
 
       if (response.data.success === true) {
+        console.log(response.data);
         navigate("/profile");
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
       console.log("Login error:", error);
-      toast.error('error, please try again later.');
-
+      toast.error("error, please try again later.");
     }
   };
   return (

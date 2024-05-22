@@ -24,13 +24,13 @@ import Messanger from './pages/user/UserMessenger/Messanger';
 
 axios.defaults.baseURL = "https://instagram-clone-server-side-thqi.onrender.com/user/";
 
-// axios.defaults.withCredentials = true;
 
 function App() {
 
   const [userData, setUserData] = useState({});
   const [auth, setauth] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
+  const [cookieData,setCookieData] = useState(null)
 
   console.log("before use effect");
 
@@ -76,7 +76,9 @@ function App() {
     userData,
     setUserData,
     modalOpen,
-    setModalOpen
+    setModalOpen,
+    setCookieData,
+    cookieData
   }
 
   return (
