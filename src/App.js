@@ -16,7 +16,7 @@ import UserSearch from './pages/user/UserSearch';
 import Clintcontex from './pages/userContext/ClientContext';
 import { useEffect, useState } from 'react';
 import { Toaster } from "react-hot-toast";
-import jwtDecode from "jwt-decode";
+import {jwtDecode} from 'jwt-decode';
 import { isEqual } from "lodash";
 import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
@@ -40,7 +40,6 @@ function App() {
     const fetchData = async () => {
       try {
         const cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-
         console.log('Cookie Token:', cookieToken);
 
         if (!cookieToken) {
@@ -50,7 +49,7 @@ function App() {
         const userDetails = jwtDecode(cookieToken);
         const email = userDetails.email;
         console.log("Email:", email);
-        const backResponse = await axios.post("/access",
+        const backResponse = await axios.post("access",
           { email: email },
           { withCredentials: true }
         )
