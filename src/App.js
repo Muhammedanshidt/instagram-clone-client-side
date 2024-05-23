@@ -55,7 +55,7 @@ function App() {
         const backResponse = await axios.get("access",
         {withCredentials:true}
         )
-        console.log("backResponse:", backResponse);
+        console.log("backResponse:", backResponse.data);
 
         // setauth(true);
         // if (!backResponse.data.successful) {
