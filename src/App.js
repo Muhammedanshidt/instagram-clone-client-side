@@ -64,7 +64,7 @@ function App() {
         // const value = backResponse.data.Data
         // console.log("backend value", value);
         // if (!isEqual(userData, value)) {
-        //   setUserData(value);
+          setUserData(backResponse.data.decode);
         // }
       }
       catch (error) {
