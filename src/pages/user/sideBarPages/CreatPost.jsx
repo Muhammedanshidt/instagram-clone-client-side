@@ -3,17 +3,17 @@ import toast from "react-hot-toast";
 // import { CgAddR } from "react-icons/cg";
 import { IoIosImages } from "react-icons/io";
 import { RiVideoUploadFill } from "react-icons/ri";
-
 import Clintcontex from "../../userContext/ClientContext";
 import { useNavigate } from "react-router";
 import axios from "axios";
 
 function CreatPost() {
   const [image, setImage] = useState([]);
-  const [Video, setVideo] = useState(null);
-
+  const [video, setVideo] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [preview, setPreview] = useState(null);
   const [caption, setCaption] = useState("");
+  const [captionVideo, setCaptionVideo] = useState("");
   const [previewVideo, setPreviewVideo] = useState(null);
   const [duration, setDuration] = useState(null);
 
@@ -33,9 +33,9 @@ function CreatPost() {
   };
   const clickCreate = () => {
     const modalCreate = document.getElementById("my_modal_3");
-    if (modalCreate) {
-      modalCreate.hidden = false;
-    }
+
+    modalCreate.hidden = false;
+
     if (preview) {
     }
   };
@@ -43,7 +43,7 @@ function CreatPost() {
     const file = e.target.files[0];
     setImage(file);
     const modalUpload = document.getElementById("my_modal_3");
-    console.log("file", image);
+    
     if (file) {
       modalUpload.hidden = true;
     }
@@ -62,7 +62,7 @@ function CreatPost() {
     const file = e.target.files[0];
     setVideo(file);
     const modalUpload = document.getElementById("my_modal_3");
-    console.log("file", Video);
+
     if (file) {
       modalUpload.hidden = true;
     }
@@ -81,7 +81,6 @@ function CreatPost() {
 
   const captionHandle = (e) => {
     setCaption(e.target.value);
-    // console.log(caption);
   };
 
   const handleSubmit = async (e) => {
@@ -91,15 +90,14 @@ function CreatPost() {
       toast.error("no image select");
       return;
     }
-    console.log(image.name, "image");
+    
     const imageFile = image;
 
     const formData = new FormData();
     formData.append("file", imageFile);
     formData.append("upload_preset", presetimg);
     formData.append("api_key", apikey);
-    console.log("uploading");
-    console.log(formData);
+   
     try {
       const response = await fetch(
         `https://api.cloudinary.com/v1_1/${cloudname}/image/upload`,
@@ -109,16 +107,67 @@ function CreatPost() {
         }
       );
       alert("success");
-      console.log(response.url);
+      
       const data = await response.json();
 
-      const backendResponse = await axios.post("post", {
-        imageUrl: data.secure_url,
-        id: userData._id,
-        caption: caption,
-      });
+      const backendResponse = await axios.post(
+        "post",
+        {
+          imageUrl: data.secure_url,
+          id: userData._id,
+          caption: caption,
+        }
+      );
 
-      console.log(backendResponse.data);
+      
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  const presetvideo = "instagram_reels";
+
+  const captionHandleVideo = (e) => {
+    setCaptionVideo(e.target.value);
+  };
+
+  const handleSubmitVideo = async (e) => {
+    e.preventDefault();
+
+    if (!video) {
+      toast.error("no video select");
+      return;
+    }
+    
+    const videoFile = video;
+
+    const formData = new FormData();
+    formData.append("file", videoFile);
+    formData.append("upload_preset", presetvideo);
+    formData.append("api_key", apikey);
+   
+    try {
+      const response = await fetch(
+        `https://api.cloudinary.com/v1_1/${cloudname}/video/upload`,
+        {
+          method: "POST",
+          body: formData,
+        }
+      );
+      alert("success");
+
+      const data = await response.json();
+
+      const backendResponse = await axios.post(
+        "postvideo",
+        {
+          videoUrl: data.secure_url,
+          id: userData._id,
+          caption: captionVideo,
+        }
+      );
+
+
     } catch (err) {
       console.log(err);
     }
@@ -169,7 +218,6 @@ function CreatPost() {
                   //  accept="image/*"
                 />
               </div>
-
               <div>
                 <div className=" flex justify-center">
                   <RiVideoUploadFill className="size-20 align-bottom mt-10" />
@@ -205,6 +253,7 @@ function CreatPost() {
           </button>
         </div>
       )}
+
       {previewVideo && (
         <div className="inline-block mx-72 rounded-md my-20 shadow-2xl">
           <div>
@@ -218,6 +267,14 @@ function CreatPost() {
               Your browser does not support the video tag.
             </video>
           </div>
+
+          <input
+            value={captionVideo}
+            onChange={captionHandleVideo}
+            className="bg-gray-100 p-2 mr-2 w-full h-10 border-s-2 focus:outline-none "
+            placeholder="caption ..."
+          />
+
           <div className="flex justify-between mx-3">
             <button
               className="hover:text-red-500 text-lg font-semibold w-fit p-1"
@@ -225,7 +282,10 @@ function CreatPost() {
             >
               cancel
             </button>
-            <button className="hover:text-blue-600 text-lg font-semibold w-fit p-1">
+            <button
+              className="hover:text-blue-600 text-lg font-semibold w-fit p-1"
+              onClick={handleSubmitVideo}
+            >
               post
             </button>
           </div>

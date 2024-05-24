@@ -34,6 +34,7 @@ function SignUp() {
 
   const saveUser = async () => {
     console.log("save user");
+    console.log(formFillData);
 
     try {
       const response = await axios.post("signup", formFillData, {
@@ -84,7 +85,7 @@ function SignUp() {
     <div className="flex justify-center items-center flex-col">
       <div
         className="w-[350px] h-[600px] mt-3 flex items-center 
-    border border-1 border-gray-300 flex-col sm flex items-center justify-center lg  flex items-center justify-center  md flex items-center justify-center"
+    border border-1 border-gray-300 flex-col "
       >
         <div className="">
           <img
