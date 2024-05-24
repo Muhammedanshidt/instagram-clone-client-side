@@ -33,7 +33,7 @@ function UserOtp() {
 
       if (backendResponse.data.success === true) {
         toast.success("OTP Verified Successfully");
-        navigate("/login");
+        navigate("/");
       } else {
         toast.error("Invalid OTP");
       }
