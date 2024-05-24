@@ -12,6 +12,7 @@ import Clintcontex from "../userContext/ClientContext";
 // import React, { useEffect, useState } from 'react';
 
 function UserProfile() {
+  window.location.reload()
   const navigate = useNavigate();
   const { userData } = useContext(Clintcontex);
 
