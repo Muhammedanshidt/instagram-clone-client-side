@@ -16,7 +16,7 @@ function UserProfile() {
   const navigate = useNavigate();
   const { userData } = useContext(Clintcontex);
 
-  if(Object.keys(userData).length === 0){
+  if(userData.length === 0){
       window.location.reload()
   }
   // console.log(userData)
