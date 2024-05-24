@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 // import Profile from '../../asset/profile photo.jpg'
-import Profile from "../../asset/profile-circle.svg";
+// import Profile from "../../asset/profile-circle.svg";
 import { IoIosSettings } from "react-icons/io";
 import { IoMdGrid } from "react-icons/io";
 // import SaveIcon from '../../asset/save icon.png'

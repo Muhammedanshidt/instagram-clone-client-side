@@ -21,6 +21,7 @@ import { Toaster } from "react-hot-toast";
 import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
 import Messanger from './pages/user/UserMessenger/Messanger';
+import Reels from './pages/user/reels/Reels'
 
 axios.defaults.baseURL = "https://instagram-clone-server-side-thqi.onrender.com/user/";
 
