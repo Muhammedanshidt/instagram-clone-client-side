@@ -16,8 +16,8 @@ import UserSearch from './pages/user/UserSearch';
 import Clintcontex from './pages/userContext/ClientContext';
 import { useEffect, useState } from 'react';
 import { Toaster } from "react-hot-toast";
-import { jwtDecode } from 'jwt-decode';
-import { isEqual } from "lodash";
+// import { jwtDecode } from 'jwt-decode';
+// import { isEqual } from "lodash";
 import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
 import Messanger from './pages/user/UserMessenger/Messanger';
@@ -29,8 +29,8 @@ function App() {
 
   const [userData, setUserData] = useState({});
   const [auth, setauth] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  const [cookieData, setCookieData] = useState(null)
+  const [modalOpen,setModalOpen] = useState(false);
+  const [cookieData,setCookieData] = useState(null)
 
   console.log("before use effect");
 

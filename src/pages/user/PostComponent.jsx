@@ -24,7 +24,7 @@ const PostComponent = ({ myProp }) => {
   const [commentedUser, setCommentedUser] = useState([]);
   const [commentedPost, setCommentedPost] = useState([]);
   const [mapComment, setMapComment] = useState([]);
-  const [currentComment, setCurrentComment] = useState({});
+  const [currentComment, setCurrentComment] = useState("");
   const [currentPost, setCurrentPost] = useState();
   const [openDelete, setOpenDelete] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -63,7 +63,7 @@ const PostComponent = ({ myProp }) => {
       }
     };
     shoPost();
-  }, [userData, commentedPost, currentComment, save]);
+  }, [userData, commentedPost, currentComment, ]);
 
 
   const likeHandler = async (item) => {

@@ -91,7 +91,9 @@ const SideBar = () => {
               <p>Explore</p>
             </div>
 
-            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg">
+            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
+            onClick={() => navigate("/reels")}
+            >
               <div>
                 <img src={Reel} alt="logo" />
               </div>
