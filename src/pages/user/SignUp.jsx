@@ -34,12 +34,10 @@ function SignUp() {
 
   const saveUser = async () => {
     console.log("save user");
-    console.log(formFillData);
+    
 
     try {
-      const response = await axios.post("signup", formFillData, {
-        withCredentials: true,
-      });
+      const response = await axios.post("signup", formFillData);
       console.log("haimonu");
 
       if (response.data) {
