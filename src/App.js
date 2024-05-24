@@ -16,7 +16,7 @@ import UserSearch from './pages/user/UserSearch';
 import Clintcontex from './pages/userContext/ClientContext';
 import { useEffect, useState } from 'react';
 import { Toaster } from "react-hot-toast";
-import {jwtDecode} from 'jwt-decode';
+import { jwtDecode } from 'jwt-decode';
 import { isEqual } from "lodash";
 import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
@@ -30,7 +30,7 @@ function App() {
   const [userData, setUserData] = useState({});
   const [auth, setauth] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
-  const [cookieData,setCookieData] = useState(null)
+  const [cookieData, setCookieData] = useState(null)
 
   console.log("before use effect");
 
@@ -39,33 +39,15 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // const cookieToken = document.cookie.replace(/(?:(?:^|.*;\s*)token\s*\=\s*([^;]*).*$)|^.*$/, "$1");
-        // console.log('Cookie Token:', cookieToken);
-        // console.log('Token:', cookieData);
 
-        // if (!cookieToken) {
-        //   console.log("Token not found");
-        //   return;
-        // }
-
-        // const userDetails = jwtDecode(cookieToken);
-        // const email = userDetails.email;
-        // console.log("Email:", email);
 
         const backResponse = await axios.get("access",
-        {withCredentials:true}
+          { withCredentials: true }
         )
         console.log("backResponse:", backResponse.data);
 
-        // setauth(true);
-        // if (!backResponse.data.successful) {
-        //   return alert("no data available");
-        // }
-        // const value = backResponse.data.Data
-        // console.log("backend value", value);
-        // if (!isEqual(userData, value)) {
-          setUserData(backResponse.data.decode);
-        // }
+        setUserData(backResponse.data.decode);
+
       }
       catch (error) {
         console.error('Error fetching data:', error);
@@ -113,6 +95,8 @@ function App() {
               </Route>
               <Route path='/explore' element={<UserExplore />} />
               <Route path='/inbox' element={<Messanger />} />
+              <Route path='/reels' element={<Reels />} />
+
 
               <Route path='/search' element={<UserSearch />} />
 

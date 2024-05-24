@@ -24,6 +24,7 @@ const PostComponent = ({ myProp }) => {
   const [commentedUser, setCommentedUser] = useState([]);
   const [commentedPost, setCommentedPost] = useState([]);
   const [mapComment, setMapComment] = useState([]);
+  const [currentComment, setCurrentComment] = useState({});
   const [currentPost, setCurrentPost] = useState();
   const [openDelete, setOpenDelete] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -51,8 +52,9 @@ const PostComponent = ({ myProp }) => {
           }
         );
 
-        const posts = response.data;
-        // console.log(posts, "response data");
+        const posts = response.data.post;
+        const like = response.data.likes;
+
         setPost(posts);
         setMapComment(posts.comments);
       
@@ -61,7 +63,7 @@ const PostComponent = ({ myProp }) => {
       }
     };
     shoPost();
-  }, []);
+  }, [userData, commentedPost, currentComment, save]);
 
 
   const likeHandler = async (item) => {
@@ -79,7 +81,7 @@ const PostComponent = ({ myProp }) => {
         console.log(data, "this is the responce from server");
       }
     } catch (error) {
-      console.log("iede", error);
+      console.log( error);
     }
   };
 
@@ -171,7 +173,9 @@ const PostComponent = ({ myProp }) => {
 
       const res = await axios.delete(`commentDelete/${userId}/${commentId}/${postId}`)
       res.data.successful
-          ? toast.success(res.data.successful)
+          ?
+    setCurrentComment("")
+    
           : toast.error();
     }
     
@@ -196,7 +200,7 @@ const PostComponent = ({ myProp }) => {
       postId:postId,
       commentId:commentId
     })
-
+setCurrentComment("")
     console.log(res.data.data)
 
   }
