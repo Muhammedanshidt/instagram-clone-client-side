@@ -12,14 +12,15 @@ import Clintcontex from "../userContext/ClientContext";
 // import React, { useEffect, useState } from 'react';
 
 function UserProfile() {
-  window.location.reload()
+
   const navigate = useNavigate();
   const { userData } = useContext(Clintcontex);
 
-  // if(Object.keys(userData).length ===0){
-  //     window.location.reload()
-  // }
+  if(Object.keys(userData).length ===0){
+      window.location.reload()
+  }
   // console.log(userData)
+  
 
   return (
     <div className="w-full h-screen overflow-auto">
