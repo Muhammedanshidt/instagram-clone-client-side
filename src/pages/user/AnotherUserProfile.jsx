@@ -192,7 +192,15 @@ const showModal = (item) => {
     <div className='w-full h-screen overflow-auto' id='scrollTabHide'>
     <div className='flex '>
         <div className='w-[350px] h-[250px]  flex justify-center items-center '>
-        <img className=' w-fit size-24 rounded-full border border-3 border-gray-300' src={findUser?.profileimage|| <Profile/>}  alt="profile"/>
+        {findUser?.profileimage ? (
+    <img
+      className="w-fit size-24 rounded-full object-cover border-3 border-gray-300"
+      src={findUser.profileimage}
+      alt="profile"
+    />
+  ) : (
+    <Profile />
+  )}
         </div>
         <div className=' w-[700px] h-[250px]  flex-col '>
           <div className='flex gap-6 mt-6'>

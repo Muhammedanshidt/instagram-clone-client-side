@@ -28,11 +28,15 @@ function UserProfile() {
     <div className="w-full h-screen overflow-auto">
       <div className="flex ">
         <div className="w-[350px] h-[250px]  flex justify-center items-center ">
-          <img
-            className=" object-cover size-32 rounded-full border border-3 border-gray-300 flex-shrink-0"
-            src={userData?.profileimage || <Profile/>}
-            alt="profile "
-          />
+        {userData?.profileimage ? (
+    <img
+      className="object-cover w-32 h-32 rounded-full border-3 border-gray-300"
+      src={userData.profileimage}
+      alt="profile"
+    />
+  ) : (
+    <Profile />
+  )}
           
         </div>
         <div className=" w-[700px] h-[250px]  flex-col ">
