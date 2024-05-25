@@ -45,7 +45,7 @@ function SignUp() {
         console.log(response.data);
 
 
-      if (response.data) {
+      if (response.status === 200) {
         // console.log(formFillData);
         setUserData(formFillData);
         // console.log(userData);
