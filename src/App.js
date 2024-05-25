@@ -37,25 +37,25 @@ function App() {
 
   console.log(userData);
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
 
 
-  //       const backResponse = await axios.get("access",
-  //         { withCredentials: true }
-  //       )
-  //       console.log("backResponse:", backResponse.data);
+        const backResponse = await axios.get("access",
+          { withCredentials: true }
+        )
+        console.log("backResponse:", backResponse.data);
 
-  //       setUserData(backResponse.data.decode);
+        setUserData(backResponse.data.decode);
 
-  //     }
-  //     catch (error) {
-  //       console.error('Error fetching data:', error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [userData])
+      }
+      catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [userData])
 
   console.log(userData);
 
