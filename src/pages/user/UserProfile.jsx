@@ -138,22 +138,21 @@ function UserProfile() {
           onClick={() => navigate("/profile/saved")}
           className=" profileIcon font-medium flex text-sm cursor-pointer hover:bg-gray-200 rounded-md hover:p-1 "
         >
-          <svg
+        <svg
             xmlns="http://www.w3.org/2000/svg"
             x="0px"
             y="0px"
             width="20"
             viewBox="0 0 24 24"
-            fill="#6B7280"
+            fill="none"
+            strokeWidth="2"
+            stroke="currentColor"
           >
             <path d="M 4 2 L 4 22 L 12 19 L 20 22 L 20 2 L 6 2 L 4 2 z"></path>
           </svg>{" "}
           Saved
         </p>
-        <p className=" profileIcon font-medium flex text-sm  hover:bg-gray-200 rounded-md hover:p-1" >
-          <FaHeart className="size-5" />
-          Likes
-        </p>
+      
       </div>
       <Outlet />
     </div>
