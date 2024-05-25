@@ -12,7 +12,6 @@ import { MdCancel } from "react-icons/md";
 import { RiImageEditFill } from "react-icons/ri";
 import toast from "react-hot-toast";
 
-
 const PostComponent = ({ myProp }) => {
   const { userData } = useContext(Clintcontex);
 
@@ -29,67 +28,45 @@ const PostComponent = ({ myProp }) => {
   const [openDelete, setOpenDelete] = useState(false);
   const [showModal, setShowModal] = useState(false);
   // const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const { modalOpen, setModalOpen } = useContext(Clintcontex);
-
-  console.log("this is postcomponent");
-  console.log(myProp, "passing to com");
-
+  const [save,setSave] = useState(false)
 
   useEffect(() => {
-    //     if (modalOpen && currentPost) {
-    //   document.getElementById(currentPost).showModal();
-    // }
-
     const shoPost = async () => {
-      // console.log("before pass", myProp);
-
       try {
-        const response = await axios.get(
-          "grtPostModal",
-          {
-            params: { currentPost: id },
-          }
-        );
+        const response = await axios.get("grtPostModal", {
+          params: { currentPost: id },
+        });
 
         const posts = response.data.post;
         const like = response.data.likes;
 
         setPost(posts);
         setMapComment(posts.comments);
-      
       } catch (error) {
         console.error("Error fetching post:", error);
       }
     };
     shoPost();
-  }, [userData, commentedPost, currentComment, ]);
-
+  }, [userData, commentedPost, currentComment]);
 
   const likeHandler = async (item) => {
-    console.log(item, "item");
     try {
       if (item) {
-        const response = await axios.post(
-          "userLike",
-          { ownerId: userData._id, postId: item._id }
-        );
+        const response = await axios.post("userLike", {
+          ownerId: userData._id,
+          postId: item._id,
+        });
         setLike(!like);
-        // console.log("after axios");
         const data = response.data;
-
-        console.log(data, "this is the responce from server");
       }
     } catch (error) {
-      console.log( error);
+      console.log(error);
     }
   };
 
   const inputRef = React.useRef(null);
 
   const submitComment = async () => {
-    console.log("hello");
-    console.log(post._id);
     try {
       const commentValue = inputRef.current.value;
 
@@ -106,24 +83,15 @@ const PostComponent = ({ myProp }) => {
           commentvalue: commentValue,
         });
 
-        console.log(res);
-
         const { postData } = res.data;
-
-        console.log(postData, "hihihichdsnckdncksnc");
-        console.log(postData.userId);
 
         if (postData) {
           // setCommentedUser(user);
           setCommentedPost(postData);
         }
-
-        // console.log(commentedUser);
-        // console.log(commentedPost);
-        // console.log(selectedPost.comments);
       }
     } catch (err) {
-      console.log("error in submitting the comment ", err);
+      console.log(err);
     }
   };
 
@@ -131,79 +99,70 @@ const PostComponent = ({ myProp }) => {
     document.getElementById("editComment").showModal();
   };
 
-  const [commentId,setCommentId] = useState ()
-  const [postId,setPostId] = useState ()
+  const [commentId, setCommentId] = useState();
+  const [postId, setPostId] = useState();
 
   const editCommentHandle = (comment) => {
+    const check = userData.comments.includes(comment._id);
 
-    // console.log(comment.postId._id);
-
-    // console.log(comment.postId._id, "iam muhammed anshid");
-    // console.log(comment._id);
-    // console.log(comment);
-    console.log(userData.comments);
-
-
-    const check = userData.comments.includes(comment._id)
-
-    console.log(check);
     if (check) {
-  setOpenDelete((prevOpen) => !prevOpen)
-  setCommentId(comment._id)
-  setPostId(comment.postId?._id)
-  // console.log(postId._id);
+      setOpenDelete((prevOpen) => !prevOpen);
+      setCommentId(comment._id);
+      setPostId(comment.postId?._id);
+      // console.log(postId._id);
     }
   };
 
   const deleteComment = async () => {
-   
-    console.log(commentId,"delete comment");
+    console.log(commentId, "delete comment");
     console.log(userData.comments);
 
-
-
-    const check = userData.comments.includes(commentId)
+    const check = userData.comments.includes(commentId);
 
     console.log(check);
 
-    const userId = userData._id
-
+    const userId = userData._id;
 
     if (check) {
-
-      const res = await axios.delete(`commentDelete/${userId}/${commentId}/${postId}`)
-      res.data.successful
-          ?
-    setCurrentComment("")
-    
-          : toast.error();
+      const res = await axios.delete(
+        `commentDelete/${userId}/${commentId}/${postId}`
+      );
+      setCurrentComment("") 
     }
-    
-  }
+  };
+
+  const savePostHandle = async (postId) => {
+    console.log("save post handle");
+    console.log(postId);
+
+    const res = await axios.post(
+      `savepost/${userData._id}/${postId}`
+    );
+
+    console.log(res.data);
+    setSave(!save);
+  };
 
   // const commentRef = React.useRef(null);
 
   const [text, setText] = useState();
 
-  
   const handleChange = (event) => {
     setText(event.target.value);
     // console.log(text);
   };
 
   const editComment = async () => {
-
     console.log(text);
 
-    const res = await axios.put("editComment",{
-      editedComment:text,
-      postId:postId,
-      commentId:commentId
-    })
-setCurrentComment("")
-    console.log(res.data.data)
-
-  }
+    const res = await axios.put("editComment", {
+      editedComment: text,
+      postId: postId,
+      commentId: commentId,
+    });
+    setCurrentComment("");
+    console.log(res.data.data);
+  };
   return (
     <div>
       <dialog id={myProp}>
@@ -282,10 +241,7 @@ setCurrentComment("")
                                 </p>
                                 <div>
                                   <MdMoreHoriz
-                                    onClick={
-                                      () => editCommentHandle(comment)
-
-                                    }
+                                    onClick={() => editCommentHandle(comment)}
                                   />
                                   {/* {console.log(comment,"delete map")} */}
                                 </div>
@@ -304,10 +260,9 @@ setCurrentComment("")
                               >
                                 <ul className="p-1">
                                   {/* {console.log(openDelete)} */}
-                                  <div className="flex w-full  hover:text-red-700  hover:font-semibold cursor-pointer px-2 mt-1 rounded-sm"
-                                         onClick={
-                                          () => deleteComment()
-                                        }
+                                  <div
+                                    className="flex w-full  hover:text-red-700  hover:font-semibold cursor-pointer px-2 mt-1 rounded-sm"
+                                    onClick={() => deleteComment()}
                                   >
                                     <MdDelete className="mt-1 mr-3 " />
                                     <li>
@@ -360,8 +315,10 @@ setCurrentComment("")
                             >
                               Cancel
                             </div>
-                            <div className="hover:text-blue-600 p-1 cursor-pointer"
-                            onClick={editComment}>
+                            <div
+                              className="hover:text-blue-600 p-1 cursor-pointer"
+                              onClick={editComment}
+                            >
                               Done
                             </div>
                           </div>
@@ -370,9 +327,9 @@ setCurrentComment("")
                             cols="30"
                             rows="3"
                             // value={text}
-                            onChange={(e)=>handleChange(e)}
+                            onChange={(e) => handleChange(e)}
                             // ref={commentRef}
-                                                      placeholder="edit your image caption ..."
+                            placeholder="edit your image caption ..."
                           ></textarea>
                         </div>
                       </div>
@@ -410,7 +367,42 @@ setCurrentComment("")
                       </i>
                     </div>
                   )}
-                  <p className="text-lg px-1"> {post?.like?.length}</p>
+                    <p className="text-sm px-1">{`liked by ${post.like?.length} user`}</p>
+                </div>
+                <div
+                  onClick={() => {
+                    savePostHandle(post._id);
+                  }}
+                >
+                  {post.saveBy?.includes(userData._id) ? (
+                    <p className=" font-medium flex text-sm cursor-pointer mr-3 mt-[2px]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="20"
+                        viewBox="0 0 24 24"
+                        fill="black"
+                      >
+                        <path d="M 4 2 L 4 22 L 12 19 L 20 22 L 20 2 L 6 2 L 4 2 z"></path>
+                      </svg>{" "}
+                    </p>
+                  ) : (
+                    <p className=" font-medium flex text-sm cursor-pointer mr-3 mt-[2px]">
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        x="0px"
+                        y="0px"
+                        width="20"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        strokeWidth="2"
+                        stroke="currentColor"
+                      >
+                        <path d="M 4 2 L 4 22 L 12 19 L 20 22 L 20 2 L 6 2 L 4 2 z"></path>
+                      </svg>{" "}
+                    </p>
+                  )}
                 </div>
               </div>
               <div>
