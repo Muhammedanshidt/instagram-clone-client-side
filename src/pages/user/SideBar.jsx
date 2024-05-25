@@ -12,15 +12,16 @@ import { AiOutlineMenu } from "react-icons/ai";
 import TitleImage from "../../asset/title.png";
 import { Outlet } from "react-router";
 import { useNavigate } from "react-router";
-import { IoIosImages } from "react-icons/io";
-import Creat from "../user/sideBarPages/CreatPost";
+import { IoIosSettings } from "react-icons/io";
+import { TbLogout2 } from "react-icons/tb";
+
 import UserNotification from "./UserNotification";
 // import "./SideBar.css";
 
 const SideBar = () => {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
   const [menuOpen, setMenuOpen] = useState(false);
-  const [image, setImage] = useState([]);
+
 
   const toggleMenu = () => {
     setMenuOpen(!menuOpen);
@@ -35,27 +36,23 @@ const SideBar = () => {
 
   const [isOpen, setIsOpen] = useState(false);
 
-  // const toggleModal = () => {
-  //   setIsOpen(!isOpen);
-  // };
-  
-  const notificationHandle  = () => {
+
+
+  const notificationHandle = () => {
     console.log("clicked");
     setIsOpen(!isOpen);
-  }
+  };
   return (
     <div>
-      <div className=" h-screen w-screen " id="scrollTabHide">
+      <div className=" h-screen w-screen" id="scrollTabHide">
         {/* Sidebar */}
         <div
-          className={`fixed bg-white text-white w-[20%] h-screen border-r ${
-            isSidebarOpen ? "block" : "hidden"
-          } sm:block `}
+          className={`fixed bg-white p-2 text-white w-[20%] h-screen border-r sm:block  bottom-3`}
         >
-          <div className="text-white h-24 flex items-center justify-start pl-3  ">
-            <img src={TitleImage} alt="logo" className="h-[32px]  ml-5" />
+          <div className="text-white h-24 flex items-center justify-start pl-3 ">
+            <img src={TitleImage} alt="logo" className="h-[32px]  ml-5 mt-16" />
           </div>
-          <div className="h-[440px] p-4  flex-col justify-start  ">
+          <div className="h-[440px] p-4  flex-col  ">
             <div
               className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
               onClick={() => navigate("/home")}
@@ -68,18 +65,14 @@ const SideBar = () => {
 
             <div
               className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
-              // onClick={()=>document.getElementById('my_modal_4').showModal()}
+              
               onClick={() => navigate("/search")}
-
-
             >
               <div>
                 <IoSearchOutline className="size-6" />
               </div>
               <p>Search</p>
             </div>
-
-            
 
             <div
               onClick={() => navigate("/explore")}
@@ -91,8 +84,9 @@ const SideBar = () => {
               <p>Explore</p>
             </div>
 
-            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
-            onClick={() => navigate("/reels")}
+            <div
+              onClick={() => navigate("/reels")}
+              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
             >
               <div>
                 <img src={Reel} alt="logo" />
@@ -110,16 +104,17 @@ const SideBar = () => {
               <p>Messages</p>
             </div>
 
-            <div className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
-            // onClick={()=> <UserNotification/>
-            onClick={notificationHandle}
+            <div
+              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
+              // onClick={()=> <UserNotification/>
+              onClick={notificationHandle}
             >
               <div>
                 <IoHeartOutline className="size-6" />
               </div>
               <p>Notifications</p>
-              
-      <UserNotification {...{isOpen,setIsOpen}}/>
+
+              <UserNotification {...{ isOpen, setIsOpen }} />
             </div>
 
             <div
@@ -132,44 +127,7 @@ const SideBar = () => {
               <p>Creat</p>
             </div>
 
-            {/* <Creat/> */}
 
-            {/* UPLOAD IMAGE */}
-            {/* <dialog id="my_modal_3" className="modal rounded-3xl shadow-2xl">
-              <div className="modal-box ">
-                <form method="dialog">
-                  <button className="btn btn-sm text-xl font-bold  btn-circle btn-ghost absolute right-2 top-2 p-2">
-                    ✕
-                  </button>
-                </form>
-                <div className="bg-white p-6 h-96 ">
-                  <h3 className="font-bold text-lg text-center m-5 w-64 ">
-                    Create new post
-                  </h3>
-                  <hr className=" border-black my-4" />
-                  <div className=" flex justify-center">
-                    <IoIosImages className="size-20 align-bottom mt-10" />
-                  </div>
-                  <h1 className="font-medium text-center mt-3 mb-6">
-                    Upload Photos Here
-                  </h1>
-                  <label
-                    htmlFor="fileInput"
-                    className="bg-blue-500 hover:bg-blue-600 text-white text-sm font-semibold rounded-md px-3 py-2 mx-20 my-6 cursor-pointer"
-                  >
-                    Select From Computer
-                  </label>
-                  <input
-                    type="file"
-                    id="fileInput"
-                    // className="hidden"
-                    onChange={(e) => setImage(e.target.files)}
-                    multiple
-                    accept="image/*"
-                  />
-                </div>
-              </div>
-            </dialog> */}
 
             <div
               onClick={() => navigate("/profile")}
@@ -181,21 +139,54 @@ const SideBar = () => {
               <p>Profile</p>
             </div>
           </div>
+
           <div
-            className="flex  text-black h-[30px] m-8 flex gap-[15px] cursor-pointer hover:bg-gray-100 rounded-lg"
-            onClick={() => document.getElementById("my_modal_2").showModal()}
+            className="ml-4 mt-4 flex text-gray-600 p-4 gap-[15px] cursor-pointer  hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg focus:text-blue-950"
+            onClick={toggleMenu}
           >
-            <AiOutlineMenu className="size-6" />
+            <AiOutlineMenu className="size-6 " />
             <p>More</p>
-            <dialog id="my_modal_2" className="modal">
-              <div className="modal-box">
-                <h3 className="font-bold text-lg">Hello!</h3>
-                <p className="py-4">Press ESC key or click outside to close</p>
-              </div>
-              <form method="dialog" className="modal-backdrop">
-                <button>close</button>
-              </form>
-            </dialog>
+          </div>
+
+          <div
+            className={`absolute bottom-10 h-fit w-max  rounded-xl text-black bg-slate-100 shadow-2xl left-40 ${
+              menuOpen ? "block" : "hidden"
+            }`}
+            // onClick={toggleMenu}
+          >
+            <ul
+              className=" flex flex-col items-center gap-2 p-3"
+              onClick={toggleMenu}
+            >
+              <li
+                className="menu-custom "
+                onClick={() => navigate("/profile/edit")}
+              >
+                <IoIosSettings className="size-6"/>
+                Edit Profile
+              </li>
+              <li className="menu-custom">
+                <TbLogout2 className="size-6"/>
+                Log Out</li>
+              <li
+                className="menu-custom"
+                onClick={() => navigate("/profile/saved")}
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  x="0px"
+                  y="0px"
+                  width="20"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                >
+                  <path d="M 4 2 L 4 22 L 12 19 L 20 22 L 20 2 L 6 2 L 4 2 z"></path>
+                </svg>{" "}
+                Saved
+              </li>
+            </ul>
           </div>
         </div>
         <div className="ml-60 h-full w-[80%] " id="scrollTabHide">
@@ -204,7 +195,6 @@ const SideBar = () => {
 
         {/* Main Content */}
 
-        {/* Sidebar Icons for Small Screens */}
         <div className="fixed bottom-0 w-screen bg-white sm:hidden">
           <div className="flex gap-10 px-4 py-2">
             <div>
