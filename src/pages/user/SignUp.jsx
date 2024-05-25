@@ -42,6 +42,9 @@ function SignUp() {
       });
       console.log("haimonu")
 
+        console.log(response.data);
+
+
       if (response.data) {
         // console.log(formFillData);
         setUserData(formFillData);
