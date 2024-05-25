@@ -5,7 +5,7 @@ import LoginImage from "../../asset/home-phones-2x.png";
 import { useNavigate } from "react-router";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
-import { useState, useContext } from "react";
+import { useState, useContext ,useEffect} from "react";
 import axios from "axios";
 import Clintcontex from "../userContext/ClientContext";
 import { toast } from "react-hot-toast";
