@@ -1,5 +1,7 @@
 import React, { useContext, useEffect,useState } from 'react'
 // import Profile from '../../asset/profile photo.jpg'
+import Profile from "../../asset/profile-circle.svg";
+
 import { IoIosSettings } from "react-icons/io";
 import { IoMdGrid } from "react-icons/io";
 import { Link } from 'react-router-dom';
@@ -190,7 +192,7 @@ const showModal = (item) => {
     <div className='w-full h-screen overflow-auto' id='scrollTabHide'>
     <div className='flex '>
         <div className='w-[350px] h-[250px]  flex justify-center items-center '>
-        <img className=' w-fit size-24 rounded-full border border-3 border-gray-300' src={findUser?.profileimage}  alt="profile"/>
+        <img className=' w-fit size-24 rounded-full border border-3 border-gray-300' src={findUser?.profileimage|| <Profile/>}  alt="profile"/>
         </div>
         <div className=' w-[700px] h-[250px]  flex-col '>
           <div className='flex gap-6 mt-6'>

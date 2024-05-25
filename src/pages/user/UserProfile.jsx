@@ -8,6 +8,8 @@ import { FaHeart } from "react-icons/fa";
 import { Outlet, useNavigate } from "react-router";
 import "./UserProfile.css";
 import Clintcontex from "../userContext/ClientContext";
+import Profile from "../../asset/profile-circle.svg";
+
 // import axios from 'axios';
 // import React, { useEffect, useState } from 'react';
 
@@ -28,7 +30,7 @@ function UserProfile() {
         <div className="w-[350px] h-[250px]  flex justify-center items-center ">
           <img
             className=" object-cover size-32 rounded-full border border-3 border-gray-300 flex-shrink-0"
-            src={userData?.profileimage}
+            src={userData?.profileimage || <Profile/>}
             alt="profile "
           />
           

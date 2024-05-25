@@ -8,6 +8,8 @@ import toast from "react-hot-toast";
 import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
 import { FaRegComment } from "react-icons/fa6";
 import PostComponent from "./PostComponent";
+import Profile from "../../asset/profile-circle.svg";
+
 
 import { Link } from "react-router-dom";
 import PostCard from "./PostCard";
