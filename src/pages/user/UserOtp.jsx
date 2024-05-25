@@ -14,20 +14,22 @@ function UserOtp() {
   // /otpverify
 
   const handleChange = (value) => {
-    
+    // console.log(value);
     if (value.match(/^\d*$/) && value.length <= 6) {
       setOtp(value);
     }
-  
+    // console.log(otp);
   };
 
   const submitOtp = async () => {
     try {
       const backendResponse = await axios.post(
         "otp",
-        { userData,otp},
-        { withCredentials:true}
+        { userData, otp },
+        { withCredentials: true }
       );
+
+      console.log(backendResponse.data.success);
 
       if (backendResponse.data.success === true) {
         toast.success("OTP Verified Successfully");
@@ -36,7 +38,7 @@ function UserOtp() {
         toast.error("Invalid OTP");
       }
     } catch (error) {
-      toast.error("Error verifying OTP");
+      // console.log(`Error : ${error}`);
     }
   };
   return (
