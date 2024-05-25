@@ -12,9 +12,32 @@ import { toast } from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
-  const { userData, setCookieData, cookieData } = useContext(Clintcontex);
+  const { userData, setCookieData, cookieData ,setUserData} = useContext(Clintcontex);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+
+
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+
+
+        const backResponse = await axios.get("access",
+          { withCredentials: true }
+        )
+        console.log("backResponse:", backResponse.data);
+
+        setUserData(backResponse.data.decode);
+
+      }
+      catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, [userData])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
