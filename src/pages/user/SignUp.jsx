@@ -17,7 +17,7 @@ function SignUp() {
   };
 
   const { userData, setUserData } = useContext(Clintcontex);
-  console.log(userData);
+  
 
   const [formFillData, setFormFillData] = useState(initialFormData);
   const [errorMessage, setErrorMessage] = useState({});
@@ -37,8 +37,10 @@ function SignUp() {
     
 
     try {
-      const response = await axios.post("signup", formFillData);
-      console.log("haimonu");
+      const response = await axios.post("signup", formFillData,{
+        withCredentials:true
+      });
+      console.log("haimonu")
 
       if (response.data) {
         // console.log(formFillData);
@@ -55,7 +57,7 @@ function SignUp() {
   const sumbitForm = (event) => {
     event.preventDefault();
     // console.log("submitted");
-    // console.log("hai");
+    
     const formError = {};
 
     if (formFillData.email === "") {
