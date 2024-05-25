@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
-// import Profile from '../../asset/profile photo.jpg'
-// import Profile from "../../asset/profile-circle.svg";
+
 import { IoIosSettings } from "react-icons/io";
 import { IoMdGrid } from "react-icons/io";
 // import SaveIcon from '../../asset/save icon.png'
@@ -8,7 +7,7 @@ import { FaHeart } from "react-icons/fa";
 import { Outlet, useNavigate } from "react-router";
 import "./UserProfile.css";
 import Clintcontex from "../userContext/ClientContext";
-import Profile from "../../asset/profile-circle.svg";
+
 
 // import axios from 'axios';
 // import React, { useEffect, useState } from 'react';
@@ -28,15 +27,11 @@ function UserProfile() {
     <div className="w-full h-screen overflow-auto">
       <div className="flex ">
         <div className="w-[350px] h-[250px]  flex justify-center items-center ">
-        {userData?.profileimage ? (
-    <img
-      className="object-cover w-32 h-32 rounded-full border-3 border-gray-300"
-      src={userData.profileimage}
-      alt="profile"
-    />
-  ) : (
-    <Profile />
-  )}
+          <img
+            className=" object-cover size-32 rounded-full border border-3 border-gray-300 flex-shrink-0"
+            src={userData?.profileimage || "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"}
+            alt="profile "
+          />
           
         </div>
         <div className=" w-[700px] h-[250px]  flex-col ">

@@ -36,12 +36,22 @@ function UserExplore() {
           {post.map((item, index) => (
             <div className="grid gap-4 bg-slate-500">
               <div key={index}>
-                <img
-                  className="h-full rounded-lg object-cover object-center"
-                  src={item.imgUrl}
-                  alt={item.caption}
-                  onClick={() => <UserPost />}
-                />
+                
+                {item.file === "video" ? (
+                  <video
+                    className="h-full rounded-lg object-cover object-center"
+                    src={item.imgUrl}
+                    alt={item.caption}
+                    controls
+                  />
+                ) : (
+                  <img
+                    className="h-full rounded-lg object-cover object-center"
+                    src={item.imgUrl}
+                    alt={item.caption}
+               
+                  />
+                )}
               </div>
             </div>
           ))}

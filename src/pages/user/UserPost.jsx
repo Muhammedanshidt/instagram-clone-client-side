@@ -175,12 +175,21 @@ function UserPost() {
             return (
               <div key={index} className="cursor-pointer w-fit h-fit">
                 <Link to={`/profile?id=${item?._id}`}>
-                  <img
-                    className="h-60 w-[350px] rounded-lg"
-                    src={item?.imgUrl}
-                    alt=""
-                    onClick={() => openModal(item)}
-                  />
+                {item.file === "video" ? (
+                    <video
+                      className="h-60 w-[350px] rounded-lg"
+                      src={item.imgUrl}
+                      onClick={() => openModal(item)}
+                      controls
+                    />
+                  ) : (
+                    <img
+                      className="h-60 w-[350px] rounded-lg"
+                      src={item?.imgUrl}
+                      alt=""
+                      onClick={() => openModal(item)}
+                    />
+                  )}
                 </Link>
               </div>
             );
