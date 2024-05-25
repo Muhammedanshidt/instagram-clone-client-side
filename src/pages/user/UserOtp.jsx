@@ -29,8 +29,6 @@ function UserOtp() {
         { withCredentials:true}
       );
 
-      console.log(backendResponse.data.success);
-
       if (backendResponse.data.success === true) {
         toast.success("OTP Verified Successfully");
         navigate("/");
@@ -38,7 +36,7 @@ function UserOtp() {
         toast.error("Invalid OTP");
       }
     } catch (error) {
-      // console.log(`Error : ${error}`);
+      toast.error("Error verifying OTP");
     }
   };
   return (
