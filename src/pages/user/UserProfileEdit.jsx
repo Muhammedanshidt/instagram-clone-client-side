@@ -13,7 +13,7 @@ function UserProfileEdit() {
   // const [loading, setLoading] = useState(false);
   const [bio, setBio] = useState("");
   const [outPass, setOutPass] = useState("");
-  const { userData } = useContext(Clintcontex);
+  const { userData,setUserData } = useContext(Clintcontex);
 
   const navigate = useNavigate();
 
@@ -110,6 +110,7 @@ function UserProfileEdit() {
         { withCredentials: true }
       );
       toast.success(logBack.data.message);
+      setUserData("")
       navigate("/login");
     } catch (error) {
       console.log(error);
