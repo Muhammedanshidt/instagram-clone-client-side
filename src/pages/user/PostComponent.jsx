@@ -339,19 +339,9 @@ const PostComponent = ({ myProp }) => {
                 </div>
               </div>
 
-              {/* <dialog id="editComment" className="modal rounded-3xl shadow-2xl">
-                <div className="modal-box ">
-                    <div>
-                      <div className="p-3 bg-slate-600 w-fit h-fit">
-                        <input
-                        placeholder={selectedPost.username}
-                        />
-                      </div>
-                    </div>
-                </div>
-              </dialog> */}
+          
 
-              <div className="text-xs h-fit border-t-2 mt-8">
+              <div className="text-xs h-fit border-t-2 mt-8 flex justify-between">
                 <div
                   className="h-fit w-fit cursor-pointer"
                   onClick={() => likeHandler(post._id)}
