@@ -109,13 +109,12 @@ const PostComponent = ({ myProp }) => {
       setOpenDelete((prevOpen) => !prevOpen);
       setCommentId(comment._id);
       setPostId(comment.postId?._id);
-      // console.log(postId._id);
+
     }
   };
 
   const deleteComment = async () => {
-    console.log(commentId, "delete comment");
-    console.log(userData.comments);
+
 
     const check = userData.comments.includes(commentId);
 
@@ -132,8 +131,7 @@ const PostComponent = ({ myProp }) => {
   };
 
   const savePostHandle = async (postId) => {
-    console.log("save post handle");
-    console.log(postId);
+
 
     const res = await axios.post(
       `savepost/${userData._id}/${postId}`
@@ -143,7 +141,6 @@ const PostComponent = ({ myProp }) => {
     setSave(!save);
   };
 
-  // const commentRef = React.useRef(null);
 
   const [text, setText] = useState();
 
@@ -153,7 +150,7 @@ const PostComponent = ({ myProp }) => {
   };
 
   const editComment = async () => {
-    console.log(text);
+
 
     const res = await axios.put("editComment", {
       editedComment: text,
@@ -161,7 +158,7 @@ const PostComponent = ({ myProp }) => {
       commentId: commentId,
     });
     setCurrentComment("");
-    console.log(res.data.data);
+
   };
   return (
     <div>
@@ -288,7 +285,6 @@ const PostComponent = ({ myProp }) => {
                                     <RiImageEditFill className="mt-1 mr-3 text-lg" />
                                     <li>Edit</li>
 
-                                    {/* {console.log(comment?.text)} */}
                                   </div>
                                 </ul>
                               </div>
