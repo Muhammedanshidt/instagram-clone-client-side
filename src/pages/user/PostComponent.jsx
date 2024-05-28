@@ -118,7 +118,7 @@ const PostComponent = ({ myProp }) => {
 
     const check = userData.comments.includes(commentId);
 
-    console.log(check);
+   
 
     const userId = userData._id;
 
@@ -137,7 +137,7 @@ const PostComponent = ({ myProp }) => {
       `savepost/${userData._id}/${postId}`
     );
 
-    console.log(res.data);
+
     setSave(!save);
   };
 
@@ -146,7 +146,7 @@ const PostComponent = ({ myProp }) => {
 
   const handleChange = (event) => {
     setText(event.target.value);
-    // console.log(text);
+
   };
 
   const editComment = async () => {
@@ -163,7 +163,7 @@ const PostComponent = ({ myProp }) => {
   return (
     <div>
       <dialog id={myProp}>
-        {console.log(post, "uioguiguiotfghkluio")}
+
         <div className="modal-box">
           <form method="dialog">
             {/* if there is a button in form, it will close the modal */}
