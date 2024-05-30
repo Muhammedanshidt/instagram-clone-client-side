@@ -27,8 +27,7 @@ const PostComponent = ({ myProp }) => {
   const [currentPost, setCurrentPost] = useState();
   const [openDelete, setOpenDelete] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  // const [isModalOpen, setIsModalOpen] = useState(false);
-  const [save,setSave] = useState(false)
+  const [save, setSave] = useState(false);
 
   useEffect(() => {
     const shoPost = async () => {
@@ -86,7 +85,7 @@ const PostComponent = ({ myProp }) => {
         const { postData } = res.data;
 
         if (postData) {
-          // setCommentedUser(user);
+          
           setCommentedPost(postData);
         }
       }
@@ -109,16 +108,11 @@ const PostComponent = ({ myProp }) => {
       setOpenDelete((prevOpen) => !prevOpen);
       setCommentId(comment._id);
       setPostId(comment.postId?._id);
-
     }
   };
 
   const deleteComment = async () => {
-
-
     const check = userData.comments.includes(commentId);
-
-   
 
     const userId = userData._id;
 
@@ -126,51 +120,36 @@ const PostComponent = ({ myProp }) => {
       const res = await axios.delete(
         `commentDelete/${userId}/${commentId}/${postId}`
       );
-      setCurrentComment("") 
+      setCurrentComment("");
     }
   };
 
   const savePostHandle = async (postId) => {
-
-
-    const res = await axios.post(
-      `savepost/${userData._id}/${postId}`
-    );
-
+    const res = await axios.post(`savepost/${userData._id}/${postId}`);
 
     setSave(!save);
   };
-
 
   const [text, setText] = useState();
 
   const handleChange = (event) => {
     setText(event.target.value);
-
   };
 
   const editComment = async () => {
-
-
     const res = await axios.put("editComment", {
       editedComment: text,
       postId: postId,
       commentId: commentId,
     });
     setCurrentComment("");
-
   };
   return (
     <div>
       <dialog id={myProp}>
-
         <div className="modal-box">
           <form method="dialog">
-            {/* if there is a button in form, it will close the modal */}
-            <button
-              className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              //  onClick={setCurrentPost("")}
-            >
+            <button className="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">
               ✕
             </button>
           </form>
@@ -210,13 +189,11 @@ const PostComponent = ({ myProp }) => {
                   className="h-full px-3 py-3 overflow-x-hidden overflow-y-scrol overscroll-none"
                   id="scrollTabHide"
                 >
-                  {console.log("check work or not")}
                   {mapComment
                     .slice()
                     .reverse()
-                    // ?.filter((comment) => comment.postId === post?._id)
+
                     .map((comment, index) => {
-                      // console.log(comment, "map comment");
                       return (
                         <div className=" w-full h-fit mt-2" key={index}>
                           <div className="flex gap-2 p-1 ">
@@ -240,7 +217,6 @@ const PostComponent = ({ myProp }) => {
                                   <MdMoreHoriz
                                     onClick={() => editCommentHandle(comment)}
                                   />
-                                  {/* {console.log(comment,"delete map")} */}
                                 </div>
                               </div>
                               <div className=" w-[80%] overflow-auto">
@@ -256,7 +232,6 @@ const PostComponent = ({ myProp }) => {
                                 }`}
                               >
                                 <ul className="p-1">
-                                  {/* {console.log(openDelete)} */}
                                   <div
                                     className="flex w-full  hover:text-red-700  hover:font-semibold cursor-pointer px-2 mt-1 rounded-sm"
                                     onClick={() => deleteComment()}
@@ -264,7 +239,6 @@ const PostComponent = ({ myProp }) => {
                                     <MdDelete className="mt-1 mr-3 " />
                                     <li>
                                       <span>Delete</span>
-                                      {/* {console.log(comment?.text, "delete")} */}
                                     </li>
                                   </div>
                                   <div className="flex w-full  hover:text-green-700 hover:font-medium cursor-pointer px-2 mt-1 rounded-sm">
@@ -274,17 +248,13 @@ const PostComponent = ({ myProp }) => {
                                   <div
                                     className=" flex w-full hover:text-blue-700  cursor-pointer px-2 mt-1 rounded-sm"
                                     onClick={() => {
-                                      // setShowModal(true);
-                                      // if (showModal) {
                                       document
                                         .getElementById("editComment")
                                         .showModal();
-                                      // }
                                     }}
                                   >
                                     <RiImageEditFill className="mt-1 mr-3 text-lg" />
                                     <li>Edit</li>
-
                                   </div>
                                 </ul>
                               </div>
@@ -305,7 +275,6 @@ const PostComponent = ({ myProp }) => {
                             <div
                               className="hover:text-red-600 p-1 cursor-pointer"
                               onClick={() => {
-                                // setShowModal(false);
                                 document.getElementById("editComment").close();
                               }}
                             >
@@ -322,9 +291,7 @@ const PostComponent = ({ myProp }) => {
                             className="outline-double p-1"
                             cols="30"
                             rows="3"
-                            // value={text}
                             onChange={(e) => handleChange(e)}
-                            // ref={commentRef}
                             placeholder="edit your image caption ..."
                           ></textarea>
                         </div>
@@ -334,8 +301,6 @@ const PostComponent = ({ myProp }) => {
                   <hr />
                 </div>
               </div>
-
-          
 
               <div className="text-xs h-fit border-t-2 mt-8 flex justify-between">
                 <div
@@ -353,7 +318,7 @@ const PostComponent = ({ myProp }) => {
                       </i>
                     </div>
                   )}
-                    <p className="text-sm px-1">{`liked by ${post.like?.length} user`}</p>
+                  <p className="text-sm px-1">{`liked by ${post.like?.length} user`}</p>
                 </div>
                 <div
                   onClick={() => {
@@ -399,7 +364,6 @@ const PostComponent = ({ myProp }) => {
                     type="text"
                     className="p-[7px] w-full outline-none"
                     placeholder="  Add a comment..."
-                    //  onChange={commentInputHandler}
                     ref={inputRef}
                   />
                   <div
