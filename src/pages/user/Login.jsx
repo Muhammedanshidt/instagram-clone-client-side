@@ -17,21 +17,21 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const backResponse = await axios.get("access", {
-          withCredentials: true,
-        });
-        console.log("backResponse:", backResponse.data);
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const backResponse = await axios.get("access", {
+  //         withCredentials: true,
+  //       });
+  //       console.log("backResponse:", backResponse.data);
 
-        setUserData(backResponse.data.decode);
-      } catch (error) {
-        console.error("Error fetching data:", error);
-      }
-    };
-    fetchData();
-  }, [userData]);
+  //       setUserData(backResponse.data.decode);
+  //     } catch (error) {
+  //       console.error("Error fetching data:", error);
+  //     }
+  //   };
+  //   fetchData();
+  // }, [userData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
