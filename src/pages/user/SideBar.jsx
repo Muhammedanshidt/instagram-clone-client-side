@@ -94,7 +94,7 @@ const SideBar = () => {
               <p>Reels</p>
             </div>
 
-            <div
+            {/* <div
               onClick={() => navigate("/inbox")}
               className=" focus-div flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
             >
@@ -102,7 +102,7 @@ const SideBar = () => {
                 <RiMessengerLine className="size-6 " />
               </div>
               <p>Messages</p>
-            </div>
+            </div> */}
 
             <div
               className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"

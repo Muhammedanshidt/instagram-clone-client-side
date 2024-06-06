@@ -16,8 +16,6 @@ import UserSearch from './pages/user/UserSearch';
 import Clintcontex from './pages/userContext/ClientContext';
 import { useEffect, useState } from 'react';
 import { Toaster } from "react-hot-toast";
-// import { jwtDecode } from 'jwt-decode';
-// import { isEqual } from "lodash";
 import axios from 'axios';
 import AnotherUserProfile from './pages/user/AnotherUserProfile';
 import Messanger from './pages/user/UserMessenger/Messanger';
@@ -40,15 +38,11 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-
-
         const backResponse = await axios.get("access",
           { withCredentials: true }
         )
         console.log("backResponse:", backResponse.data);
-
         setUserData(backResponse.data.decode);
-
       }
       catch (error) {
         console.error('Error fetching data:', error);
@@ -95,7 +89,7 @@ function App() {
                 <Route path='/profile/saved' element={<UserSaved />} />
               </Route>
               <Route path='/explore' element={<UserExplore />} />
-              <Route path='/inbox' element={<Messanger />} />
+              
               <Route path='/reels' element={<Reels />} />
 
 
