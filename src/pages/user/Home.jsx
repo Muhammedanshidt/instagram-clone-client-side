@@ -1,14 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
-// import { PiDotsThreeBold } from "react-icons/pi";
 import Clintcontex from "../userContext/ClientContext";
 import axios from "axios";
-// import { useSelect } from '@material-tailwind/react';
-// import { CgProfile } from "react-icons/cg";
+
 import toast from "react-hot-toast";
-import { IoMdHeart, IoMdHeartEmpty } from "react-icons/io";
-import { FaRegComment } from "react-icons/fa6";
-import PostComponent from "./PostComponent";
-import Profile from "../../asset/profile-circle.svg";
+
 
 
 import { Link } from "react-router-dom";
@@ -20,8 +15,7 @@ const Home = () => {
   const [signUser, setSignUser] = useState([]);
   const [post, setPost] = useState([]);
   const [like, setLike] = useState(false);
-  const [showComponent, setShowComponent] = useState(false);
-  const [postId, setPostId] = useState();
+
 
   useEffect(() => {
     const getUser = async () => {
@@ -56,18 +50,9 @@ const Home = () => {
           console.log(response.data);
           setPost(response.data);
 
-          // console.log(typeof idusr);
-          //  response.data.map(item => {
 
-          //  console.log(item)
-          // //  setLike(item.like.includes(userData._id.stringify()))
-          // const bol = item.like.includes(iduser)
-          //  setLike(bol);
-          //  console.log(like);
-
-          // });
         } catch (error) {
-          console.log(error);
+
         }
       };
       getExplorePost();
@@ -88,13 +73,13 @@ const Home = () => {
           "userLike",
           { ownerId: userData._id, postId: postId }
         );
-        console.log("after axios");
+
         const data = response.data;
 
         console.log(data, "this is the responce from server");
       }
     } catch (error) {
-      console.log("iede", error);
+
     }
   };
 
