@@ -1,9 +1,4 @@
-.container{
-    width: 100vw;
-    height: 100vh;
-    background-color: rgb(255, 255, 255);
-    display: flex;
-}
+
 .loginImage{
     width: 50vw;
     height: 100vh;
@@ -12,31 +7,8 @@
     justify-content: flex-end;
     align-items: center;
 }
-.loginInput{
-    width: 50vw;
-    height: 100vh;
-    background-color: rgb(255, 255, 255);
-    margin-left: 50px;
-    margin-top: -50px;
-    display:flex;
-    flex-direction: column;
-    justify-content: center;
-    margin-top: -20px;
-    /* align-items: center; */
 
-}
-.mainInputBox{
-    height: 408px;
-    width: 350px;
-    background-color: #ffff;
-    border: 1px solid #DBDBDB;
-    padding: 10px 0;
-    margin: 0px 0px 10px;
-    display:flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-}
+
 .inputBox{
     width: 250px;
     height: 30px;
@@ -46,8 +18,6 @@
     text-decoration: none;
     text-align: left;
     word-spacing: 0px;   
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-    background-color: #fafafa;
     border: solid 1px #DBDBDB;
     border-radius: 3px;
 }
@@ -56,69 +26,7 @@ input.inputBox::placeholder{
     font-size: 12px;
     transform: translateY(-10px);
     transition: all 0.3s;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
     font-weight: 400;
  
 }
-.titleImage{
-    display: flex;
-    position: absolute;
-    margin-bottom: 300px;
-    display: flex;
-    flex-direction: row;
-}
-
-.align-items {
-    align-items: flex-end;
-  }
-  
-.align-items {
-  align-items: flex-end;
-}
-  
-
-
-.image {
-	opacity: 0;
-    margin-left: 20px;
-	animation: change-img-anim 20s infinite;
-}
-
-.image:nth-of-type(1) {
-	animation-delay: 5s;
-}
-.image:nth-of-type(2) {
-	animation-delay: 10s;
-}
-.image:nth-of-type(3) {
-	animation-delay: 15s;
-}
-
-@keyframes change-img-anim {
-	0%{ opacity: 0;}
-	10%{ opacity: 1;}
-	90%{ opacity: 1;}
-	100%{ pacity: 0;}
-}
-
-
-
-/* Styles for screens smaller than 600px */
-@media only screen and (max-width: 600px) {
-   .loginImage{
-    display: none;
-   }
-   .mainInputBox{
-    display: flex;
-    justify-self: center;
-    align-items: center;
-   }
-   .container{
-    background-image: url(https://www.google.com/imgres?imgurl=https%3A%2F%2Fpreview.colorkit.co%2Fgradient%2Ff9ce34-ee2a7b-6228d7.png%3Fsize%3Dwallpaper%26scale%3D0.25%26static%3Dtrue&tbnid=ZNbxarMQomCFzM&vet=12ahUKEwi7vKDT57aEAxVIoGMGHcKMBwUQMygCegQIARBZ..i&imgrefurl=https%3A%2F%2Fcolorkit.co%2Fgradient%2Ff9ce34-ee2a7b-6228d7%2F&docid=FUIsUV6i1LqyCM&w=960&h=540&q=instagram%20theme&hl=en-GB&ved=2ahUKEwi7vKDT57aEAxVIoGMGHcKMBwUQMygCegQIARBZ);
-   }
-   .loginInput{
-    background-image: url(https://www.google.com/imgres?imgurl=https%3A%2F%2Fpreview.colorkit.co%2Fgradient%2Ff9ce34-ee2a7b-6228d7.png%3Fsize%3Dwallpaper%26scale%3D0.25%26static%3Dtrue&tbnid=ZNbxarMQomCFzM&vet=12ahUKEwi7vKDT57aEAxVIoGMGHcKMBwUQMygCegQIARBZ..i&imgrefurl=https%3A%2F%2Fcolorkit.co%2Fgradient%2Ff9ce34-ee2a7b-6228d7%2F&docid=FUIsUV6i1LqyCM&w=960&h=540&q=instagram%20theme&hl=en-GB&ved=2ahUKEwi7vKDT57aEAxVIoGMGHcKMBwUQMygCegQIARBZ);
-
-   }
-  }
   
