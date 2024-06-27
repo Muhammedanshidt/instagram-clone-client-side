@@ -95,14 +95,14 @@ function Login() {
             <div className="h-fit flex flex-col justify-center items-center  ">
             <input
               placeholder=" email address"
-              className="inputBox mt-16 font-custom_input"
+              className="inputBox mt-16 outline-none "
               type="text"
               onChange={(e) => setEmail(e.target.value)}
             />
             <br />
             <input
               placeholder="password"
-              className="inputBox font-custom_input "
+              className="inputBox outline-none"
               type="password"
               onChange={(e) => setPassword(e.target.value)}
             />
