@@ -4,16 +4,17 @@ import TitleImage from "../../asset/title.png";
 import { useNavigate } from "react-router";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
-import { useState, useContext } from "react";
+import { useState} from "react";
 import axios from "axios";
-import Clintcontex from "../userContext/ClientContext";
+// import Clintcontex from "../userContext/ClientContext;
 import { toast } from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
-  const { setUserData } = useContext(Clintcontex);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [errorMsg, setErrorMsg] = useState("");
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -30,6 +31,7 @@ function Login() {
         },
         { withCredentials: true }
       );
+    setErrorMsg(response.data.message);
 
       if (response.data.success === false) {
         toast.error(response.data.message); 
@@ -39,7 +41,7 @@ function Login() {
       }
 
     } catch (error) {
-      toast.error(response.data.message);
+      toast.error(errorMsg);
     }
   };
   return (
