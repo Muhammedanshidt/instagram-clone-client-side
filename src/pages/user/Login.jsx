@@ -1,37 +1,19 @@
 import React from "react";
 import "./Login.css";
 import TitleImage from "../../asset/title.png";
-import LoginImage from "../../asset/home-phones-2x.png";
 import { useNavigate } from "react-router";
 import PlayStore from "../../asset/playstore.png";
 import Microsoft from "../../asset/microsoft.png";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import axios from "axios";
 import Clintcontex from "../userContext/ClientContext";
 import { toast } from "react-hot-toast";
 
 function Login() {
   const navigate = useNavigate();
-  const { userData, setCookieData, cookieData, setUserData } =
-    useContext(Clintcontex);
+  const { setUserData } = useContext(Clintcontex);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const backResponse = await axios.get("access", {
-  //         withCredentials: true,
-  //       });
-  //       console.log("backResponse:", backResponse.data);
-
-  //       setUserData(backResponse.data.decode);
-  //     } catch (error) {
-  //       console.error("Error fetching data:", error);
-  //     }
-  //   };
-  //   fetchData();
-  // }, [userData]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -39,7 +21,6 @@ function Login() {
       toast.error("Please enter fields");
       return;
     }
-    console.log("hai");
     try {
       const response = await axios.post(
         "login",
@@ -50,28 +31,15 @@ function Login() {
         { withCredentials: true }
       );
 
-      if (response.data.success === true) {
-        console.log(response.data.accessToken);
-        setCookieData(response.data.accessToken);
-
-        try {
-          const backResponse = await axios.get("access", {
-            withCredentials: true,
-          });
-          console.log("backResponse:", backResponse.data);
-
-          setUserData(backResponse.data.decode);
-        } catch (error) {
-          console.error("Error fetching data:", error);
-        }
-
-        navigate("/profile");
+      if (response.data.success === false) {
+        toast.error(response.data.message); 
       } else {
-        toast.error(response.data.message);
+        navigate("/profile");
+        toast.success(response.data.message); 
       }
+
     } catch (error) {
-      console.log("Login error:", error);
-      toast.error("error, please try again later.");
+      toast.error(response.data.message);
     }
   };
   return (
