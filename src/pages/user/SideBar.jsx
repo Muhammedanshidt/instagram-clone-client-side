@@ -43,191 +43,189 @@ const SideBar = () => {
     setIsOpen(!isOpen);
   };
   return (
-    <div>
-      <div className=" h-screen w-screen" id="scrollTabHide">
-        {/* Sidebar */}
-        <div
-          className={`fixed bg-white p-2 text-white w-[20%] h-screen border-r sm:block  bottom-3`}
-        >
-          <div className="text-white h-24 flex items-center justify-start pl-3 ">
-            <img src={TitleImage} alt="logo" className="h-[32px]  ml-5 mt-16" />
-          </div>
-          <div className="h-[440px] p-4  flex-col  ">
-            <div
-              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
-              onClick={() => navigate("/home")}
-            >
-              <div>
-                <GoHomeFill className="size-6 " />
-              </div>
-              <p>Home</p>
+<div className="" id="scrollTabHide">
+      
+      <div
+        className={`fixed bg-red-200 h-fit p-2 text-white bottom-[1px] w-[20%] border-r hidden sm:block `}
+      >
+        <div className="text-white h-24 flex items-center justify-start pl-3 ">
+          <img src={TitleImage} alt="logo" className="h-[32px]  ml-5 mt-16" />
+        </div>
+        <div className="h-[440px] p-4  flex-col  ">
+          <div
+            className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
+            onClick={() => navigate("/home")}
+          >
+            <div>
+              <GoHomeFill className="size-6 " />
             </div>
-
-            <div
-              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
-              
-              onClick={() => navigate("/search")}
-            >
-              <div>
-                <IoSearchOutline className="size-6" />
-              </div>
-              <p>Search</p>
-            </div>
-
-            <div
-              onClick={() => navigate("/explore")}
-              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
-            >
-              <div>
-                <MdOutlineExplore className="size-6 " />
-              </div>
-              <p>Explore</p>
-            </div>
-
-            <div
-              onClick={() => navigate("/reels")}
-              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
-            >
-              <div>
-                <img src={Reel} alt="logo" />
-              </div>
-              <p>Reels</p>
-            </div>
-
-            {/* <div
-              onClick={() => navigate("/inbox")}
-              className=" focus-div flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
-            >
-              <div>
-                <RiMessengerLine className="size-6 " />
-              </div>
-              <p>Messages</p>
-            </div> */}
-
-            <div
-              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
-              // onClick={()=> <UserNotification/>
-              onClick={notificationHandle}
-            >
-              <div>
-                <IoHeartOutline className="size-6" />
-              </div>
-              <p>Notifications</p>
-
-              <UserNotification {...{ isOpen, setIsOpen }} />
-            </div>
-
-            <div
-              className=" focus-div flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
-              onClick={handleClickCreate}
-            >
-              <div>
-                <CgAddR className="size-6 rounded-" />
-              </div>
-              <p>Creat</p>
-            </div>
-
-
-
-            <div
-              onClick={() => navigate("/profile")}
-              className="flex text-gray-600 p-4 gap-[15px] cursor-pointer  hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg focus:text-blue-950"
-            >
-              <div>
-                <CgProfile className="size-6" />
-              </div>
-              <p>Profile</p>
-            </div>
+            <p>Home</p>
           </div>
 
           <div
-            className="ml-4 mt-4 flex text-gray-600 p-4 gap-[15px] cursor-pointer  hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg focus:text-blue-950"
-            onClick={toggleMenu}
+            className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
+            // onClick={()=>document.getElementById('my_modal_4').showModal()}
+            onClick={() => navigate("/search")}
           >
-            <AiOutlineMenu className="size-6 " />
-            <p>More</p>
+            <div>
+              <IoSearchOutline className="size-6" />
+            </div>
+            <p>Search</p>
           </div>
 
           <div
-            className={`absolute bottom-10 h-fit w-max  rounded-xl text-black bg-slate-100 shadow-2xl left-40 ${
-              menuOpen ? "block" : "hidden"
-            }`}
-            // onClick={toggleMenu}
+            onClick={() => navigate("/explore")}
+            className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
           >
-            <ul
-              className=" flex flex-col items-center gap-2 p-3"
-              onClick={toggleMenu}
-            >
-              <li
-                className="menu-custom "
-                onClick={() => navigate("/profile/edit")}
-              >
-                <IoIosSettings className="size-6"/>
-                Edit Profile
-              </li>
-              <li className="menu-custom">
-                <TbLogout2 className="size-6"/>
-                Log Out</li>
-              <li
-                className="menu-custom"
-                onClick={() => navigate("/profile/saved")}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  x="0px"
-                  y="0px"
-                  width="20"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  strokeWidth="2"
-                  stroke="currentColor"
-                >
-                  <path d="M 4 2 L 4 22 L 12 19 L 20 22 L 20 2 L 6 2 L 4 2 z"></path>
-                </svg>{" "}
-                Saved
-              </li>
-            </ul>
+            <div>
+              <MdOutlineExplore className="size-6 " />
+            </div>
+            <p>Explore</p>
           </div>
-        </div>
-        <div className="ml-60 h-full w-[80%] " id="scrollTabHide">
-          <Outlet />
-        </div>
 
-        {/* Main Content */}
-
-        <div className="fixed bottom-0 w-screen bg-white sm:hidden">
-          <div className="flex gap-10 px-4 py-2">
+          <div
+            onClick={() => navigate("/reels")}
+            className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
+          >
             <div>
-              <GoHomeFill className="size-6  text-black " />{" "}
-            </div>
-            <div>
-              {" "}
-              <MdOutlineExplore
-                onClick={() => navigate("/explore")}
-                className="size-6  text-black "
-              />{" "}
-            </div>
-            <div>
-              {" "}
               <img src={Reel} alt="logo" />
             </div>
+            <p>Reels</p>
+          </div>
+
+          <div
+            onClick={() => navigate("/inbox")}
+            className=" focus-div flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
+          >
             <div>
-              <CgAddR className="  text-black size-6 rounded-lg " />{" "}
+              <RiMessengerLine className="size-6 " />
             </div>
+            <p>Messages</p>
+          </div>
+
+          <div
+            className="flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg"
+            // onClick={()=> <UserNotification/>
+            onClick={notificationHandle}
+          >
             <div>
-              {" "}
-              <RiMessengerLine
-                onClick={() => navigate("/inbox")}
-                className=" text-black size-6 "
-              />
+              <IoHeartOutline className="size-6" />
             </div>
+            <p>Notifications</p>
+
+            <UserNotification {...{ isOpen, setIsOpen }} />
+          </div>
+
+          <div
+            className=" focus-div flex text-gray-600 p-4 gap-[15px] cursor-pointer hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg "
+            onClick={handleClickCreate}
+          >
             <div>
-              {" "}
-              <CgProfile
-                onClick={() => navigate("/profile")}
-                className=" text-black size-6"
-              />{" "}
+              <CgAddR className="size-6 rounded-" />
             </div>
+            <p>Creat</p>
+          </div>
+
+
+
+          <div
+            onClick={() => navigate("/profile")}
+            className="flex text-gray-600 p-4 gap-[15px] cursor-pointer  hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg focus:text-blue-950"
+          >
+            <div>
+              <CgProfile className="size-6" />
+            </div>
+            <p>Profile</p>
+          </div>
+        </div>
+
+        <div
+          className="ml-4 mt-4 flex text-gray-600 p-4 gap-[15px] cursor-pointer  hover:shadow-gray-700 hover:shadow-lg hover:bg-gray-50  hover:text-black rounded-lg focus:text-blue-950"
+          onClick={toggleMenu}
+        >
+          <AiOutlineMenu className="size-6 " />
+          <p>More</p>
+        </div>
+
+        <div
+          className={`absolute bottom-10 h-fit w-max  rounded-xl text-black bg-slate-100 shadow-2xl left-40 ${
+            menuOpen ? "block" : "hidden"
+          }`}
+          // onClick={toggleMenu}
+        >
+          <ul
+            className=" flex flex-col items-center gap-2 p-3"
+            onClick={toggleMenu}
+          >
+            <li
+              className="menu-custom "
+              onClick={() => navigate("/profile/edit")}
+            >
+              <IoIosSettings className="size-6"/>
+              Edit Profile
+            </li>
+            <li className="menu-custom">
+              <TbLogout2 className="size-6"/>
+              Log Out</li>
+            <li
+              className="menu-custom"
+              onClick={() => navigate("/profile/saved")}
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                x="0px"
+                y="0px"
+                width="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                strokeWidth="2"
+                stroke="currentColor"
+              >
+                <path d="M 4 2 L 4 22 L 12 19 L 20 22 L 20 2 L 6 2 L 4 2 z"></path>
+              </svg>{" "}
+              Saved
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div className="ml-60 h-full w-[80%] " id="scrollTabHide">
+        <Outlet />
+      </div>
+
+      {/* Main Content */}
+
+      <div className="fixed bottom-0 w-screen bg-white sm:hidden">
+        <div className="flex gap-10 px-4 py-2">
+          <div>
+            <GoHomeFill className="size-6  text-black " />{" "}
+          </div>
+          <div>
+            {" "}
+            <MdOutlineExplore
+              onClick={() => navigate("/explore")}
+              className="size-6  text-black "
+            />{" "}
+          </div>
+          <div>
+            {" "}
+            <img src={Reel} alt="logo" />
+          </div>
+          <div>
+            <CgAddR className="  text-black size-6 rounded-lg " />{" "}
+          </div>
+          <div>
+            {" "}
+            <RiMessengerLine
+              onClick={() => navigate("/inbox")}
+              className=" text-black size-6 "
+            />
+          </div>
+          <div>
+            {" "}
+            <CgProfile
+              onClick={() => navigate("/profile")}
+              className=" text-black size-6"
+            />{" "}
           </div>
         </div>
       </div>
