@@ -84,46 +84,45 @@ const Home = () => {
   };
 
   return (
+    <div className="flex max-sm:flex max-sm:justify-center max-sm:items-center " id="scrollTabHide">
     
-    <div className="flex max-sm:flex max-sm:justify-center left-0 max-sm:items-center bg-lime-400" id="scrollTabHide">
-    
 
-    <div className=" ml-14 w-full bg-red-500 object-cover ">
-      {post.length > 0 ? (
-        post.map((item, index) => (
-          <PostCard {...{item,likeHandler,like}} key={index} />
-         
-        ))
-      ) : (
-        <h1>Loading...</h1>
-      )}
-    </div>
+      <div className="w-full object-cover ">
+        {post.length > 0 ? (
+          post.map((item, index) => (
+            <PostCard {...{item,likeHandler,like}} key={index} />
+           
+          ))
+        ) : (
+          <h1>Loading...</h1>
+        )}
+      </div>
 
-    {/* user show profile side */}
+      {/* user show profile side */}
 
-    <div className="hidden md:block fixed  right-20 h-screen" id="scrollTabHide">
-      {/* <button className='bg-rose-600 w-fit h-fit mx-10 my-10' onClick={getUser}>show</button>  */}
-      <div className=" w-full h-fit bg-amber-300  py-10 ">
-        {signUser.map((item) => (
-          <div className="border p-10 rounded-full flex justify-center w-full m-2 py-2 hover:bg-blue-100">
-            <Link to={`/user/${item.username}`}>
-              <div className="flex">
-                <img
-                  src={
-                    item?.profileimage ||
-                    "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"
-                  }
-                  className="w-16 rounded-full h-16 border-[1px] border-black object-cover"
-                  alt="image"
-                />
-                <p className="my-3 mx-3 font-semibold ">{item.username}</p>
-              </div>
-            </Link>
-           </div>
-        ))}
+      <div className="hidden md:block fixed  right-20 h-screen" id="scrollTabHide">
+        {/* <button className='bg-rose-600 w-fit h-fit mx-10 my-10' onClick={getUser}>show</button>  */}
+        <div className=" w-full h-fit py-10 ">
+          {signUser.map((item) => (
+            <div className="border p-10 rounded-full flex justify-center w-full m-2 py-2 hover:bg-blue-100">
+              <Link to={`/user/${item.username}`}>
+                <div className="flex">
+                  <img
+                    src={
+                      item?.profileimage ||
+                      "https://cdn.pixabay.com/photo/2018/11/13/21/43/avatar-3814049_640.png"
+                    }
+                    className="w-16 rounded-full h-16 border-[1px] border-black object-cover"
+                    alt="image"
+                  />
+                  <p className="my-3 mx-3 font-semibold ">{item.username}</p>
+                </div>
+              </Link>
+             </div>
+          ))}
+        </div>
       </div>
     </div>
-  </div>
   );
 };
 

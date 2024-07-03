@@ -15,13 +15,13 @@ function PostCard({ item, likeHandler, like }) {
   };
 
   return (
-    <div className="">
-      <div className=" w-fit h-fit mt-4 border-t border-black">
+    <div className="flex max-sm:flex max-sm:justify-center le max-sm:items-center">
+      <div className="  h-fit mt-4 border-t border-black">
         <Link to={`/user/${item?.userId?.username}`}>
           <div className="w-fit h-fit p-2 flex gap-3 cursor-pointer">
             <img
               src={item.userId?.profileimage}
-              className="size-10 rounded-full"
+              className="size-10 rounded-full object-cover"
               alt=""
             />
             <p>{item?.userId?.username}</p>
@@ -29,7 +29,7 @@ function PostCard({ item, likeHandler, like }) {
         </Link>
 
         <div className="p-1 flex justify-center items-center">
-        {item.file === "video" ? (
+          {item.file === "video" ? (
             <video src={item.imgUrl} className="w-[400px] h-[350px]" controls />
           ) : (
             <img
@@ -39,6 +39,7 @@ function PostCard({ item, likeHandler, like }) {
             />
           )}
         </div>
+
         <div className="w-full h-fit pl-1 ">
           <span className="text-sm font-semibold">
             {item?.userId?.username}
@@ -51,36 +52,27 @@ function PostCard({ item, likeHandler, like }) {
             className="h-fit w-fit cursor-pointer"
             onClick={() => likeHandler(item?._id)}
           >
-            {item?.like?.includes(userData._id) ? (
+            {item?.like?.includes(userData?._id) || like ? (
               <i className="text-red-500 text-2xl">
                 <IoMdHeart />
               </i>
             ) : (
-              <div>
-                <i className="text-2xl">
-                  <IoMdHeartEmpty />
-                </i>
-              </div>
+              <i className="text-2xl">
+                <IoMdHeartEmpty />
+              </i>
             )}
-
-            <p className="text-lg px-1"> {item?.like?.length}</p>
           </div>
-          <div className="w-fit h-fit cursor-pointer" onClick={showModal}>
+
+          <div
+            className="w-fit h-fit cursor-pointer mt-[2px]"
+            onClick={showModal}
+          >
             <FaRegComment className="text-xl text-zinc-800" />
           </div>
-          {/* {showComponent ?
-
-      <div className="z-40">
-         <PostComponent selectId={item?._id}/>
-      </div>
-      :<div >
-        <p>kujguyvrkucgvuergoucverouvueroui</p>
-        </div>} */}
-          {/* </div> */}
         </div>
       </div>
     </div>
-  );
+  )
 }
 
 export default PostCard;
