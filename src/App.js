@@ -91,8 +91,7 @@ function App() {
               <Route path='/explore' element={<UserExplore />} />
               
               <Route path='/reels' element={<Reels />} />
-
-
+              
               <Route path='/search' element={<UserSearch />} />
 
 
