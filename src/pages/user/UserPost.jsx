@@ -177,7 +177,7 @@ function UserPost() {
                 <Link to={`/profile?id=${item?._id}`}>
                 {item.file === "video" ? (
                     <video
-                      className="h-60 w-[350px] rounded-lg"
+                      className="h-60 w-[350px] rounded-lg object-cover"
                       src={item.imgUrl}
                       onClick={() => openModal(item)}
                       controls
@@ -216,7 +216,7 @@ function UserPost() {
                 <img
                   src={selectedPost?.imgUrl}
                   alt={selectedPost?.caption}
-                  className="h-full w-full "
+                  className="h-full w-full object-cover"
                 />
               </div>
             )}
@@ -284,7 +284,7 @@ function UserPost() {
                     <hr className=" border-black" />
                     <div className=" h-fit w-full flex">
                       <div className="bg-slate-500 w-[50%] h-[50%] ">
-                        <img src={selectedPost.imgUrl} className="h-fit" />
+                        <img src={selectedPost.imgUrl} className="h-fit object-cover" />
                       </div>
                       <div>
                         <textarea
