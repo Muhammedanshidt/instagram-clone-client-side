@@ -104,7 +104,7 @@ const Home = () => {
         {/* <button className='bg-rose-600 w-fit h-fit mx-10 my-10' onClick={getUser}>show</button>  */}
         <div className=" w-full h-fit py-10 ">
           {signUser.map((item) => (
-            <div className="border p-10 rounded-full flex justify-center w-full m-2 py-2 hover:bg-blue-100">
+            <div className="border p-10 rounded-full flex justify-center w-full m-2 py-2 hover:bg-blue-100 overflow-hidden">
               <Link to={`/user/${item.username}`}>
                 <div className="flex">
                   <img
