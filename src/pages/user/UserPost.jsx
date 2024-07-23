@@ -184,7 +184,7 @@ function UserPost() {
                     />
                   ) : (
                     <img
-                      className="h-60 w-[350px] rounded-lg"
+                      className="h-60 w-[350px] rounded-lg object-cover"
                       src={item?.imgUrl}
                       alt=""
                       onClick={() => openModal(item)}
